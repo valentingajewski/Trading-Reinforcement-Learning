@@ -1,0 +1,5 @@
+forex_data_by_year_and_pair/
+forex_data_by_pair/
+.conda/
+.vscode/
+forex_data_pairs.text
