@@ -1,2 +1,2 @@
-Pair,Total Return (%),Ann. Sharpe Ratio,Max Drawdown (%),Calmar Ratio,OOS Bars,Folds
-EURUSD,-0.0,-4.2256,0.0,-0.0267,1406466,45
+Pair,Total Return (%),Ann. Sharpe Ratio,Max Drawdown (%),Calmar Ratio,OOS Bars,Folds,Trades,Sell %,Flat %,Buy %
+EURUSD,-31.96,4.3926,34.86,-2.2499,91071,3,1395,53.8,0.0,46.2

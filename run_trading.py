@@ -65,6 +65,10 @@ def parse_args():
         help="OOS test window in months (default: 1)",
     )
     p.add_argument(
+        "--max-folds", type=int, default=None,
+        help="Cap number of WFO folds (default: all). Use e.g. 5 for quick diagnostics.",
+    )
+    p.add_argument(
         "--timesteps", type=int, default=100_000,
         help="Training timesteps per WFO fold (default: 100000)",
     )
@@ -81,13 +85,17 @@ def parse_args():
         help="Initial account balance (default: 100000)",
     )
     p.add_argument(
+        "--lot-size", type=float, default=100_000.0,
+        help="Trade position size in base currency units (default: 100000 = 1 std lot)",
+    )
+    p.add_argument(
         "--pip-cost", type=float, default=0.0001,
         help="Transaction cost in price units (default: 0.0001 = 1 pip)",
     )
     p.add_argument(
         "--device", type=str, default="auto",
         choices=["auto", "cpu", "cuda"],
-        help="Compute device (default: auto)",
+        help="Compute device (default: auto — uses GPU if available)",
     )
     p.add_argument(
         "--seed", type=int, default=42,
@@ -136,7 +144,9 @@ def main():
             df=df,
             train_months=args.train_months,
             test_months=args.test_months,
+            max_folds=args.max_folds,
             initial_balance=args.balance,
+            lot_size=args.lot_size,
             pip_cost=args.pip_cost,
             total_timesteps=args.timesteps,
             initial_lr=args.lr,

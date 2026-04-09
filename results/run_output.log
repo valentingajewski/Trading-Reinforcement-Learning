@@ -1,0 +1,34 @@
+=== WRAPPER START ===
+Imports OK
+Loading forex_data_by_pair/EURUSD.txt...
+2026-04-09 22:21:40 | INFO    | rl_trading.data_loader | Loaded EURUSD.txt — 8557258 rows from 2003-05-06 00:00:00 to 2026-03-31 23:59:00
+Loaded 8557258 rows
+Starting WFO...
+2026-04-09 22:22:38 | INFO    | rl_trading.features | Built 10 features, total rows 8557258
+2026-04-09 22:22:39 | INFO    | rl_trading.wfo | WFO for EURUSD — 3 folds (6m train / 1m test)
+2026-04-09 22:22:39 | INFO    | rl_trading.wfo | Fold 1/3  train [2003-05-08 → 2003-11-08]  test [2003-11-08 → 2003-12-08]
+2026-04-09 22:22:40 | INFO    | rl_trading.agent | Built RecurrentPPO — LSTM(128×1), LR 3.0e-04 → 0
+2026-04-09 22:24:27 | INFO    | rl_trading.agent | Step 25000 | Mean episode reward: -1093.946764
+2026-04-09 22:25:31 | INFO    | rl_trading.agent | Step 50000 | Mean episode reward: -499.656405
+2026-04-09 22:25:54 | INFO    | rl_trading.wfo | Fold 1 OOS — final balance: 99427.00  (-0.57%)  trades: 677  positions: sell=57.0% flat=0.0% buy=43.0%  turnover=0.0234
+2026-04-09 22:25:54 | INFO    | rl_trading.wfo | Fold 2/3  train [2003-11-08 → 2004-05-08]  test [2004-05-08 → 2004-06-08]
+2026-04-09 22:25:54 | INFO    | rl_trading.agent | Built RecurrentPPO — LSTM(128×1), LR 3.0e-04 → 0
+2026-04-09 22:26:53 | INFO    | rl_trading.agent | Step 25000 | Mean episode reward: -1294.007914
+2026-04-09 22:27:51 | INFO    | rl_trading.agent | Step 50000 | Mean episode reward: -704.601651
+2026-04-09 22:28:15 | INFO    | rl_trading.wfo | Fold 2 OOS — final balance: 99772.00  (-0.23%)  trades: 313  positions: sell=17.1% flat=0.0% buy=82.9%  turnover=0.0103
+2026-04-09 22:28:15 | INFO    | rl_trading.wfo | Fold 3/3  train [2004-05-08 → 2004-11-08]  test [2004-11-08 → 2004-12-08]
+2026-04-09 22:28:15 | INFO    | rl_trading.agent | Built RecurrentPPO — LSTM(128×1), LR 3.0e-04 → 0
+2026-04-09 22:29:14 | INFO    | rl_trading.agent | Step 25000 | Mean episode reward: -963.500914
+2026-04-09 22:30:11 | INFO    | rl_trading.agent | Step 50000 | Mean episode reward: -514.756039
+2026-04-09 22:30:39 | INFO    | rl_trading.wfo | Fold 3 OOS — final balance: 68045.00  (-31.96%)  trades: 407  positions: sell=86.2% flat=0.0% buy=13.8%  turnover=0.0129
+
+Completed 3 folds
+
+  Pair  Total Return (%)  Ann. Sharpe Ratio  Max Drawdown (%)  Calmar Ratio  OOS Bars  Folds  Trades  Sell %  Flat %  Buy %
+EURUSD            -31.96             4.3926             34.86       -2.2499     91071      3    1395    53.8     0.0   46.2
+2026-04-09 22:30:40 | INFO    | rl_trading.metrics | Saved equity curve → results\EURUSD_equity_curve.png
+
+Equity curve saved
+Summary CSV saved
+
+=== WRAPPER DONE ===

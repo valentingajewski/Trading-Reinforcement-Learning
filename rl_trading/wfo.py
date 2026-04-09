@@ -101,16 +101,18 @@ def _evaluate_fold(
     features_scaled: np.ndarray,
     prices: np.ndarray,
     initial_balance: float,
+    lot_size: float,
     pip_cost: float,
-) -> tuple[np.ndarray, np.ndarray, np.ndarray]:
+) -> tuple[np.ndarray, np.ndarray, np.ndarray, dict]:
     """
     Run a trained model on OOS data and collect actions, per-step returns,
-    and the balance curve.
+    the balance curve, and trade diagnostics.
     """
     env = ForexTradingEnv(
         features=features_scaled,
         prices=prices,
         initial_balance=initial_balance,
+        lot_size=lot_size,
         pip_cost=pip_cost,
     )
     obs, _ = env.reset()
@@ -134,10 +136,22 @@ def _evaluate_fold(
         balance_list.append(env._balance)
         returns_list.append(reward)
 
+    # Trade diagnostics
+    actions_arr = np.array(actions_list)
+    positions = np.array(env.position_history)
+    diagnostics = {
+        "trade_count": env.trade_count,
+        "position_sell_pct": round(100 * np.mean(positions == -1), 1),
+        "position_flat_pct": round(100 * np.mean(positions == 0), 1),
+        "position_buy_pct": round(100 * np.mean(positions == 1), 1),
+        "turnover": env.trade_count / max(len(actions_list), 1),
+    }
+
     return (
-        np.array(actions_list),
+        actions_arr,
         np.array(returns_list),
         np.array(balance_list),
+        diagnostics,
     )
 
 
@@ -150,7 +164,9 @@ def run_wfo(
     df: pd.DataFrame,
     train_months: int = 6,
     test_months: int = 1,
+    max_folds: Optional[int] = None,
     initial_balance: float = 100_000.0,
+    lot_size: float = 100_000.0,
     pip_cost: float = 0.0001,
     total_timesteps: int = 100_000,
     initial_lr: float = 3e-4,
@@ -169,6 +185,10 @@ def run_wfo(
         Raw minute OHLCV with DatetimeIndex.
     train_months / test_months : int
         Rolling window sizes.
+    max_folds : int or None
+        Cap the number of WFO folds (useful for fast diagnostics).
+    lot_size : float
+        Trade size in base currency units (100k = 1 standard lot).
     total_timesteps : int
         Training budget per fold.
 
@@ -190,10 +210,15 @@ def run_wfo(
     splits = list(_generate_wfo_splits(
         df.index, train_months=train_months, test_months=test_months
     ))
+    if max_folds is not None:
+        splits = splits[:max_folds]
     logger.info(
         "WFO for %s — %d folds (%dm train / %dm test)",
         pair_name, len(splits), train_months, test_months,
     )
+
+    # Chain balance across folds so each fold starts where the last ended
+    running_balance = initial_balance
 
     for fold_idx, (tr_s, tr_e, te_s, te_e) in enumerate(splits):
         logger.info(
@@ -217,12 +242,16 @@ def run_wfo(
         train_scaled = scaler.fit_transform(train_feat.values)
         test_scaled = scaler.transform(test_feat.values)
 
-        # --- Training env ---
+        # --- Training env (with trade penalty to discourage excessive churning) ---
         train_env = ForexTradingEnv(
             features=train_scaled,
             prices=train_prices.values,
             initial_balance=initial_balance,
+            lot_size=lot_size,
             pip_cost=pip_cost,
+            reward_scaling=1000.0,
+            episode_length=4096,  # cap episodes for faster learning cycles
+            trade_penalty=50.0,   # additional $50 penalty per position change (need 5-pip move to profit)
         )
 
         # --- Build & train agent ---
@@ -236,14 +265,17 @@ def run_wfo(
         model.learn(
             total_timesteps=total_timesteps,
             callback=LoggingCallback(log_interval=25_000),
-            progress_bar=True,
+            progress_bar=False,
         )
 
-        # --- OOS evaluation ---
-        actions, returns, balance = _evaluate_fold(
+        # --- OOS evaluation (chain balance from previous fold) ---
+        actions, returns, balance, diag = _evaluate_fold(
             model, test_scaled, test_prices.values,
-            initial_balance=initial_balance, pip_cost=pip_cost,
+            initial_balance=running_balance, lot_size=lot_size, pip_cost=pip_cost,
         )
+
+        # Update running balance for next fold (never below initial balance)
+        running_balance = max(balance[-1], initial_balance)
 
         result = WFOResult(
             fold=fold_idx,
@@ -259,10 +291,16 @@ def run_wfo(
         )
         report.folds.append(result)
         logger.info(
-            "Fold %d OOS — final balance: %.2f  (%.2f%%)",
+            "Fold %d OOS — final balance: %.2f  (%.2f%%)  trades: %d  "
+            "positions: sell=%.1f%% flat=%.1f%% buy=%.1f%%  turnover=%.4f",
             fold_idx + 1,
             balance[-1],
-            100 * (balance[-1] / initial_balance - 1),
+            100 * (balance[-1] / balance[0] - 1),
+            diag["trade_count"],
+            diag["position_sell_pct"],
+            diag["position_flat_pct"],
+            diag["position_buy_pct"],
+            diag["turnover"],
         )
 
     return report
