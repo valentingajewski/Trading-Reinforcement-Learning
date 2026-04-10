@@ -15,7 +15,7 @@ import numpy as np
 import pandas as pd
 from ta.momentum import RSIIndicator
 from ta.trend import MACD, EMAIndicator
-from ta.volatility import AverageTrueRange
+from ta.volatility import AverageTrueRange, BollingerBands
 
 logger = logging.getLogger(__name__)
 
@@ -158,6 +158,20 @@ def build_features(df: pd.DataFrame) -> pd.DataFrame:
     # Drop raw EMA / MTF levels (we keep only relative distances)
     feats.drop(columns=["ema_20", "ema_50", "ema_200",
                          "ema50_15m", "ema50_1h"], inplace=True)
+
+    # 8. Volatility features — helps agent recognize high-vol regimes
+    feats["realized_vol_20"] = feats["log_return"].rolling(20).std()
+    feats["realized_vol_60"] = feats["log_return"].rolling(60).std()
+    bb = BollingerBands(close=df["close"], window=20, window_dev=2)
+    feats["bb_width"] = (bb.bollinger_hband() - bb.bollinger_lband()) / df["close"]
+
+    # 9. Time features — cyclic encoding of hour-of-day and day-of-week
+    hour = df.index.hour + df.index.minute / 60.0
+    feats["hour_sin"] = np.sin(2 * np.pi * hour / 24)
+    feats["hour_cos"] = np.cos(2 * np.pi * hour / 24)
+    dow = df.index.dayofweek
+    feats["dow_sin"] = np.sin(2 * np.pi * dow / 5)
+    feats["dow_cos"] = np.cos(2 * np.pi * dow / 5)
 
     logger.info("Built %d features, total rows %d", feats.shape[1], len(feats))
     return feats

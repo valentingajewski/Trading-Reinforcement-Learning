@@ -61,6 +61,8 @@ class ForexTradingEnv(gym.Env):
         reward_scaling: float = 1000.0,
         episode_length: Optional[int] = None,
         trade_penalty: float = 0.0,
+        whipsaw_window: int = 10,
+        whipsaw_penalty: float = 0.0,
     ):
         super().__init__()
 
@@ -70,6 +72,8 @@ class ForexTradingEnv(gym.Env):
         self.initial_balance = initial_balance
         self.lot_size = lot_size
         self.trade_penalty = trade_penalty
+        self.whipsaw_window = whipsaw_window
+        self.whipsaw_penalty = whipsaw_penalty
         self.pip_cost = pip_cost
         self.eta = eta
         self.reward_scaling = reward_scaling
@@ -78,8 +82,8 @@ class ForexTradingEnv(gym.Env):
         self.n_steps = len(features)
         self.n_features = features.shape[1]
 
-        # 3 portfolio state vars appended to observation: position, unrealized PnL, balance (normalised)
-        obs_dim = self.n_features + 3
+        # 4 portfolio state vars appended to observation: position, unrealized PnL, balance, steps_since_trade
+        obs_dim = self.n_features + 4
         self.observation_space = spaces.Box(
             low=-np.inf, high=np.inf, shape=(obs_dim,), dtype=np.float32
         )
@@ -100,6 +104,9 @@ class ForexTradingEnv(gym.Env):
         self._A: float = 0.0  # EMA of returns
         self._B: float = 0.0  # EMA of squared returns
 
+        # Whipsaw tracking (penalises rapid position flipping)
+        self._steps_since_trade: int = 999
+
     # ------------------------------------------------------------------
     # Gym API
     # ------------------------------------------------------------------
@@ -113,6 +120,7 @@ class ForexTradingEnv(gym.Env):
         self._total_pnl = 0.0
         self._A = 0.0
         self._B = 0.0
+        self._steps_since_trade = 999
         self.trade_count = 0
         self.position_history = []
         return self._get_obs(), {}
@@ -133,10 +141,16 @@ class ForexTradingEnv(gym.Env):
         cost = 0.0
         if trade_occurred:
             cost = self.pip_cost * self.lot_size + self.trade_penalty
+            # Whipsaw penalty: extra cost for rapid position switches
+            if self.whipsaw_penalty > 0 and self._steps_since_trade < self.whipsaw_window:
+                cost += self.whipsaw_penalty
         self._balance -= cost
 
         if trade_occurred:
             self.trade_count += 1
+            self._steps_since_trade = 0
+        else:
+            self._steps_since_trade += 1
 
         # --- Update position ---
         if target_position != 0 and target_position != prev_position:
@@ -191,6 +205,7 @@ class ForexTradingEnv(gym.Env):
             float(self._position),
             unrealised / self.initial_balance,          # normalised unPnL
             (self._balance - self.initial_balance) / self.initial_balance,  # normalised balance delta
+            min(self._steps_since_trade, 100) / 100.0,  # normalised steps since last trade (capped at 100)
         ], dtype=np.float32)
 
         return np.concatenate([market, portfolio])

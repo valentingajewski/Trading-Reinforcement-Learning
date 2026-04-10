@@ -69,8 +69,8 @@ def parse_args():
         help="Cap number of WFO folds (default: all). Use e.g. 5 for quick diagnostics.",
     )
     p.add_argument(
-        "--timesteps", type=int, default=100_000,
-        help="Training timesteps per WFO fold (default: 100000)",
+        "--timesteps", type=int, default=300_000,
+        help="Training timesteps per WFO fold (default: 300000)",
     )
     p.add_argument(
         "--lr", type=float, default=3e-4,

@@ -250,8 +250,10 @@ def run_wfo(
             lot_size=lot_size,
             pip_cost=pip_cost,
             reward_scaling=1000.0,
-            episode_length=4096,  # cap episodes for faster learning cycles
-            trade_penalty=0.5,   # $0.50 penalty per position change for a $1,000 account
+            episode_length=8192,  # ~5.7 days — captures weekly patterns
+            trade_penalty=1.0,    # $1.00 penalty per position change
+            whipsaw_window=10,    # penalise trades within 10 steps of the last
+            whipsaw_penalty=1.0,  # extra $1.00 for rapid position flipping
         )
 
         # --- Build & train agent ---
@@ -274,8 +276,8 @@ def run_wfo(
             initial_balance=running_balance, lot_size=lot_size, pip_cost=pip_cost,
         )
 
-        # Update running balance for next fold (never below initial balance)
-        running_balance = max(balance[-1], initial_balance)
+        # Update running balance for next fold (honest chaining)
+        running_balance = balance[-1]
 
         result = WFOResult(
             fold=fold_idx,

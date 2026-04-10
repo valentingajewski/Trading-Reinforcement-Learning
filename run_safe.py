@@ -55,21 +55,21 @@ try:
     df = load_pair(fp)
     print(f"Loaded {len(df)} rows", flush=True)
     
-    # Run WFO with 3 folds, 50k timesteps, CPU
+    # Run WFO with 24 folds, 300k timesteps, CUDA
     print("Starting WFO...", flush=True)
     report = run_wfo(
         pair_name=pair,
         df=df,
-        train_months=6,
+        train_months=12,
         test_months=1,
-        max_folds=3,
-        initial_balance=100_000.0,
-        lot_size=100_000.0,
+        max_folds=24,
+        initial_balance=1_000.0,
+        lot_size=1_000.0,
         pip_cost=0.0001,
-        total_timesteps=50_000,
+        total_timesteps=300_000,
         initial_lr=3e-4,
         lstm_hidden_size=128,
-        device="cpu",
+        device="cuda",
         seed=42,
     )
     

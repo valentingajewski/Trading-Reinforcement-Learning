@@ -62,7 +62,7 @@ def build_agent(
     gamma: float = 0.99,
     gae_lambda: float = 0.95,
     clip_range: float = 0.2,
-    ent_coef: float = 0.05,
+    ent_coef: float = 0.02,
     lstm_hidden_size: int = 128,
     n_lstm_layers: int = 1,
     policy_kwargs: Optional[dict] = None,
