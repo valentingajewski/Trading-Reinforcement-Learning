@@ -165,8 +165,8 @@ def run_wfo(
     train_months: int = 6,
     test_months: int = 1,
     max_folds: Optional[int] = None,
-    initial_balance: float = 100_000.0,
-    lot_size: float = 100_000.0,
+    initial_balance: float = 1_000.0,
+    lot_size: float = 1_000.0,
     pip_cost: float = 0.0001,
     total_timesteps: int = 100_000,
     initial_lr: float = 3e-4,
@@ -188,7 +188,7 @@ def run_wfo(
     max_folds : int or None
         Cap the number of WFO folds (useful for fast diagnostics).
     lot_size : float
-        Trade size in base currency units (100k = 1 standard lot).
+        Trade size in base currency units (1000 = 0.01 standard lot).
     total_timesteps : int
         Training budget per fold.
 
@@ -242,7 +242,7 @@ def run_wfo(
         train_scaled = scaler.fit_transform(train_feat.values)
         test_scaled = scaler.transform(test_feat.values)
 
-        # --- Training env (with trade penalty to discourage excessive churning) ---
+        # --- Training env (with a balance-scaled trade penalty to discourage churning) ---
         train_env = ForexTradingEnv(
             features=train_scaled,
             prices=train_prices.values,
@@ -251,7 +251,7 @@ def run_wfo(
             pip_cost=pip_cost,
             reward_scaling=1000.0,
             episode_length=4096,  # cap episodes for faster learning cycles
-            trade_penalty=50.0,   # additional $50 penalty per position change (need 5-pip move to profit)
+            trade_penalty=0.5,   # $0.50 penalty per position change for a $1,000 account
         )
 
         # --- Build & train agent ---

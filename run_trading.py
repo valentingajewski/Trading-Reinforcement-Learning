@@ -11,7 +11,7 @@ Usage
     python run_trading.py --pair EURUSD
 
     # Customise training budget & window sizes
-    python run_trading.py --pair EURUSD --timesteps 200000 --train-months 6 --test-months 1
+    python run_trading.py --pair EURUSD --timesteps 200000 --train-months 12 --test-months 1
 
     # Use GPU
     python run_trading.py --device cuda
@@ -57,8 +57,8 @@ def parse_args():
         help="Run on a single pair (e.g. EURUSD). Default: all pairs.",
     )
     p.add_argument(
-        "--train-months", type=int, default=6,
-        help="Training window in months (default: 6)",
+        "--train-months", type=int, default=12,
+        help="Training window in months (default: 12)",
     )
     p.add_argument(
         "--test-months", type=int, default=1,
@@ -81,12 +81,12 @@ def parse_args():
         help="LSTM hidden size (default: 128)",
     )
     p.add_argument(
-        "--balance", type=float, default=100_000.0,
-        help="Initial account balance (default: 100000)",
+        "--balance", type=float, default=1_000.0,
+        help="Initial account balance (default: 1000)",
     )
     p.add_argument(
-        "--lot-size", type=float, default=100_000.0,
-        help="Trade position size in base currency units (default: 100000 = 1 std lot)",
+        "--lot-size", type=float, default=1_000.0,
+        help="Trade position size in base currency units (default: 1000 = 0.01 std lot)",
     )
     p.add_argument(
         "--pip-cost", type=float, default=0.0001,

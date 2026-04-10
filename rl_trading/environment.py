@@ -6,7 +6,7 @@ Implements:
 - Differential Sharpe Ratio reward (Moody et al., 1998)
 - Transaction cost penalty (1 pip per trade)
 - Portfolio state: position, unrealized PnL, balance
-- Lot sizing: trades 1 standard lot (100k units) so price moves create real PnL
+- Lot sizing: defaults to 1,000 units (0.01 standard lot) for a $1,000 starter account
 """
 
 import logging
@@ -21,8 +21,8 @@ logger = logging.getLogger(__name__)
 # Maps discrete actions to position targets
 ACTION_TO_POSITION = {0: -1, 1: 0, 2: 1}
 
-# Standard lot = 100,000 units of base currency
-DEFAULT_LOT_SIZE = 100_000
+# Micro lot = 1,000 units of base currency
+DEFAULT_LOT_SIZE = 1_000
 
 
 class ForexTradingEnv(gym.Env):
@@ -38,7 +38,7 @@ class ForexTradingEnv(gym.Env):
     initial_balance : float
         Starting account balance in quote currency units.
     lot_size : float
-        Position size in units of base currency (default: 100k = 1 standard lot).
+        Position size in units of base currency (default: 1000 = 0.01 standard lot).
     pip_cost : float
         Transaction cost per trade in price units (default 0.0001 = 1 pip for
         major pairs). Multiplied by lot_size internally.
