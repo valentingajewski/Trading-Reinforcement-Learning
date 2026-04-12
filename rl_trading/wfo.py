@@ -101,17 +101,21 @@ def _evaluate_fold(
     features_scaled: np.ndarray,
     prices: np.ndarray,
     initial_balance: float,
+    lot_size: float,
     pip_cost: float,
-) -> tuple[np.ndarray, np.ndarray, np.ndarray]:
+    min_hold_steps: int,
+) -> tuple[np.ndarray, np.ndarray, np.ndarray, dict]:
     """
     Run a trained model on OOS data and collect actions, per-step returns,
-    and the balance curve.
+    the balance curve, and trade diagnostics.
     """
     env = ForexTradingEnv(
         features=features_scaled,
         prices=prices,
         initial_balance=initial_balance,
+        lot_size=lot_size,
         pip_cost=pip_cost,
+        min_hold_steps=min_hold_steps,
     )
     obs, _ = env.reset()
     lstm_states = None
@@ -123,21 +127,39 @@ def _evaluate_fold(
 
     done = False
     while not done:
+        prev_balance = env._balance
         action, lstm_states = model.predict(
             obs, state=lstm_states, episode_start=episode_starts, deterministic=True
         )
-        obs, reward, terminated, truncated, _ = env.step(action)
+        obs, _reward, terminated, truncated, _ = env.step(action)
         done = terminated or truncated
         episode_starts = np.array([done], dtype=bool)
 
-        actions_list.append(int(action))
+        executed_action = 0 if env._position == -1 else 1 if env._position == 0 else 2
+        actions_list.append(executed_action)
         balance_list.append(env._balance)
-        returns_list.append(reward)
+        # OOS performance metrics must use true account return, not training reward.
+        if abs(prev_balance) > 1e-12:
+            returns_list.append((env._balance - prev_balance) / prev_balance)
+        else:
+            returns_list.append(0.0)
+
+    # Trade diagnostics
+    actions_arr = np.array(actions_list)
+    positions = np.array(env.position_history)
+    diagnostics = {
+        "trade_count": env.trade_count,
+        "position_sell_pct": round(100 * np.mean(positions == -1), 1),
+        "position_flat_pct": round(100 * np.mean(positions == 0), 1),
+        "position_buy_pct": round(100 * np.mean(positions == 1), 1),
+        "turnover": env.trade_count / max(len(actions_list), 1),
+    }
 
     return (
-        np.array(actions_list),
+        actions_arr,
         np.array(returns_list),
         np.array(balance_list),
+        diagnostics,
     )
 
 
@@ -150,11 +172,20 @@ def run_wfo(
     df: pd.DataFrame,
     train_months: int = 6,
     test_months: int = 1,
-    initial_balance: float = 100_000.0,
+    max_folds: Optional[int] = None,
+    initial_balance: float = 1_000.0,
+    lot_size: float = 1_000.0,
     pip_cost: float = 0.0001,
     total_timesteps: int = 100_000,
     initial_lr: float = 3e-4,
+    ent_coef: float = 0.01,
     lstm_hidden_size: int = 128,
+    trade_penalty: float = 0.75,
+    whipsaw_window: int = 30,
+    whipsaw_penalty: float = 1.25,
+    position_cost: float = 0.002,
+    min_hold_steps: int = 5,
+    chain_balance: bool = False,
     device: str = "auto",
     seed: int = 42,
 ) -> WFOReport:
@@ -169,6 +200,10 @@ def run_wfo(
         Raw minute OHLCV with DatetimeIndex.
     train_months / test_months : int
         Rolling window sizes.
+    max_folds : int or None
+        Cap the number of WFO folds (useful for fast diagnostics).
+    lot_size : float
+        Trade size in base currency units (1000 = 0.01 standard lot).
     total_timesteps : int
         Training budget per fold.
 
@@ -184,20 +219,24 @@ def run_wfo(
     all_features = all_features.loc[first_valid:]
     df = df.loc[first_valid:]
 
-    feature_cols = all_features.columns.tolist()
     report = WFOReport(pair=pair_name)
 
     splits = list(_generate_wfo_splits(
         df.index, train_months=train_months, test_months=test_months
     ))
+    if max_folds is not None:
+        splits = splits[:max_folds]
     logger.info(
-        "WFO for %s — %d folds (%dm train / %dm test)",
+        "WFO for %s -- %d folds (%dm train / %dm test)",
         pair_name, len(splits), train_months, test_months,
     )
 
+    # Optional capital chaining across folds (disabled by default for cleaner WFO comparability).
+    running_balance = initial_balance
+
     for fold_idx, (tr_s, tr_e, te_s, te_e) in enumerate(splits):
         logger.info(
-            "Fold %d/%d  train [%s → %s]  test [%s → %s]",
+            "Fold %d/%d  train [%s -> %s]  test [%s -> %s]",
             fold_idx + 1, len(splits),
             tr_s.date(), tr_e.date(), te_s.date(), te_e.date(),
         )
@@ -209,7 +248,7 @@ def run_wfo(
         test_prices = df.loc[te_s:te_e, "close"]
 
         if len(train_feat) < 1000 or len(test_feat) < 100:
-            logger.warning("Fold %d skipped — insufficient data", fold_idx + 1)
+            logger.warning("Fold %d skipped -- insufficient data", fold_idx + 1)
             continue
 
         # --- Scale (fit on train only) ---
@@ -222,13 +261,22 @@ def run_wfo(
             features=train_scaled,
             prices=train_prices.values,
             initial_balance=initial_balance,
+            lot_size=lot_size,
             pip_cost=pip_cost,
+            reward_scaling=100.0,     # lower scaling lets DSR contribute meaningfully
+            episode_length=20160,     # ~14 days — captures weekly/biweekly patterns
+            trade_penalty=trade_penalty,
+            whipsaw_window=whipsaw_window,
+            whipsaw_penalty=whipsaw_penalty,
+            position_cost=position_cost,
+            min_hold_steps=min_hold_steps,
         )
 
         # --- Build & train agent ---
         model = build_agent(
             env=train_env,
             initial_lr=initial_lr,
+            ent_coef=ent_coef,
             lstm_hidden_size=lstm_hidden_size,
             device=device,
             seed=seed,
@@ -236,14 +284,29 @@ def run_wfo(
         model.learn(
             total_timesteps=total_timesteps,
             callback=LoggingCallback(log_interval=25_000),
-            progress_bar=True,
+            progress_bar=False,
         )
 
+        fold_initial_balance = running_balance if chain_balance else initial_balance
+        if fold_initial_balance <= 0:
+            logger.warning(
+                "Stopping WFO at fold %d: non-positive starting balance %.2f",
+                fold_idx + 1,
+                fold_initial_balance,
+            )
+            break
+
         # --- OOS evaluation ---
-        actions, returns, balance = _evaluate_fold(
+        actions, returns, balance, diag = _evaluate_fold(
             model, test_scaled, test_prices.values,
-            initial_balance=initial_balance, pip_cost=pip_cost,
+            initial_balance=fold_initial_balance,
+            lot_size=lot_size,
+            pip_cost=pip_cost,
+            min_hold_steps=min_hold_steps,
         )
+
+        if chain_balance:
+            running_balance = balance[-1]
 
         result = WFOResult(
             fold=fold_idx,
@@ -259,10 +322,24 @@ def run_wfo(
         )
         report.folds.append(result)
         logger.info(
-            "Fold %d OOS — final balance: %.2f  (%.2f%%)",
+            "Fold %d OOS -- final balance: %.2f  (%.2f%%)  trades: %d  "
+            "positions: sell=%.1f%% flat=%.1f%% buy=%.1f%%  turnover=%.4f",
             fold_idx + 1,
             balance[-1],
-            100 * (balance[-1] / initial_balance - 1),
+            100 * (balance[-1] / balance[0] - 1),
+            diag["trade_count"],
+            diag["position_sell_pct"],
+            diag["position_flat_pct"],
+            diag["position_buy_pct"],
+            diag["turnover"],
         )
+
+        if chain_balance and running_balance <= 0:
+            logger.warning(
+                "Account exhausted after fold %d (balance=%.2f). Stopping remaining folds.",
+                fold_idx + 1,
+                running_balance,
+            )
+            break
 
     return report

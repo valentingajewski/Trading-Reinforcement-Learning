@@ -6,6 +6,7 @@ Implements:
 - Differential Sharpe Ratio reward (Moody et al., 1998)
 - Transaction cost penalty (1 pip per trade)
 - Portfolio state: position, unrealized PnL, balance
+- Lot sizing: defaults to 1,000 units (0.01 standard lot) for a $1,000 starter account
 """
 
 import logging
@@ -20,6 +21,9 @@ logger = logging.getLogger(__name__)
 # Maps discrete actions to position targets
 ACTION_TO_POSITION = {0: -1, 1: 0, 2: 1}
 
+# Micro lot = 1,000 units of base currency
+DEFAULT_LOT_SIZE = 1_000
+
 
 class ForexTradingEnv(gym.Env):
     """
@@ -33,9 +37,11 @@ class ForexTradingEnv(gym.Env):
         Close prices aligned with *features*.
     initial_balance : float
         Starting account balance in quote currency units.
+    lot_size : float
+        Position size in units of base currency (default: 1000 = 0.01 standard lot).
     pip_cost : float
         Transaction cost per trade in price units (default 0.0001 = 1 pip for
-        major pairs).
+        major pairs). Multiplied by lot_size internally.
     eta : float
         Adaptation rate for the differential Sharpe ratio EMA.
     episode_length : int or None
@@ -48,10 +54,17 @@ class ForexTradingEnv(gym.Env):
         self,
         features: np.ndarray,
         prices: np.ndarray,
-        initial_balance: float = 100_000.0,
+        initial_balance: float = 1_000.0,
+        lot_size: float = DEFAULT_LOT_SIZE,
         pip_cost: float = 0.0001,
         eta: float = 0.001,
+        reward_scaling: float = 1000.0,
         episode_length: Optional[int] = None,
+        trade_penalty: float = 0.0,
+        whipsaw_window: int = 10,
+        whipsaw_penalty: float = 0.0,
+        position_cost: float = 0.0,
+        min_hold_steps: int = 0,
     ):
         super().__init__()
 
@@ -59,19 +72,30 @@ class ForexTradingEnv(gym.Env):
         self.features = features.astype(np.float32)
         self.prices = prices.astype(np.float64)
         self.initial_balance = initial_balance
+        self.lot_size = lot_size
+        self.trade_penalty = trade_penalty
+        self.whipsaw_window = whipsaw_window
+        self.whipsaw_penalty = whipsaw_penalty
         self.pip_cost = pip_cost
         self.eta = eta
+        self.reward_scaling = reward_scaling
         self.episode_length = episode_length
+        self.position_cost = position_cost
+        self.min_hold_steps = min_hold_steps
 
         self.n_steps = len(features)
         self.n_features = features.shape[1]
 
-        # 3 portfolio state vars appended to observation: position, unrealized PnL, balance (normalised)
-        obs_dim = self.n_features + 3
+        # 4 portfolio state vars appended to observation: position, unrealized PnL, balance, steps_since_trade
+        obs_dim = self.n_features + 4
         self.observation_space = spaces.Box(
             low=-np.inf, high=np.inf, shape=(obs_dim,), dtype=np.float32
         )
         self.action_space = spaces.Discrete(3)
+
+        # Trade tracking
+        self.trade_count: int = 0
+        self.position_history: list[int] = []
 
         # Internal state — set in reset()
         self._current_step: int = 0
@@ -83,6 +107,9 @@ class ForexTradingEnv(gym.Env):
         # Differential Sharpe Ratio running statistics
         self._A: float = 0.0  # EMA of returns
         self._B: float = 0.0  # EMA of squared returns
+
+        # Whipsaw tracking (penalises rapid position flipping)
+        self._steps_since_trade: int = 999
 
     # ------------------------------------------------------------------
     # Gym API
@@ -97,23 +124,52 @@ class ForexTradingEnv(gym.Env):
         self._total_pnl = 0.0
         self._A = 0.0
         self._B = 0.0
+        self._steps_since_trade = 999
+        self.trade_count = 0
+        self.position_history = []
         return self._get_obs(), {}
 
     def step(self, action: int):
-        target_position = ACTION_TO_POSITION[int(action)]
+        desired_position = ACTION_TO_POSITION[int(action)]
         price = self.prices[self._current_step]
         prev_position = self._position
 
-        # --- Realise PnL on position change ---
+        target_position = desired_position
+        if (
+            desired_position != prev_position
+            and self.min_hold_steps > 0
+            and self._steps_since_trade < self.min_hold_steps
+        ):
+            # Enforce a small minimum hold time to suppress minute-to-minute churn.
+            target_position = prev_position
+
+        # --- Realise PnL on position change (lot-sized) ---
         realised = 0.0
         if prev_position != target_position and prev_position != 0:
-            realised = prev_position * (price - self._entry_price)
+            realised = prev_position * (price - self._entry_price) * self.lot_size
             self._balance += realised
 
-        # --- Transaction cost ---
+        # --- Transaction cost (lot-sized: 1 pip × lot_size) + trade penalty ---
         trade_occurred = target_position != prev_position
-        cost = self.pip_cost if trade_occurred else 0.0
+        cost = 0.0
+        if trade_occurred:
+            cost = self.pip_cost * self.lot_size + self.trade_penalty
+            # Whipsaw penalty: extra cost for rapid position switches
+            if self.whipsaw_penalty > 0 and self._steps_since_trade < self.whipsaw_window:
+                cost += self.whipsaw_penalty
         self._balance -= cost
+
+        # --- Per-step holding cost (encourages going flat when uncertain) ---
+        holding_cost = 0.0
+        if self.position_cost > 0 and target_position != 0:
+            holding_cost = self.position_cost
+            self._balance -= holding_cost
+
+        if trade_occurred:
+            self.trade_count += 1
+            self._steps_since_trade = 0
+        else:
+            self._steps_since_trade += 1
 
         # --- Update position ---
         if target_position != 0 and target_position != prev_position:
@@ -121,12 +177,17 @@ class ForexTradingEnv(gym.Env):
         if target_position == 0:
             self._entry_price = 0.0
         self._position = target_position
+        self.position_history.append(target_position)
 
         # --- Step return (for reward) ---
-        step_return = self._compute_step_return(price, realised, cost)
+        step_return = self._compute_step_return(price, realised, cost + holding_cost)
 
-        # --- Differential Sharpe Ratio reward ---
-        reward = self._differential_sharpe(step_return)
+        # --- Hybrid reward: scaled PnL + Differential Sharpe Ratio ---
+        # The PnL component gives a direct, meaningful signal from the start.
+        # The DSR component encourages risk-adjusted behaviour as stats accumulate.
+        dsr = self._differential_sharpe(step_return)
+        pnl_reward = step_return * self.reward_scaling
+        reward = pnl_reward + dsr
 
         # --- Advance ---
         self._current_step += 1
@@ -157,23 +218,24 @@ class ForexTradingEnv(gym.Env):
         if self._position != 0:
             unrealised = self._position * (
                 self.prices[idx] - self._entry_price
-            )
+            ) * self.lot_size
 
         portfolio = np.array([
             float(self._position),
             unrealised / self.initial_balance,          # normalised unPnL
             (self._balance - self.initial_balance) / self.initial_balance,  # normalised balance delta
+            min(self._steps_since_trade, 100) / 100.0,  # normalised steps since last trade (capped at 100)
         ], dtype=np.float32)
 
         return np.concatenate([market, portfolio])
 
     def _compute_step_return(self, price: float, realised: float,
                              cost: float) -> float:
-        """Net return for this step (realised + mark-to-market change − cost)."""
+        """Net return for this step (realised + mark-to-market change − cost), lot-sized."""
         unrealised_change = 0.0
         if self._position != 0 and self._current_step > 0:
             prev_price = self.prices[self._current_step - 1]
-            unrealised_change = self._position * (price - prev_price)
+            unrealised_change = self._position * (price - prev_price) * self.lot_size
         return (realised + unrealised_change - cost) / self.initial_balance
 
     def _differential_sharpe(self, R_t: float) -> float:

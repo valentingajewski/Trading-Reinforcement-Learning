@@ -11,7 +11,7 @@ Usage
     python run_trading.py --pair EURUSD
 
     # Customise training budget & window sizes
-    python run_trading.py --pair EURUSD --timesteps 200000 --train-months 6 --test-months 1
+    python run_trading.py --pair EURUSD --timesteps 200000 --train-months 12 --test-months 1
 
     # Use GPU
     python run_trading.py --device cuda
@@ -57,28 +57,60 @@ def parse_args():
         help="Run on a single pair (e.g. EURUSD). Default: all pairs.",
     )
     p.add_argument(
-        "--train-months", type=int, default=6,
-        help="Training window in months (default: 6)",
+        "--train-months", type=int, default=12,
+        help="Training window in months (default: 12)",
     )
     p.add_argument(
         "--test-months", type=int, default=1,
         help="OOS test window in months (default: 1)",
     )
     p.add_argument(
-        "--timesteps", type=int, default=100_000,
-        help="Training timesteps per WFO fold (default: 100000)",
+        "--max-folds", type=int, default=None,
+        help="Cap number of WFO folds (default: all). Use e.g. 5 for quick diagnostics.",
     )
     p.add_argument(
-        "--lr", type=float, default=3e-4,
-        help="Initial learning rate (default: 3e-4)",
+        "--timesteps", type=int, default=300_000,
+        help="Training timesteps per WFO fold (default: 300000)",
+    )
+    p.add_argument(
+        "--lr", type=float, default=1e-4,
+        help="Initial learning rate (default: 1e-4)",
+    )
+    p.add_argument(
+        "--ent-coef", type=float, default=0.01,
+        help="Entropy coefficient (default: 0.01)",
+    )
+    p.add_argument(
+        "--trade-penalty", type=float, default=0.75,
+        help="Per-trade penalty during training (default: 0.75)",
+    )
+    p.add_argument(
+        "--whipsaw-window", type=int, default=30,
+        help="Steps defining rapid trade reversals (default: 30)",
+    )
+    p.add_argument(
+        "--whipsaw-penalty", type=float, default=1.25,
+        help="Extra penalty for fast flip-flops (default: 1.25)",
+    )
+    p.add_argument(
+        "--position-cost", type=float, default=0.002,
+        help="Per-step cost while non-flat in training (default: 0.002)",
+    )
+    p.add_argument(
+        "--min-hold-steps", type=int, default=5,
+        help="Minimum steps to hold a position before switching (default: 5)",
     )
     p.add_argument(
         "--lstm-size", type=int, default=128,
         help="LSTM hidden size (default: 128)",
     )
     p.add_argument(
-        "--balance", type=float, default=100_000.0,
-        help="Initial account balance (default: 100000)",
+        "--balance", type=float, default=1_000.0,
+        help="Initial account balance (default: 1000)",
+    )
+    p.add_argument(
+        "--lot-size", type=float, default=1_000.0,
+        help="Trade position size in base currency units (default: 1000 = 0.01 std lot)",
     )
     p.add_argument(
         "--pip-cost", type=float, default=0.0001,
@@ -87,7 +119,11 @@ def parse_args():
     p.add_argument(
         "--device", type=str, default="auto",
         choices=["auto", "cpu", "cuda"],
-        help="Compute device (default: auto)",
+        help="Compute device (default: auto — uses GPU if available)",
+    )
+    p.add_argument(
+        "--chain-balance", action="store_true",
+        help="Chain account balance between folds (default: disabled)",
     )
     p.add_argument(
         "--seed", type=int, default=42,
@@ -136,17 +172,26 @@ def main():
             df=df,
             train_months=args.train_months,
             test_months=args.test_months,
+            max_folds=args.max_folds,
             initial_balance=args.balance,
+            lot_size=args.lot_size,
             pip_cost=args.pip_cost,
             total_timesteps=args.timesteps,
             initial_lr=args.lr,
+            ent_coef=args.ent_coef,
             lstm_hidden_size=args.lstm_size,
+            trade_penalty=args.trade_penalty,
+            whipsaw_window=args.whipsaw_window,
+            whipsaw_penalty=args.whipsaw_penalty,
+            position_cost=args.position_cost,
+            min_hold_steps=args.min_hold_steps,
+            chain_balance=args.chain_balance,
             device=args.device,
             seed=args.seed,
         )
 
         if not report.folds:
-            logger.warning("No completed folds for %s — skipping", pair_name)
+            logger.warning("No completed folds for %s -- skipping", pair_name)
             continue
 
         # --- Metrics ---
@@ -164,10 +209,10 @@ def main():
         full_table.to_csv(csv_path, index=False)
 
         logger.info("\n" + "=" * 70)
-        logger.info("WALK-FORWARD OPTIMISATION — ALL PAIRS SUMMARY")
+        logger.info("WALK-FORWARD OPTIMISATION -- ALL PAIRS SUMMARY")
         logger.info("=" * 70)
         logger.info("\n%s", full_table.to_string(index=False))
-        logger.info("Summary saved → %s", csv_path)
+        logger.info("Summary saved -> %s", csv_path)
     else:
         logger.warning("No results produced.")
 
