@@ -29,6 +29,8 @@ MINUTES_PER_YEAR = 252 * 24 * 60  # forex trades ~24h, 252 days/year
 
 def total_return(balance_curve: np.ndarray) -> float:
     """Total return as a fraction (0.10 = +10%)."""
+    if len(balance_curve) < 2 or abs(balance_curve[0]) <= 1e-12:
+        return 0.0
     return balance_curve[-1] / balance_curve[0] - 1.0
 
 
@@ -41,6 +43,8 @@ def annualized_sharpe(returns: np.ndarray, periods_per_year: float = MINUTES_PER
 
 def max_drawdown(balance_curve: np.ndarray) -> float:
     """Maximum drawdown as a positive fraction (0.15 = −15%)."""
+    if len(balance_curve) == 0:
+        return 0.0
     peak = np.maximum.accumulate(balance_curve)
     dd = (peak - balance_curve) / peak
     return float(np.max(dd))
@@ -53,6 +57,8 @@ def calmar_ratio(balance_curve: np.ndarray, returns: np.ndarray,
     if mdd == 0:
         return 0.0
     n = len(returns)
+    if len(balance_curve) < 2 or balance_curve[0] <= 0 or balance_curve[-1] <= 0:
+        return 0.0
     ann_return = (balance_curve[-1] / balance_curve[0]) ** (periods_per_year / max(n, 1)) - 1
     return float(ann_return / mdd)
 
@@ -66,9 +72,20 @@ def compute_summary(report: WFOReport) -> pd.DataFrame:
     pd.DataFrame
         Single-row table with key metrics.
     """
-    balance = report.oos_balance
     returns = report.oos_returns
     actions = report.oos_actions
+
+    fold_returns = []
+    for f in report.folds:
+        if len(f.balance_curve) >= 2 and f.balance_curve[0] > 0:
+            fold_returns.append(float(f.balance_curve[-1] / f.balance_curve[0] - 1.0))
+
+    if fold_returns:
+        compounded_total_return = float(np.prod(1.0 + np.array(fold_returns)) - 1.0)
+        fold_equity = np.concatenate([[1.0], np.cumprod(1.0 + np.array(fold_returns))])
+    else:
+        compounded_total_return = 0.0
+        fold_equity = np.array([1.0])
 
     # Position distribution
     action_counts = Counter(actions)
@@ -78,10 +95,10 @@ def compute_summary(report: WFOReport) -> pd.DataFrame:
 
     metrics = {
         "Pair": report.pair,
-        "Total Return (%)": round(total_return(balance) * 100, 2),
+        "Total Return (%)": round(compounded_total_return * 100, 2),
         "Ann. Sharpe Ratio": round(annualized_sharpe(returns), 4),
-        "Max Drawdown (%)": round(max_drawdown(balance) * 100, 2),
-        "Calmar Ratio": round(calmar_ratio(balance, returns), 4),
+        "Max Drawdown (%)": round(max_drawdown(fold_equity) * 100, 2),
+        "Calmar Ratio": round(calmar_ratio(fold_equity, returns), 4),
         "OOS Bars": len(returns),
         "Folds": len(report.folds),
         "Trades": trades,
@@ -203,5 +220,5 @@ def plot_equity_curve(
         plt.show()
     plt.close(fig)
 
-    logger.info("Saved equity curve → %s", filepath)
+    logger.info("Saved equity curve -> %s", filepath)
     return filepath

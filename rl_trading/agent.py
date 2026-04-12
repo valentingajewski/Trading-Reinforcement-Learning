@@ -56,13 +56,13 @@ class LoggingCallback(BaseCallback):
 def build_agent(
     env,
     initial_lr: float = 3e-4,
-    n_steps: int = 2048,
-    batch_size: int = 64,
+    n_steps: int = 4096,
+    batch_size: int = 128,
     n_epochs: int = 10,
     gamma: float = 0.99,
     gae_lambda: float = 0.95,
     clip_range: float = 0.2,
-    ent_coef: float = 0.02,
+    ent_coef: float = 0.01,
     lstm_hidden_size: int = 128,
     n_lstm_layers: int = 1,
     policy_kwargs: Optional[dict] = None,
@@ -113,7 +113,7 @@ def build_agent(
         seed=seed,
     )
     logger.info(
-        "Built RecurrentPPO — LSTM(%d×%d), LR %.1e → 0",
+        "Built RecurrentPPO -- LSTM(%dx%d), LR %.1e -> 0",
         lstm_hidden_size, n_lstm_layers, initial_lr,
     )
     return model

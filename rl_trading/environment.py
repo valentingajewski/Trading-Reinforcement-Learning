@@ -63,6 +63,8 @@ class ForexTradingEnv(gym.Env):
         trade_penalty: float = 0.0,
         whipsaw_window: int = 10,
         whipsaw_penalty: float = 0.0,
+        position_cost: float = 0.0,
+        min_hold_steps: int = 0,
     ):
         super().__init__()
 
@@ -78,6 +80,8 @@ class ForexTradingEnv(gym.Env):
         self.eta = eta
         self.reward_scaling = reward_scaling
         self.episode_length = episode_length
+        self.position_cost = position_cost
+        self.min_hold_steps = min_hold_steps
 
         self.n_steps = len(features)
         self.n_features = features.shape[1]
@@ -126,9 +130,18 @@ class ForexTradingEnv(gym.Env):
         return self._get_obs(), {}
 
     def step(self, action: int):
-        target_position = ACTION_TO_POSITION[int(action)]
+        desired_position = ACTION_TO_POSITION[int(action)]
         price = self.prices[self._current_step]
         prev_position = self._position
+
+        target_position = desired_position
+        if (
+            desired_position != prev_position
+            and self.min_hold_steps > 0
+            and self._steps_since_trade < self.min_hold_steps
+        ):
+            # Enforce a small minimum hold time to suppress minute-to-minute churn.
+            target_position = prev_position
 
         # --- Realise PnL on position change (lot-sized) ---
         realised = 0.0
@@ -146,6 +159,12 @@ class ForexTradingEnv(gym.Env):
                 cost += self.whipsaw_penalty
         self._balance -= cost
 
+        # --- Per-step holding cost (encourages going flat when uncertain) ---
+        holding_cost = 0.0
+        if self.position_cost > 0 and target_position != 0:
+            holding_cost = self.position_cost
+            self._balance -= holding_cost
+
         if trade_occurred:
             self.trade_count += 1
             self._steps_since_trade = 0
@@ -161,7 +180,7 @@ class ForexTradingEnv(gym.Env):
         self.position_history.append(target_position)
 
         # --- Step return (for reward) ---
-        step_return = self._compute_step_return(price, realised, cost)
+        step_return = self._compute_step_return(price, realised, cost + holding_cost)
 
         # --- Hybrid reward: scaled PnL + Differential Sharpe Ratio ---
         # The PnL component gives a direct, meaningful signal from the start.

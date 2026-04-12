@@ -73,8 +73,32 @@ def parse_args():
         help="Training timesteps per WFO fold (default: 300000)",
     )
     p.add_argument(
-        "--lr", type=float, default=3e-4,
-        help="Initial learning rate (default: 3e-4)",
+        "--lr", type=float, default=1e-4,
+        help="Initial learning rate (default: 1e-4)",
+    )
+    p.add_argument(
+        "--ent-coef", type=float, default=0.01,
+        help="Entropy coefficient (default: 0.01)",
+    )
+    p.add_argument(
+        "--trade-penalty", type=float, default=0.75,
+        help="Per-trade penalty during training (default: 0.75)",
+    )
+    p.add_argument(
+        "--whipsaw-window", type=int, default=30,
+        help="Steps defining rapid trade reversals (default: 30)",
+    )
+    p.add_argument(
+        "--whipsaw-penalty", type=float, default=1.25,
+        help="Extra penalty for fast flip-flops (default: 1.25)",
+    )
+    p.add_argument(
+        "--position-cost", type=float, default=0.002,
+        help="Per-step cost while non-flat in training (default: 0.002)",
+    )
+    p.add_argument(
+        "--min-hold-steps", type=int, default=5,
+        help="Minimum steps to hold a position before switching (default: 5)",
     )
     p.add_argument(
         "--lstm-size", type=int, default=128,
@@ -96,6 +120,10 @@ def parse_args():
         "--device", type=str, default="auto",
         choices=["auto", "cpu", "cuda"],
         help="Compute device (default: auto — uses GPU if available)",
+    )
+    p.add_argument(
+        "--chain-balance", action="store_true",
+        help="Chain account balance between folds (default: disabled)",
     )
     p.add_argument(
         "--seed", type=int, default=42,
@@ -150,13 +178,20 @@ def main():
             pip_cost=args.pip_cost,
             total_timesteps=args.timesteps,
             initial_lr=args.lr,
+            ent_coef=args.ent_coef,
             lstm_hidden_size=args.lstm_size,
+            trade_penalty=args.trade_penalty,
+            whipsaw_window=args.whipsaw_window,
+            whipsaw_penalty=args.whipsaw_penalty,
+            position_cost=args.position_cost,
+            min_hold_steps=args.min_hold_steps,
+            chain_balance=args.chain_balance,
             device=args.device,
             seed=args.seed,
         )
 
         if not report.folds:
-            logger.warning("No completed folds for %s — skipping", pair_name)
+            logger.warning("No completed folds for %s -- skipping", pair_name)
             continue
 
         # --- Metrics ---
@@ -174,10 +209,10 @@ def main():
         full_table.to_csv(csv_path, index=False)
 
         logger.info("\n" + "=" * 70)
-        logger.info("WALK-FORWARD OPTIMISATION — ALL PAIRS SUMMARY")
+        logger.info("WALK-FORWARD OPTIMISATION -- ALL PAIRS SUMMARY")
         logger.info("=" * 70)
         logger.info("\n%s", full_table.to_string(index=False))
-        logger.info("Summary saved → %s", csv_path)
+        logger.info("Summary saved -> %s", csv_path)
     else:
         logger.warning("No results produced.")
 
