@@ -83,9 +83,15 @@ def compute_summary(report: WFOReport) -> pd.DataFrame:
     if fold_returns:
         compounded_total_return = float(np.prod(1.0 + np.array(fold_returns)) - 1.0)
         fold_equity = np.concatenate([[1.0], np.cumprod(1.0 + np.array(fold_returns))])
+        positive_fold_pct = 100.0 * float(np.mean(np.array(fold_returns) > 0))
+        median_fold_return = 100.0 * float(np.median(fold_returns))
+        worst_fold_return = 100.0 * float(np.min(fold_returns))
     else:
         compounded_total_return = 0.0
         fold_equity = np.array([1.0])
+        positive_fold_pct = 0.0
+        median_fold_return = 0.0
+        worst_fold_return = 0.0
 
     # Position distribution
     action_counts = Counter(actions)
@@ -99,6 +105,9 @@ def compute_summary(report: WFOReport) -> pd.DataFrame:
         "Ann. Sharpe Ratio": round(annualized_sharpe(returns), 4),
         "Max Drawdown (%)": round(max_drawdown(fold_equity) * 100, 2),
         "Calmar Ratio": round(calmar_ratio(fold_equity, returns), 4),
+        "Positive Folds (%)": round(positive_fold_pct, 1),
+        "Median Fold Return (%)": round(median_fold_return, 2),
+        "Worst Fold Return (%)": round(worst_fold_return, 2),
         "OOS Bars": len(returns),
         "Folds": len(report.folds),
         "Trades": trades,

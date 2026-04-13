@@ -101,6 +101,10 @@ def parse_args():
         help="Minimum steps to hold a position before switching (default: 5)",
     )
     p.add_argument(
+        "--drawdown-penalty", type=float, default=2.0,
+        help="Reward penalty multiplier for current drawdown (default: 2.0)",
+    )
+    p.add_argument(
         "--lstm-size", type=int, default=128,
         help="LSTM hidden size (default: 128)",
     )
@@ -185,6 +189,7 @@ def main():
             whipsaw_penalty=args.whipsaw_penalty,
             position_cost=args.position_cost,
             min_hold_steps=args.min_hold_steps,
+            drawdown_penalty=args.drawdown_penalty,
             chain_balance=args.chain_balance,
             device=args.device,
             seed=args.seed,

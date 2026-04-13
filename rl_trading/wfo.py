@@ -185,6 +185,7 @@ def run_wfo(
     whipsaw_penalty: float = 1.25,
     position_cost: float = 0.002,
     min_hold_steps: int = 5,
+    drawdown_penalty: float = 2.0,
     chain_balance: bool = False,
     device: str = "auto",
     seed: int = 42,
@@ -270,6 +271,7 @@ def run_wfo(
             whipsaw_penalty=whipsaw_penalty,
             position_cost=position_cost,
             min_hold_steps=min_hold_steps,
+            drawdown_penalty=drawdown_penalty,
         )
 
         # --- Build & train agent ---

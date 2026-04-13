@@ -55,7 +55,7 @@ try:
     df = load_pair(fp)
     print(f"Loaded {len(df)} rows", flush=True)
     
-    # Run WFO with 24 folds, 300k timesteps, CUDA
+    # Run WFO with 24 folds, 500k timesteps, CUDA
     print("Starting WFO...", flush=True)
     report = run_wfo(
         pair_name=pair,
@@ -66,7 +66,7 @@ try:
         initial_balance=1_000.0,
         lot_size=1_000.0,
         pip_cost=0.0001,
-        total_timesteps=300_000,
+        total_timesteps=500_000,
         initial_lr=1e-4,
         ent_coef=0.01,
         lstm_hidden_size=128,
@@ -75,6 +75,7 @@ try:
         whipsaw_penalty=1.25,
         position_cost=0.002,
         min_hold_steps=5,
+        drawdown_penalty=2.0,
         chain_balance=False,
         device="cuda",
         seed=42,

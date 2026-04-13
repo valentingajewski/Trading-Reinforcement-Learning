@@ -65,6 +65,7 @@ class ForexTradingEnv(gym.Env):
         whipsaw_penalty: float = 0.0,
         position_cost: float = 0.0,
         min_hold_steps: int = 0,
+        drawdown_penalty: float = 0.0,
     ):
         super().__init__()
 
@@ -82,12 +83,13 @@ class ForexTradingEnv(gym.Env):
         self.episode_length = episode_length
         self.position_cost = position_cost
         self.min_hold_steps = min_hold_steps
+        self.drawdown_penalty = drawdown_penalty
 
         self.n_steps = len(features)
         self.n_features = features.shape[1]
 
-        # 4 portfolio state vars appended to observation: position, unrealized PnL, balance, steps_since_trade
-        obs_dim = self.n_features + 4
+        # 5 portfolio vars: position, unrealized PnL, balance, steps_since_trade, drawdown
+        obs_dim = self.n_features + 5
         self.observation_space = spaces.Box(
             low=-np.inf, high=np.inf, shape=(obs_dim,), dtype=np.float32
         )
@@ -102,6 +104,7 @@ class ForexTradingEnv(gym.Env):
         self._position: int = 0       # -1, 0, 1
         self._entry_price: float = 0.0
         self._balance: float = initial_balance
+        self._peak_balance: float = initial_balance
         self._total_pnl: float = 0.0
 
         # Differential Sharpe Ratio running statistics
@@ -121,6 +124,7 @@ class ForexTradingEnv(gym.Env):
         self._position = 0
         self._entry_price = 0.0
         self._balance = self.initial_balance
+        self._peak_balance = self.initial_balance
         self._total_pnl = 0.0
         self._A = 0.0
         self._B = 0.0
@@ -187,7 +191,9 @@ class ForexTradingEnv(gym.Env):
         # The DSR component encourages risk-adjusted behaviour as stats accumulate.
         dsr = self._differential_sharpe(step_return)
         pnl_reward = step_return * self.reward_scaling
-        reward = pnl_reward + dsr
+        self._peak_balance = max(self._peak_balance, self._balance)
+        drawdown = (self._peak_balance - self._balance) / max(self._peak_balance, 1e-12)
+        reward = pnl_reward + dsr - self.drawdown_penalty * drawdown
 
         # --- Advance ---
         self._current_step += 1
@@ -225,6 +231,7 @@ class ForexTradingEnv(gym.Env):
             unrealised / self.initial_balance,          # normalised unPnL
             (self._balance - self.initial_balance) / self.initial_balance,  # normalised balance delta
             min(self._steps_since_trade, 100) / 100.0,  # normalised steps since last trade (capped at 100)
+            (self._peak_balance - self._balance) / max(self._peak_balance, 1e-12),
         ], dtype=np.float32)
 
         return np.concatenate([market, portfolio])
