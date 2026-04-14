@@ -75,7 +75,7 @@ try:
         whipsaw_penalty=1.25,
         position_cost=0.002,
         min_hold_steps=5,
-        drawdown_penalty=2.0,
+        drawdown_penalty=0.5,
         chain_balance=False,
         device="cuda",
         seed=42,

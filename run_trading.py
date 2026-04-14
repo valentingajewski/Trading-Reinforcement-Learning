@@ -101,8 +101,8 @@ def parse_args():
         help="Minimum steps to hold a position before switching (default: 5)",
     )
     p.add_argument(
-        "--drawdown-penalty", type=float, default=2.0,
-        help="Reward penalty multiplier for current drawdown (default: 2.0)",
+        "--drawdown-penalty", type=float, default=0.5,
+        help="Reward penalty multiplier for worsening drawdown (default: 0.5)",
     )
     p.add_argument(
         "--lstm-size", type=int, default=128,

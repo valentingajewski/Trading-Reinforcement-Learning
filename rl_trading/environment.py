@@ -137,6 +137,7 @@ class ForexTradingEnv(gym.Env):
         desired_position = ACTION_TO_POSITION[int(action)]
         price = self.prices[self._current_step]
         prev_position = self._position
+        prev_drawdown = (self._peak_balance - self._balance) / max(self._peak_balance, 1e-12)
 
         target_position = desired_position
         if (
@@ -193,7 +194,9 @@ class ForexTradingEnv(gym.Env):
         pnl_reward = step_return * self.reward_scaling
         self._peak_balance = max(self._peak_balance, self._balance)
         drawdown = (self._peak_balance - self._balance) / max(self._peak_balance, 1e-12)
-        reward = pnl_reward + dsr - self.drawdown_penalty * drawdown
+        # Penalize only worsening drawdown, not static drawdown level each step.
+        drawdown_increase = max(0.0, drawdown - prev_drawdown)
+        reward = pnl_reward + dsr - self.drawdown_penalty * drawdown_increase
 
         # --- Advance ---
         self._current_step += 1

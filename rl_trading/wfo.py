@@ -185,7 +185,7 @@ def run_wfo(
     whipsaw_penalty: float = 1.25,
     position_cost: float = 0.002,
     min_hold_steps: int = 5,
-    drawdown_penalty: float = 2.0,
+    drawdown_penalty: float = 0.5,
     chain_balance: bool = False,
     device: str = "auto",
     seed: int = 42,
