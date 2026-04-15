@@ -58,14 +58,14 @@ class ForexTradingEnv(gym.Env):
         lot_size: float = DEFAULT_LOT_SIZE,
         pip_cost: float = 0.0001,
         eta: float = 0.001,
-        reward_scaling: float = 1000.0,
+        reward_scaling: float = 10.0,
         episode_length: Optional[int] = None,
         trade_penalty: float = 0.0,
         whipsaw_window: int = 10,
         whipsaw_penalty: float = 0.0,
         position_cost: float = 0.0,
-        min_hold_steps: int = 0,
-        drawdown_penalty: float = 0.0,
+        min_hold_steps: int = 15,
+        drawdown_penalty: float = 1.0,
     ):
         super().__init__()
 

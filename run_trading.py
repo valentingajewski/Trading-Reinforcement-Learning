@@ -77,8 +77,12 @@ def parse_args():
         help="Initial learning rate (default: 1e-4)",
     )
     p.add_argument(
-        "--ent-coef", type=float, default=0.01,
-        help="Entropy coefficient (default: 0.01)",
+        "--ent-coef", type=float, default=0.05,
+        help="Starting entropy coefficient (default: 0.05)",
+    )
+    p.add_argument(
+        "--ent-coef-final", type=float, default=0.02,
+        help="Final entropy coefficient after linear decay (default: 0.02)",
     )
     p.add_argument(
         "--trade-penalty", type=float, default=0.75,
@@ -97,16 +101,16 @@ def parse_args():
         help="Per-step cost while non-flat in training (default: 0.002)",
     )
     p.add_argument(
-        "--min-hold-steps", type=int, default=5,
-        help="Minimum steps to hold a position before switching (default: 5)",
+        "--min-hold-steps", type=int, default=15,
+        help="Minimum steps to hold a position before switching (default: 15)",
     )
     p.add_argument(
-        "--drawdown-penalty", type=float, default=0.5,
-        help="Reward penalty multiplier for worsening drawdown (default: 0.5)",
+        "--drawdown-penalty", type=float, default=1.0,
+        help="Reward penalty multiplier for worsening drawdown (default: 1.0)",
     )
     p.add_argument(
-        "--lstm-size", type=int, default=128,
-        help="LSTM hidden size (default: 128)",
+        "--lstm-size", type=int, default=256,
+        help="LSTM hidden size (default: 256)",
     )
     p.add_argument(
         "--balance", type=float, default=1_000.0,
@@ -183,6 +187,7 @@ def main():
             total_timesteps=args.timesteps,
             initial_lr=args.lr,
             ent_coef=args.ent_coef,
+            ent_coef_final=args.ent_coef_final,
             lstm_hidden_size=args.lstm_size,
             trade_penalty=args.trade_penalty,
             whipsaw_window=args.whipsaw_window,

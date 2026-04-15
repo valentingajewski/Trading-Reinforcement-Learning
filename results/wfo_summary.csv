@@ -1,2 +1,2 @@
-Pair,Total Return (%),Ann. Sharpe Ratio,Max Drawdown (%),Calmar Ratio,OOS Bars,Folds,Trades,Sell %,Flat %,Buy %
-EURUSD,-1.38,1.0108,38.63,-0.0186,698721,22,14869,58.5,0.3,41.2
+Pair,Total Return (%),Ann. Sharpe Ratio,Max Drawdown (%),Calmar Ratio,Positive Folds (%),Median Fold Return (%),Worst Fold Return (%),OOS Bars,Folds,Trades,Sell %,Flat %,Buy %
+EURUSD,-1.43,-0.0138,14.74,-0.0505,59.1,0.42,-13.43,698721,22,2381,66.2,0.5,33.4

@@ -18,11 +18,11 @@ logger = logging.getLogger(__name__)
 # Learning rate schedule
 # ---------------------------------------------------------------------------
 
-def linear_schedule(initial_lr: float):
-    """Return a callable that linearly decays the LR from *initial_lr* → 0."""
+def linear_schedule(initial_value: float, final_value: float = 0.0):
+    """Return a callable that linearly decays from *initial_value* to *final_value*."""
     def _schedule(progress_remaining: float) -> float:
         # progress_remaining goes from 1.0 → 0.0 during training
-        return initial_lr * progress_remaining
+        return final_value + (initial_value - final_value) * progress_remaining
     return _schedule
 
 
@@ -56,14 +56,15 @@ class LoggingCallback(BaseCallback):
 def build_agent(
     env,
     initial_lr: float = 3e-4,
-    n_steps: int = 4096,
-    batch_size: int = 128,
+    n_steps: int = 8192,
+    batch_size: int = 256,
     n_epochs: int = 10,
     gamma: float = 0.99,
     gae_lambda: float = 0.95,
-    clip_range: float = 0.2,
-    ent_coef: float = 0.01,
-    lstm_hidden_size: int = 128,
+    clip_range: float = 0.1,
+    ent_coef: float = 0.05,
+    ent_coef_final: float = 0.02,
+    lstm_hidden_size: int = 256,
     n_lstm_layers: int = 1,
     policy_kwargs: Optional[dict] = None,
     device: str = "auto",
@@ -105,7 +106,7 @@ def build_agent(
         gamma=gamma,
         gae_lambda=gae_lambda,
         clip_range=clip_range,
-        ent_coef=ent_coef,
+        ent_coef=linear_schedule(ent_coef, ent_coef_final),
         max_grad_norm=0.5,
         policy_kwargs=policy_kwargs,
         verbose=0,
@@ -113,7 +114,7 @@ def build_agent(
         seed=seed,
     )
     logger.info(
-        "Built RecurrentPPO -- LSTM(%dx%d), LR %.1e -> 0",
-        lstm_hidden_size, n_lstm_layers, initial_lr,
+        "Built RecurrentPPO -- LSTM(%dx%d), LR %.1e -> 0, ent %.3f -> %.3f",
+        lstm_hidden_size, n_lstm_layers, initial_lr, ent_coef, ent_coef_final,
     )
     return model
