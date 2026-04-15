@@ -287,7 +287,11 @@ def run_wfo(
         )
         model.learn(
             total_timesteps=total_timesteps,
-            callback=LoggingCallback(log_interval=25_000),
+            callback=LoggingCallback(
+                log_interval=25_000,
+                ent_coef_start=ent_coef,
+                ent_coef_end=ent_coef_final,
+            ),
             progress_bar=False,
         )
 

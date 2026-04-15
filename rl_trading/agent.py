@@ -33,19 +33,46 @@ def linear_schedule(initial_value: float, final_value: float = 0.0):
 class LoggingCallback(BaseCallback):
     """Prints mean reward every *log_interval* steps."""
 
-    def __init__(self, log_interval: int = 10_000, verbose: int = 0):
+    def __init__(
+        self,
+        log_interval: int = 10_000,
+        verbose: int = 0,
+        ent_coef_start: Optional[float] = None,
+        ent_coef_end: Optional[float] = None,
+    ):
         super().__init__(verbose)
         self.log_interval = log_interval
+        self.ent_coef_start = ent_coef_start
+        self.ent_coef_end = ent_coef_end
+
+    def _decayed_ent_coef(self) -> Optional[float]:
+        if self.ent_coef_start is None or self.ent_coef_end is None:
+            return None
+        total = max(int(getattr(self.model, "_total_timesteps", 0)), 1)
+        ratio = min(max(self.model.num_timesteps / total, 0.0), 1.0)
+        return self.ent_coef_start + (self.ent_coef_end - self.ent_coef_start) * ratio
 
     def _on_step(self) -> bool:
+        decayed_ent = self._decayed_ent_coef()
+        if decayed_ent is not None:
+            self.model.ent_coef = float(decayed_ent)
+
         if self.n_calls % self.log_interval == 0:
             if len(self.model.ep_info_buffer) > 0:
                 mean_rew = sum(
                     ep["r"] for ep in self.model.ep_info_buffer
                 ) / len(self.model.ep_info_buffer)
-                logger.info(
-                    "Step %d | Mean episode reward: %.6f", self.n_calls, mean_rew
-                )
+                if decayed_ent is not None:
+                    logger.info(
+                        "Step %d | Mean episode reward: %.6f | ent_coef: %.4f",
+                        self.n_calls,
+                        mean_rew,
+                        decayed_ent,
+                    )
+                else:
+                    logger.info(
+                        "Step %d | Mean episode reward: %.6f", self.n_calls, mean_rew
+                    )
         return True
 
 
@@ -106,7 +133,7 @@ def build_agent(
         gamma=gamma,
         gae_lambda=gae_lambda,
         clip_range=clip_range,
-        ent_coef=linear_schedule(ent_coef, ent_coef_final),
+        ent_coef=ent_coef,
         max_grad_norm=0.5,
         policy_kwargs=policy_kwargs,
         verbose=0,
