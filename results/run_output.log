@@ -1,505 +1,524 @@
 === WRAPPER START ===
-2026-04-25 10:30:40 | INFO    | numexpr.utils | NumExpr defaulting to 6 threads.
+2026-04-26 09:02:03 | INFO    | numexpr.utils | NumExpr defaulting to 6 threads.
 Imports OK
 Loading forex_data_by_pair/EURUSD.txt...
-2026-04-25 10:31:36 | INFO    | rl_trading.data_loader | Loaded EURUSD.txt — 8557258 rows from 2003-05-06 00:00:00 to 2026-03-31 23:59:00
+2026-04-26 09:02:59 | INFO    | rl_trading.data_loader | Loaded EURUSD.txt — 8557258 rows from 2003-05-06 00:00:00 to 2026-03-31 23:59:00
 Loaded 8557258 rows
 Starting WFO...
-2026-04-25 10:32:40 | INFO    | rl_trading.features | Built 17 features, total rows 8557258
-2026-04-25 10:32:40 | INFO    | rl_trading.wfo | WFO for EURUSD -- 21 folds (12m train / 12m test)
-2026-04-25 10:32:40 | INFO    | rl_trading.wfo | Fold 1/21  train [2003-05-08 -> 2004-05-08]  test [2004-05-08 -> 2005-05-08]
-2026-04-25 10:32:42 | INFO    | rl_trading.agent | Built RecurrentPPO -- LSTM(128x1), LR 1.0e-04 -> 0, ent 0.010 -> 0.010
-2026-04-25 10:34:10 | INFO    | rl_trading.agent | Step 25000 | Mean episode reward: -394.990632 | ent_coef: 0.0100
-2026-04-25 10:35:41 | INFO    | rl_trading.agent | Step 50000 | Mean episode reward: -372.480747 | ent_coef: 0.0100
-2026-04-25 10:37:00 | INFO    | rl_trading.agent | Step 75000 | Mean episode reward: -351.218004 | ent_coef: 0.0100
-2026-04-25 10:38:14 | INFO    | rl_trading.agent | Step 100000 | Mean episode reward: -338.317710 | ent_coef: 0.0100
-2026-04-25 10:39:28 | INFO    | rl_trading.agent | Step 125000 | Mean episode reward: -324.145625 | ent_coef: 0.0100
-2026-04-25 10:40:44 | INFO    | rl_trading.agent | Step 150000 | Mean episode reward: -295.207696 | ent_coef: 0.0100
-2026-04-25 10:41:57 | INFO    | rl_trading.agent | Step 175000 | Mean episode reward: -280.982983 | ent_coef: 0.0100
-2026-04-25 10:43:10 | INFO    | rl_trading.agent | Step 200000 | Mean episode reward: -266.783675 | ent_coef: 0.0100
-2026-04-25 10:44:24 | INFO    | rl_trading.agent | Step 225000 | Mean episode reward: -255.906400 | ent_coef: 0.0100
-2026-04-25 10:45:45 | INFO    | rl_trading.agent | Step 250000 | Mean episode reward: -232.292561 | ent_coef: 0.0100
-2026-04-25 10:46:58 | INFO    | rl_trading.agent | Step 275000 | Mean episode reward: -222.442011 | ent_coef: 0.0100
-2026-04-25 10:48:12 | INFO    | rl_trading.agent | Step 300000 | Mean episode reward: -213.107121 | ent_coef: 0.0100
-2026-04-25 10:49:25 | INFO    | rl_trading.agent | Step 325000 | Mean episode reward: -204.929924 | ent_coef: 0.0100
-2026-04-25 10:50:39 | INFO    | rl_trading.agent | Step 350000 | Mean episode reward: -188.402202 | ent_coef: 0.0100
-2026-04-25 10:51:55 | INFO    | rl_trading.agent | Step 375000 | Mean episode reward: -180.853998 | ent_coef: 0.0100
-2026-04-25 10:53:08 | INFO    | rl_trading.agent | Step 400000 | Mean episode reward: -173.736983 | ent_coef: 0.0100
-2026-04-25 10:54:22 | INFO    | rl_trading.agent | Step 425000 | Mean episode reward: -166.708943 | ent_coef: 0.0100
-2026-04-25 10:55:36 | INFO    | rl_trading.agent | Step 450000 | Mean episode reward: -154.167890 | ent_coef: 0.0100
-2026-04-25 10:56:51 | INFO    | rl_trading.agent | Step 475000 | Mean episode reward: -148.729121 | ent_coef: 0.0100
-2026-04-25 10:58:10 | INFO    | rl_trading.agent | Step 500000 | Mean episode reward: -143.432286 | ent_coef: 0.0100
-2026-04-25 11:04:49 | INFO    | rl_trading.wfo | Fold 1 OOS -- final balance: 920.98  (-7.90%)  trades: 628  positions: sell=2.5% flat=0.0% buy=97.5%  turnover=0.0017
-2026-04-25 11:04:49 | INFO    | rl_trading.wfo | Fold 2/21  train [2004-05-08 -> 2005-05-08]  test [2005-05-08 -> 2006-05-08]
-2026-04-25 11:04:49 | INFO    | rl_trading.agent | Built RecurrentPPO -- LSTM(128x1), LR 1.0e-04 -> 0, ent 0.010 -> 0.010
-2026-04-25 11:06:16 | INFO    | rl_trading.agent | Step 25000 | Mean episode reward: -465.301447 | ent_coef: 0.0100
-2026-04-25 11:07:42 | INFO    | rl_trading.agent | Step 50000 | Mean episode reward: -445.553150 | ent_coef: 0.0100
-2026-04-25 11:09:00 | INFO    | rl_trading.agent | Step 75000 | Mean episode reward: -416.957064 | ent_coef: 0.0100
-2026-04-25 11:10:13 | INFO    | rl_trading.agent | Step 100000 | Mean episode reward: -400.518171 | ent_coef: 0.0100
-2026-04-25 11:11:27 | INFO    | rl_trading.agent | Step 125000 | Mean episode reward: -379.034846 | ent_coef: 0.0100
-2026-04-25 11:12:40 | INFO    | rl_trading.agent | Step 150000 | Mean episode reward: -358.381290 | ent_coef: 0.0100
-2026-04-25 11:13:53 | INFO    | rl_trading.agent | Step 175000 | Mean episode reward: -330.135081 | ent_coef: 0.0100
-2026-04-25 11:15:08 | INFO    | rl_trading.agent | Step 200000 | Mean episode reward: -316.824717 | ent_coef: 0.0100
-2026-04-25 11:16:21 | INFO    | rl_trading.agent | Step 225000 | Mean episode reward: -304.314453 | ent_coef: 0.0100
-2026-04-25 11:17:40 | INFO    | rl_trading.agent | Step 250000 | Mean episode reward: -291.643940 | ent_coef: 0.0100
-2026-04-25 11:18:55 | INFO    | rl_trading.agent | Step 275000 | Mean episode reward: -269.210688 | ent_coef: 0.0100
-2026-04-25 11:20:08 | INFO    | rl_trading.agent | Step 300000 | Mean episode reward: -259.188704 | ent_coef: 0.0100
-2026-04-25 11:21:21 | INFO    | rl_trading.agent | Step 325000 | Mean episode reward: -248.518049 | ent_coef: 0.0100
-2026-04-25 11:22:34 | INFO    | rl_trading.agent | Step 350000 | Mean episode reward: -239.499438 | ent_coef: 0.0100
-2026-04-25 11:23:47 | INFO    | rl_trading.agent | Step 375000 | Mean episode reward: -231.803710 | ent_coef: 0.0100
-2026-04-25 11:25:02 | INFO    | rl_trading.agent | Step 400000 | Mean episode reward: -218.019348 | ent_coef: 0.0100
-2026-04-25 11:26:15 | INFO    | rl_trading.agent | Step 425000 | Mean episode reward: -213.106593 | ent_coef: 0.0100
-2026-04-25 11:27:28 | INFO    | rl_trading.agent | Step 450000 | Mean episode reward: -208.485107 | ent_coef: 0.0100
-2026-04-25 11:28:41 | INFO    | rl_trading.agent | Step 475000 | Mean episode reward: -203.406413 | ent_coef: 0.0100
-2026-04-25 11:30:01 | INFO    | rl_trading.agent | Step 500000 | Mean episode reward: -194.459661 | ent_coef: 0.0100
-2026-04-25 11:36:40 | INFO    | rl_trading.wfo | Fold 2 OOS -- final balance: 993.84  (-0.62%)  trades: 707  positions: sell=17.7% flat=0.8% buy=81.5%  turnover=0.0019
-2026-04-25 11:36:40 | INFO    | rl_trading.wfo | Fold 3/21  train [2005-05-08 -> 2006-05-08]  test [2006-05-08 -> 2007-05-08]
-2026-04-25 11:36:40 | INFO    | rl_trading.agent | Built RecurrentPPO -- LSTM(128x1), LR 1.0e-04 -> 0, ent 0.010 -> 0.010
-2026-04-25 11:38:07 | INFO    | rl_trading.agent | Step 25000 | Mean episode reward: -459.194460 | ent_coef: 0.0100
-2026-04-25 11:39:31 | INFO    | rl_trading.agent | Step 50000 | Mean episode reward: -443.464612 | ent_coef: 0.0100
-2026-04-25 11:40:48 | INFO    | rl_trading.agent | Step 75000 | Mean episode reward: -415.602334 | ent_coef: 0.0100
-2026-04-25 11:42:02 | INFO    | rl_trading.agent | Step 100000 | Mean episode reward: -396.850975 | ent_coef: 0.0100
-2026-04-25 11:43:16 | INFO    | rl_trading.agent | Step 125000 | Mean episode reward: -375.091767 | ent_coef: 0.0100
-2026-04-25 11:44:31 | INFO    | rl_trading.agent | Step 150000 | Mean episode reward: -336.273617 | ent_coef: 0.0100
-2026-04-25 11:45:45 | INFO    | rl_trading.agent | Step 175000 | Mean episode reward: -318.138166 | ent_coef: 0.0100
-2026-04-25 11:46:58 | INFO    | rl_trading.agent | Step 200000 | Mean episode reward: -303.663437 | ent_coef: 0.0100
-2026-04-25 11:48:12 | INFO    | rl_trading.agent | Step 225000 | Mean episode reward: -291.179483 | ent_coef: 0.0100
-2026-04-25 11:49:31 | INFO    | rl_trading.agent | Step 250000 | Mean episode reward: -269.098280 | ent_coef: 0.0100
-2026-04-25 11:50:45 | INFO    | rl_trading.agent | Step 275000 | Mean episode reward: -259.778616 | ent_coef: 0.0100
-2026-04-25 11:51:58 | INFO    | rl_trading.agent | Step 300000 | Mean episode reward: -249.899733 | ent_coef: 0.0100
-2026-04-25 11:53:11 | INFO    | rl_trading.agent | Step 325000 | Mean episode reward: -241.399661 | ent_coef: 0.0100
-2026-04-25 11:54:24 | INFO    | rl_trading.agent | Step 350000 | Mean episode reward: -225.139627 | ent_coef: 0.0100
-2026-04-25 11:55:39 | INFO    | rl_trading.agent | Step 375000 | Mean episode reward: -216.888467 | ent_coef: 0.0100
-2026-04-25 11:56:52 | INFO    | rl_trading.agent | Step 400000 | Mean episode reward: -210.378184 | ent_coef: 0.0100
-2026-04-25 11:58:05 | INFO    | rl_trading.agent | Step 425000 | Mean episode reward: -203.579877 | ent_coef: 0.0100
-2026-04-25 11:59:18 | INFO    | rl_trading.agent | Step 450000 | Mean episode reward: -192.327249 | ent_coef: 0.0100
-2026-04-25 12:00:33 | INFO    | rl_trading.agent | Step 475000 | Mean episode reward: -186.596956 | ent_coef: 0.0100
-2026-04-25 12:01:51 | INFO    | rl_trading.agent | Step 500000 | Mean episode reward: -181.809386 | ent_coef: 0.0100
-2026-04-25 12:08:32 | INFO    | rl_trading.wfo | Fold 3 OOS -- final balance: 1054.11  (5.41%)  trades: 1049  positions: sell=61.3% flat=0.0% buy=38.7%  turnover=0.0028
-2026-04-25 12:08:32 | INFO    | rl_trading.wfo | Fold 4/21  train [2006-05-08 -> 2007-05-08]  test [2007-05-08 -> 2008-05-08]
-2026-04-25 12:08:32 | INFO    | rl_trading.agent | Built RecurrentPPO -- LSTM(128x1), LR 1.0e-04 -> 0, ent 0.010 -> 0.010
-2026-04-25 12:10:00 | INFO    | rl_trading.agent | Step 25000 | Mean episode reward: -458.296697 | ent_coef: 0.0100
-2026-04-25 12:11:25 | INFO    | rl_trading.agent | Step 50000 | Mean episode reward: -433.968967 | ent_coef: 0.0100
-2026-04-25 12:12:44 | INFO    | rl_trading.agent | Step 75000 | Mean episode reward: -407.284659 | ent_coef: 0.0100
-2026-04-25 12:13:59 | INFO    | rl_trading.agent | Step 100000 | Mean episode reward: -400.121238 | ent_coef: 0.0100
-2026-04-25 12:15:12 | INFO    | rl_trading.agent | Step 125000 | Mean episode reward: -391.366222 | ent_coef: 0.0100
-2026-04-25 12:16:27 | INFO    | rl_trading.agent | Step 150000 | Mean episode reward: -367.484161 | ent_coef: 0.0100
-2026-04-25 12:17:40 | INFO    | rl_trading.agent | Step 175000 | Mean episode reward: -354.759854 | ent_coef: 0.0100
-2026-04-25 12:18:53 | INFO    | rl_trading.agent | Step 200000 | Mean episode reward: -343.861597 | ent_coef: 0.0100
-2026-04-25 12:20:07 | INFO    | rl_trading.agent | Step 225000 | Mean episode reward: -332.228635 | ent_coef: 0.0100
-2026-04-25 12:21:27 | INFO    | rl_trading.agent | Step 250000 | Mean episode reward: -311.618396 | ent_coef: 0.0100
-2026-04-25 12:22:40 | INFO    | rl_trading.agent | Step 275000 | Mean episode reward: -300.182480 | ent_coef: 0.0100
-2026-04-25 12:23:52 | INFO    | rl_trading.agent | Step 300000 | Mean episode reward: -289.510560 | ent_coef: 0.0100
-2026-04-25 12:25:06 | INFO    | rl_trading.agent | Step 325000 | Mean episode reward: -279.722038 | ent_coef: 0.0100
-2026-04-25 12:26:21 | INFO    | rl_trading.agent | Step 350000 | Mean episode reward: -264.114597 | ent_coef: 0.0100
-2026-04-25 12:27:34 | INFO    | rl_trading.agent | Step 375000 | Mean episode reward: -255.782821 | ent_coef: 0.0100
-2026-04-25 12:28:47 | INFO    | rl_trading.agent | Step 400000 | Mean episode reward: -248.667085 | ent_coef: 0.0100
-2026-04-25 12:30:00 | INFO    | rl_trading.agent | Step 425000 | Mean episode reward: -242.101029 | ent_coef: 0.0100
-2026-04-25 12:31:13 | INFO    | rl_trading.agent | Step 450000 | Mean episode reward: -228.367592 | ent_coef: 0.0100
-2026-04-25 12:32:28 | INFO    | rl_trading.agent | Step 475000 | Mean episode reward: -222.190049 | ent_coef: 0.0100
-2026-04-25 12:33:46 | INFO    | rl_trading.agent | Step 500000 | Mean episode reward: -217.160611 | ent_coef: 0.0100
-2026-04-25 12:40:29 | INFO    | rl_trading.wfo | Fold 4 OOS -- final balance: 723.68  (-27.63%)  trades: 1378  positions: sell=60.1% flat=5.6% buy=34.2%  turnover=0.0037
-2026-04-25 12:40:29 | INFO    | rl_trading.wfo | Fold 5/21  train [2007-05-08 -> 2008-05-08]  test [2008-05-08 -> 2009-05-08]
-2026-04-25 12:40:29 | INFO    | rl_trading.agent | Built RecurrentPPO -- LSTM(128x1), LR 1.0e-04 -> 0, ent 0.010 -> 0.010
-2026-04-25 12:41:56 | INFO    | rl_trading.agent | Step 25000 | Mean episode reward: -459.652383 | ent_coef: 0.0100
-2026-04-25 12:43:22 | INFO    | rl_trading.agent | Step 50000 | Mean episode reward: -436.295042 | ent_coef: 0.0100
-2026-04-25 12:44:40 | INFO    | rl_trading.agent | Step 75000 | Mean episode reward: -416.069609 | ent_coef: 0.0100
-2026-04-25 12:45:53 | INFO    | rl_trading.agent | Step 100000 | Mean episode reward: -400.385057 | ent_coef: 0.0100
-2026-04-25 12:47:07 | INFO    | rl_trading.agent | Step 125000 | Mean episode reward: -382.270200 | ent_coef: 0.0100
-2026-04-25 12:48:21 | INFO    | rl_trading.agent | Step 150000 | Mean episode reward: -357.111315 | ent_coef: 0.0100
-2026-04-25 12:49:36 | INFO    | rl_trading.agent | Step 175000 | Mean episode reward: -315.360485 | ent_coef: 0.0100
-2026-04-25 12:50:49 | INFO    | rl_trading.agent | Step 200000 | Mean episode reward: -288.551004 | ent_coef: 0.0100
-2026-04-25 12:52:02 | INFO    | rl_trading.agent | Step 225000 | Mean episode reward: -271.588158 | ent_coef: 0.0100
-2026-04-25 12:53:20 | INFO    | rl_trading.agent | Step 250000 | Mean episode reward: -258.472133 | ent_coef: 0.0100
-2026-04-25 12:54:35 | INFO    | rl_trading.agent | Step 275000 | Mean episode reward: -233.226850 | ent_coef: 0.0100
-2026-04-25 12:55:48 | INFO    | rl_trading.agent | Step 300000 | Mean episode reward: -226.231463 | ent_coef: 0.0100
-2026-04-25 12:57:01 | INFO    | rl_trading.agent | Step 325000 | Mean episode reward: -218.297743 | ent_coef: 0.0100
-2026-04-25 12:58:14 | INFO    | rl_trading.agent | Step 350000 | Mean episode reward: -207.931936 | ent_coef: 0.0100
-2026-04-25 12:59:27 | INFO    | rl_trading.agent | Step 375000 | Mean episode reward: -195.280253 | ent_coef: 0.0100
-2026-04-25 13:00:42 | INFO    | rl_trading.agent | Step 400000 | Mean episode reward: -190.564232 | ent_coef: 0.0100
-2026-04-25 13:01:55 | INFO    | rl_trading.agent | Step 425000 | Mean episode reward: -184.882520 | ent_coef: 0.0100
-2026-04-25 13:03:09 | INFO    | rl_trading.agent | Step 450000 | Mean episode reward: -179.689712 | ent_coef: 0.0100
-2026-04-25 13:04:22 | INFO    | rl_trading.agent | Step 475000 | Mean episode reward: -171.403523 | ent_coef: 0.0100
-2026-04-25 13:05:42 | INFO    | rl_trading.agent | Step 500000 | Mean episode reward: -167.742342 | ent_coef: 0.0100
-2026-04-25 13:12:24 | INFO    | rl_trading.wfo | Fold 5 OOS -- final balance: 766.86  (-23.31%)  trades: 3587  positions: sell=47.3% flat=1.3% buy=51.4%  turnover=0.0095
-2026-04-25 13:12:24 | INFO    | rl_trading.wfo | Fold 6/21  train [2008-05-08 -> 2009-05-08]  test [2009-05-08 -> 2010-05-08]
-2026-04-25 13:12:24 | INFO    | rl_trading.agent | Built RecurrentPPO -- LSTM(128x1), LR 1.0e-04 -> 0, ent 0.010 -> 0.010
-2026-04-25 13:13:51 | INFO    | rl_trading.agent | Step 25000 | Mean episode reward: -459.268484 | ent_coef: 0.0100
-2026-04-25 13:15:16 | INFO    | rl_trading.agent | Step 50000 | Mean episode reward: -443.347891 | ent_coef: 0.0100
-2026-04-25 13:16:35 | INFO    | rl_trading.agent | Step 75000 | Mean episode reward: -397.589742 | ent_coef: 0.0100
-2026-04-25 13:17:51 | INFO    | rl_trading.agent | Step 100000 | Mean episode reward: -386.505086 | ent_coef: 0.0100
-2026-04-25 13:19:05 | INFO    | rl_trading.agent | Step 125000 | Mean episode reward: -369.854662 | ent_coef: 0.0100
-2026-04-25 13:20:18 | INFO    | rl_trading.agent | Step 150000 | Mean episode reward: -353.808672 | ent_coef: 0.0100
-2026-04-25 13:21:33 | INFO    | rl_trading.agent | Step 175000 | Mean episode reward: -325.355224 | ent_coef: 0.0100
-2026-04-25 13:22:46 | INFO    | rl_trading.agent | Step 200000 | Mean episode reward: -312.637048 | ent_coef: 0.0100
-2026-04-25 13:23:59 | INFO    | rl_trading.agent | Step 225000 | Mean episode reward: -299.191681 | ent_coef: 0.0100
-2026-04-25 13:25:17 | INFO    | rl_trading.agent | Step 250000 | Mean episode reward: -288.507638 | ent_coef: 0.0100
-2026-04-25 13:26:33 | INFO    | rl_trading.agent | Step 275000 | Mean episode reward: -267.806994 | ent_coef: 0.0100
-2026-04-25 13:27:46 | INFO    | rl_trading.agent | Step 300000 | Mean episode reward: -259.023443 | ent_coef: 0.0100
-2026-04-25 13:29:00 | INFO    | rl_trading.agent | Step 325000 | Mean episode reward: -250.473038 | ent_coef: 0.0100
-2026-04-25 13:30:13 | INFO    | rl_trading.agent | Step 350000 | Mean episode reward: -241.859752 | ent_coef: 0.0100
-2026-04-25 13:31:28 | INFO    | rl_trading.agent | Step 375000 | Mean episode reward: -226.962106 | ent_coef: 0.0100
-2026-04-25 13:32:41 | INFO    | rl_trading.agent | Step 400000 | Mean episode reward: -219.945513 | ent_coef: 0.0100
-2026-04-25 13:33:54 | INFO    | rl_trading.agent | Step 425000 | Mean episode reward: -213.278440 | ent_coef: 0.0100
-2026-04-25 13:35:07 | INFO    | rl_trading.agent | Step 450000 | Mean episode reward: -207.160026 | ent_coef: 0.0100
-2026-04-25 13:36:20 | INFO    | rl_trading.agent | Step 475000 | Mean episode reward: -196.040944 | ent_coef: 0.0100
-2026-04-25 13:37:41 | INFO    | rl_trading.agent | Step 500000 | Mean episode reward: -191.407603 | ent_coef: 0.0100
-2026-04-25 13:44:23 | INFO    | rl_trading.wfo | Fold 6 OOS -- final balance: 870.60  (-12.94%)  trades: 730  positions: sell=0.0% flat=20.3% buy=79.7%  turnover=0.0019
-2026-04-25 13:44:23 | INFO    | rl_trading.wfo | Fold 7/21  train [2009-05-08 -> 2010-05-08]  test [2010-05-08 -> 2011-05-08]
-2026-04-25 13:44:23 | INFO    | rl_trading.agent | Built RecurrentPPO -- LSTM(128x1), LR 1.0e-04 -> 0, ent 0.010 -> 0.010
-2026-04-25 13:45:51 | INFO    | rl_trading.agent | Step 25000 | Mean episode reward: -456.531696 | ent_coef: 0.0100
-2026-04-25 13:47:18 | INFO    | rl_trading.agent | Step 50000 | Mean episode reward: -423.241911 | ent_coef: 0.0100
-2026-04-25 13:48:37 | INFO    | rl_trading.agent | Step 75000 | Mean episode reward: -410.612272 | ent_coef: 0.0100
-2026-04-25 13:49:52 | INFO    | rl_trading.agent | Step 100000 | Mean episode reward: -389.857673 | ent_coef: 0.0100
-2026-04-25 13:51:05 | INFO    | rl_trading.agent | Step 125000 | Mean episode reward: -380.300994 | ent_coef: 0.0100
-2026-04-25 13:52:20 | INFO    | rl_trading.agent | Step 150000 | Mean episode reward: -351.255307 | ent_coef: 0.0100
-2026-04-25 13:53:34 | INFO    | rl_trading.agent | Step 175000 | Mean episode reward: -339.312368 | ent_coef: 0.0100
-2026-04-25 13:54:47 | INFO    | rl_trading.agent | Step 200000 | Mean episode reward: -328.222372 | ent_coef: 0.0100
-2026-04-25 13:56:00 | INFO    | rl_trading.agent | Step 225000 | Mean episode reward: -318.027778 | ent_coef: 0.0100
-2026-04-25 13:57:21 | INFO    | rl_trading.agent | Step 250000 | Mean episode reward: -298.506990 | ent_coef: 0.0100
-2026-04-25 13:58:33 | INFO    | rl_trading.agent | Step 275000 | Mean episode reward: -289.952803 | ent_coef: 0.0100
-2026-04-25 13:59:46 | INFO    | rl_trading.agent | Step 300000 | Mean episode reward: -281.225533 | ent_coef: 0.0100
-2026-04-25 14:00:59 | INFO    | rl_trading.agent | Step 325000 | Mean episode reward: -273.216820 | ent_coef: 0.0100
-2026-04-25 14:02:14 | INFO    | rl_trading.agent | Step 350000 | Mean episode reward: -258.384412 | ent_coef: 0.0100
-2026-04-25 14:03:27 | INFO    | rl_trading.agent | Step 375000 | Mean episode reward: -251.942865 | ent_coef: 0.0100
-2026-04-25 14:04:41 | INFO    | rl_trading.agent | Step 400000 | Mean episode reward: -245.714317 | ent_coef: 0.0100
-2026-04-25 14:05:54 | INFO    | rl_trading.agent | Step 425000 | Mean episode reward: -239.657134 | ent_coef: 0.0100
-2026-04-25 14:07:06 | INFO    | rl_trading.agent | Step 450000 | Mean episode reward: -228.252402 | ent_coef: 0.0100
-2026-04-25 14:08:21 | INFO    | rl_trading.agent | Step 475000 | Mean episode reward: -222.656159 | ent_coef: 0.0100
-2026-04-25 14:09:39 | INFO    | rl_trading.agent | Step 500000 | Mean episode reward: -218.134783 | ent_coef: 0.0100
-2026-04-25 14:16:19 | INFO    | rl_trading.wfo | Fold 7 OOS -- final balance: 880.73  (-11.93%)  trades: 1565  positions: sell=34.4% flat=0.0% buy=65.6%  turnover=0.0042
-2026-04-25 14:16:19 | INFO    | rl_trading.wfo | Fold 8/21  train [2010-05-08 -> 2011-05-08]  test [2011-05-08 -> 2012-05-08]
-2026-04-25 14:16:19 | INFO    | rl_trading.agent | Built RecurrentPPO -- LSTM(128x1), LR 1.0e-04 -> 0, ent 0.010 -> 0.010
-2026-04-25 14:17:46 | INFO    | rl_trading.agent | Step 25000 | Mean episode reward: -237.605833 | ent_coef: 0.0100
-2026-04-25 14:19:12 | INFO    | rl_trading.agent | Step 50000 | Mean episode reward: -186.758457 | ent_coef: 0.0100
-2026-04-25 14:20:33 | INFO    | rl_trading.agent | Step 75000 | Mean episode reward: -130.235063 | ent_coef: 0.0100
-2026-04-25 14:21:49 | INFO    | rl_trading.agent | Step 100000 | Mean episode reward: -108.889499 | ent_coef: 0.0100
-2026-04-25 14:23:02 | INFO    | rl_trading.agent | Step 125000 | Mean episode reward: -113.705311 | ent_coef: 0.0100
-2026-04-25 14:24:16 | INFO    | rl_trading.agent | Step 150000 | Mean episode reward: -113.910361 | ent_coef: 0.0100
-2026-04-25 14:25:30 | INFO    | rl_trading.agent | Step 175000 | Mean episode reward: -89.325467 | ent_coef: 0.0100
-2026-04-25 14:26:45 | INFO    | rl_trading.agent | Step 200000 | Mean episode reward: -65.189869 | ent_coef: 0.0100
-2026-04-25 14:27:59 | INFO    | rl_trading.agent | Step 225000 | Mean episode reward: -43.483691 | ent_coef: 0.0100
-2026-04-25 14:29:17 | INFO    | rl_trading.agent | Step 250000 | Mean episode reward: -23.521141 | ent_coef: 0.0100
-2026-04-25 14:30:33 | INFO    | rl_trading.agent | Step 275000 | Mean episode reward: -9.322374 | ent_coef: 0.0100
-2026-04-25 14:31:46 | INFO    | rl_trading.agent | Step 300000 | Mean episode reward: -11.802960 | ent_coef: 0.0100
-2026-04-25 14:32:59 | INFO    | rl_trading.agent | Step 325000 | Mean episode reward: -13.838685 | ent_coef: 0.0100
-2026-04-25 14:34:13 | INFO    | rl_trading.agent | Step 350000 | Mean episode reward: 2.440161 | ent_coef: 0.0100
-2026-04-25 14:35:26 | INFO    | rl_trading.agent | Step 375000 | Mean episode reward: 16.198334 | ent_coef: 0.0100
-2026-04-25 14:36:41 | INFO    | rl_trading.agent | Step 400000 | Mean episode reward: 30.723615 | ent_coef: 0.0100
-2026-04-25 14:37:55 | INFO    | rl_trading.agent | Step 425000 | Mean episode reward: 44.425938 | ent_coef: 0.0100
-2026-04-25 14:39:09 | INFO    | rl_trading.agent | Step 450000 | Mean episode reward: 56.888085 | ent_coef: 0.0100
-2026-04-25 14:40:22 | INFO    | rl_trading.agent | Step 475000 | Mean episode reward: 80.060110 | ent_coef: 0.0100
-2026-04-25 14:41:43 | INFO    | rl_trading.agent | Step 500000 | Mean episode reward: 90.649889 | ent_coef: 0.0100
-2026-04-25 14:48:27 | INFO    | rl_trading.wfo | Fold 8 OOS -- final balance: 1115.01  (11.50%)  trades: 318  positions: sell=99.7% flat=0.3% buy=0.0%  turnover=0.0008
-2026-04-25 14:48:27 | INFO    | rl_trading.wfo | Fold 9/21  train [2011-05-08 -> 2012-05-08]  test [2012-05-08 -> 2013-05-08]
-2026-04-25 14:48:28 | INFO    | rl_trading.agent | Built RecurrentPPO -- LSTM(128x1), LR 1.0e-04 -> 0, ent 0.010 -> 0.010
-2026-04-25 14:49:55 | INFO    | rl_trading.agent | Step 25000 | Mean episode reward: -432.138872 | ent_coef: 0.0100
-2026-04-25 14:51:20 | INFO    | rl_trading.agent | Step 50000 | Mean episode reward: -424.071339 | ent_coef: 0.0100
-2026-04-25 14:52:39 | INFO    | rl_trading.agent | Step 75000 | Mean episode reward: -403.489986 | ent_coef: 0.0100
-2026-04-25 14:53:52 | INFO    | rl_trading.agent | Step 100000 | Mean episode reward: -384.320178 | ent_coef: 0.0100
-2026-04-25 14:55:06 | INFO    | rl_trading.agent | Step 125000 | Mean episode reward: -368.915575 | ent_coef: 0.0100
-2026-04-25 14:56:19 | INFO    | rl_trading.agent | Step 150000 | Mean episode reward: -352.789492 | ent_coef: 0.0100
-2026-04-25 14:57:32 | INFO    | rl_trading.agent | Step 175000 | Mean episode reward: -339.444200 | ent_coef: 0.0100
-2026-04-25 14:58:45 | INFO    | rl_trading.agent | Step 200000 | Mean episode reward: -313.302309 | ent_coef: 0.0100
-2026-04-25 15:00:00 | INFO    | rl_trading.agent | Step 225000 | Mean episode reward: -302.756637 | ent_coef: 0.0100
-2026-04-25 15:01:18 | INFO    | rl_trading.agent | Step 250000 | Mean episode reward: -293.312371 | ent_coef: 0.0100
-2026-04-25 15:02:31 | INFO    | rl_trading.agent | Step 275000 | Mean episode reward: -284.978884 | ent_coef: 0.0100
-2026-04-25 15:03:44 | INFO    | rl_trading.agent | Step 300000 | Mean episode reward: -277.338207 | ent_coef: 0.0100
-2026-04-25 15:04:59 | INFO    | rl_trading.agent | Step 325000 | Mean episode reward: -263.013134 | ent_coef: 0.0100
-2026-04-25 15:06:12 | INFO    | rl_trading.agent | Step 350000 | Mean episode reward: -256.646087 | ent_coef: 0.0100
-2026-04-25 15:07:25 | INFO    | rl_trading.agent | Step 375000 | Mean episode reward: -249.691839 | ent_coef: 0.0100
-2026-04-25 15:08:38 | INFO    | rl_trading.agent | Step 400000 | Mean episode reward: -243.027848 | ent_coef: 0.0100
-2026-04-25 15:09:53 | INFO    | rl_trading.agent | Step 425000 | Mean episode reward: -232.506933 | ent_coef: 0.0100
-2026-04-25 15:11:05 | INFO    | rl_trading.agent | Step 450000 | Mean episode reward: -227.115666 | ent_coef: 0.0100
-2026-04-25 15:12:20 | INFO    | rl_trading.agent | Step 475000 | Mean episode reward: -222.159266 | ent_coef: 0.0100
-2026-04-25 15:13:44 | INFO    | rl_trading.agent | Step 500000 | Mean episode reward: -217.264928 | ent_coef: 0.0100
-2026-04-25 15:20:58 | INFO    | rl_trading.wfo | Fold 9 OOS -- final balance: 1116.77  (11.68%)  trades: 667  positions: sell=72.2% flat=0.0% buy=27.8%  turnover=0.0018
-2026-04-25 15:20:58 | INFO    | rl_trading.wfo | Fold 10/21  train [2012-05-08 -> 2013-05-08]  test [2013-05-08 -> 2014-05-08]
-2026-04-25 15:20:58 | INFO    | rl_trading.agent | Built RecurrentPPO -- LSTM(128x1), LR 1.0e-04 -> 0, ent 0.010 -> 0.010
-2026-04-25 15:22:25 | INFO    | rl_trading.agent | Step 25000 | Mean episode reward: -445.281326 | ent_coef: 0.0100
-2026-04-25 15:23:50 | INFO    | rl_trading.agent | Step 50000 | Mean episode reward: -417.974059 | ent_coef: 0.0100
-2026-04-25 15:25:05 | INFO    | rl_trading.agent | Step 75000 | Mean episode reward: -393.479950 | ent_coef: 0.0100
-2026-04-25 15:26:18 | INFO    | rl_trading.agent | Step 100000 | Mean episode reward: -379.560317 | ent_coef: 0.0100
-2026-04-25 15:27:31 | INFO    | rl_trading.agent | Step 125000 | Mean episode reward: -357.123632 | ent_coef: 0.0100
-2026-04-25 15:28:46 | INFO    | rl_trading.agent | Step 150000 | Mean episode reward: -322.628905 | ent_coef: 0.0100
-2026-04-25 15:29:59 | INFO    | rl_trading.agent | Step 175000 | Mean episode reward: -307.155711 | ent_coef: 0.0100
-2026-04-25 15:31:12 | INFO    | rl_trading.agent | Step 200000 | Mean episode reward: -292.946565 | ent_coef: 0.0100
-2026-04-25 15:32:25 | INFO    | rl_trading.agent | Step 225000 | Mean episode reward: -280.563484 | ent_coef: 0.0100
-2026-04-25 15:33:45 | INFO    | rl_trading.agent | Step 250000 | Mean episode reward: -255.524159 | ent_coef: 0.0100
-2026-04-25 15:34:58 | INFO    | rl_trading.agent | Step 275000 | Mean episode reward: -244.405577 | ent_coef: 0.0100
-2026-04-25 15:36:12 | INFO    | rl_trading.agent | Step 300000 | Mean episode reward: -235.624898 | ent_coef: 0.0100
-2026-04-25 15:37:24 | INFO    | rl_trading.agent | Step 325000 | Mean episode reward: -226.846101 | ent_coef: 0.0100
-2026-04-25 15:38:38 | INFO    | rl_trading.agent | Step 350000 | Mean episode reward: -207.464848 | ent_coef: 0.0100
-2026-04-25 15:39:54 | INFO    | rl_trading.agent | Step 375000 | Mean episode reward: -198.716901 | ent_coef: 0.0100
-2026-04-25 15:41:08 | INFO    | rl_trading.agent | Step 400000 | Mean episode reward: -191.730021 | ent_coef: 0.0100
-2026-04-25 15:42:21 | INFO    | rl_trading.agent | Step 425000 | Mean episode reward: -186.037568 | ent_coef: 0.0100
-2026-04-25 15:43:35 | INFO    | rl_trading.agent | Step 450000 | Mean episode reward: -172.971708 | ent_coef: 0.0100
-2026-04-25 15:44:51 | INFO    | rl_trading.agent | Step 475000 | Mean episode reward: -167.618897 | ent_coef: 0.0100
-2026-04-25 15:46:10 | INFO    | rl_trading.agent | Step 500000 | Mean episode reward: -162.709564 | ent_coef: 0.0100
-2026-04-25 15:52:47 | INFO    | rl_trading.wfo | Fold 10 OOS -- final balance: 1008.31  (0.83%)  trades: 849  positions: sell=67.3% flat=0.0% buy=32.7%  turnover=0.0023
-2026-04-25 15:52:47 | INFO    | rl_trading.wfo | Fold 11/21  train [2013-05-08 -> 2014-05-08]  test [2014-05-08 -> 2015-05-08]
-2026-04-25 15:52:47 | INFO    | rl_trading.agent | Built RecurrentPPO -- LSTM(128x1), LR 1.0e-04 -> 0, ent 0.010 -> 0.010
-2026-04-25 15:54:13 | INFO    | rl_trading.agent | Step 25000 | Mean episode reward: -438.191932 | ent_coef: 0.0100
-2026-04-25 15:55:38 | INFO    | rl_trading.agent | Step 50000 | Mean episode reward: -417.170751 | ent_coef: 0.0100
-2026-04-25 15:56:53 | INFO    | rl_trading.agent | Step 75000 | Mean episode reward: -400.829519 | ent_coef: 0.0100
-2026-04-25 15:58:08 | INFO    | rl_trading.agent | Step 100000 | Mean episode reward: -375.016585 | ent_coef: 0.0100
-2026-04-25 15:59:21 | INFO    | rl_trading.agent | Step 125000 | Mean episode reward: -361.726955 | ent_coef: 0.0100
-2026-04-25 16:00:34 | INFO    | rl_trading.agent | Step 150000 | Mean episode reward: -346.206443 | ent_coef: 0.0100
-2026-04-25 16:01:47 | INFO    | rl_trading.agent | Step 175000 | Mean episode reward: -330.658543 | ent_coef: 0.0100
-2026-04-25 16:03:00 | INFO    | rl_trading.agent | Step 200000 | Mean episode reward: -301.282035 | ent_coef: 0.0100
-2026-04-25 16:04:16 | INFO    | rl_trading.agent | Step 225000 | Mean episode reward: -289.900945 | ent_coef: 0.0100
-2026-04-25 16:05:34 | INFO    | rl_trading.agent | Step 250000 | Mean episode reward: -280.478062 | ent_coef: 0.0100
-2026-04-25 16:06:47 | INFO    | rl_trading.agent | Step 275000 | Mean episode reward: -271.256108 | ent_coef: 0.0100
-2026-04-25 16:08:02 | INFO    | rl_trading.agent | Step 300000 | Mean episode reward: -253.216307 | ent_coef: 0.0100
-2026-04-25 16:09:15 | INFO    | rl_trading.agent | Step 325000 | Mean episode reward: -246.737867 | ent_coef: 0.0100
-2026-04-25 16:10:29 | INFO    | rl_trading.agent | Step 350000 | Mean episode reward: -240.578439 | ent_coef: 0.0100
-2026-04-25 16:11:42 | INFO    | rl_trading.agent | Step 375000 | Mean episode reward: -232.942550 | ent_coef: 0.0100
-2026-04-25 16:12:55 | INFO    | rl_trading.agent | Step 400000 | Mean episode reward: -222.214364 | ent_coef: 0.0100
-2026-04-25 16:14:10 | INFO    | rl_trading.agent | Step 425000 | Mean episode reward: -215.979258 | ent_coef: 0.0100
-2026-04-25 16:15:23 | INFO    | rl_trading.agent | Step 450000 | Mean episode reward: -211.790902 | ent_coef: 0.0100
-2026-04-25 16:16:37 | INFO    | rl_trading.agent | Step 475000 | Mean episode reward: -207.602466 | ent_coef: 0.0100
-2026-04-25 16:17:56 | INFO    | rl_trading.agent | Step 500000 | Mean episode reward: -200.139100 | ent_coef: 0.0100
-2026-04-25 16:24:36 | INFO    | rl_trading.wfo | Fold 11 OOS -- final balance: 834.19  (-16.58%)  trades: 1362  positions: sell=56.4% flat=0.0% buy=43.6%  turnover=0.0037
-2026-04-25 16:24:36 | INFO    | rl_trading.wfo | Fold 12/21  train [2014-05-08 -> 2015-05-08]  test [2015-05-08 -> 2016-05-08]
-2026-04-25 16:24:37 | INFO    | rl_trading.agent | Built RecurrentPPO -- LSTM(128x1), LR 1.0e-04 -> 0, ent 0.010 -> 0.010
-2026-04-25 16:26:04 | INFO    | rl_trading.agent | Step 25000 | Mean episode reward: -450.702746 | ent_coef: 0.0100
-2026-04-25 16:27:27 | INFO    | rl_trading.agent | Step 50000 | Mean episode reward: -426.071477 | ent_coef: 0.0100
-2026-04-25 16:28:44 | INFO    | rl_trading.agent | Step 75000 | Mean episode reward: -398.432018 | ent_coef: 0.0100
-2026-04-25 16:29:57 | INFO    | rl_trading.agent | Step 100000 | Mean episode reward: -381.899434 | ent_coef: 0.0100
-2026-04-25 16:31:11 | INFO    | rl_trading.agent | Step 125000 | Mean episode reward: -361.295440 | ent_coef: 0.0100
-2026-04-25 16:32:24 | INFO    | rl_trading.agent | Step 150000 | Mean episode reward: -344.561870 | ent_coef: 0.0100
-2026-04-25 16:33:37 | INFO    | rl_trading.agent | Step 175000 | Mean episode reward: -313.822095 | ent_coef: 0.0100
-2026-04-25 16:34:52 | INFO    | rl_trading.agent | Step 200000 | Mean episode reward: -300.111388 | ent_coef: 0.0100
-2026-04-25 16:36:05 | INFO    | rl_trading.agent | Step 225000 | Mean episode reward: -287.026757 | ent_coef: 0.0100
-2026-04-25 16:37:23 | INFO    | rl_trading.agent | Step 250000 | Mean episode reward: -274.670730 | ent_coef: 0.0100
-2026-04-25 16:38:37 | INFO    | rl_trading.agent | Step 275000 | Mean episode reward: -262.796273 | ent_coef: 0.0100
-2026-04-25 16:39:53 | INFO    | rl_trading.agent | Step 300000 | Mean episode reward: -238.330068 | ent_coef: 0.0100
-2026-04-25 16:41:07 | INFO    | rl_trading.agent | Step 325000 | Mean episode reward: -226.672592 | ent_coef: 0.0100
-2026-04-25 16:42:21 | INFO    | rl_trading.agent | Step 350000 | Mean episode reward: -212.195629 | ent_coef: 0.0100
-2026-04-25 16:43:34 | INFO    | rl_trading.agent | Step 375000 | Mean episode reward: -203.590907 | ent_coef: 0.0100
-2026-04-25 16:44:50 | INFO    | rl_trading.agent | Step 400000 | Mean episode reward: -187.454479 | ent_coef: 0.0100
-2026-04-25 16:46:04 | INFO    | rl_trading.agent | Step 425000 | Mean episode reward: -181.332340 | ent_coef: 0.0100
-2026-04-25 16:47:18 | INFO    | rl_trading.agent | Step 450000 | Mean episode reward: -165.461423 | ent_coef: 0.0100
-2026-04-25 16:48:31 | INFO    | rl_trading.agent | Step 475000 | Mean episode reward: -159.658776 | ent_coef: 0.0100
-2026-04-25 16:49:51 | INFO    | rl_trading.agent | Step 500000 | Mean episode reward: -145.626044 | ent_coef: 0.0100
-2026-04-25 16:56:29 | INFO    | rl_trading.wfo | Fold 12 OOS -- final balance: 915.04  (-8.50%)  trades: 266  positions: sell=75.3% flat=0.0% buy=24.6%  turnover=0.0007
-2026-04-25 16:56:29 | INFO    | rl_trading.wfo | Fold 13/21  train [2015-05-08 -> 2016-05-08]  test [2016-05-08 -> 2017-05-08]
-2026-04-25 16:56:30 | INFO    | rl_trading.agent | Built RecurrentPPO -- LSTM(128x1), LR 1.0e-04 -> 0, ent 0.010 -> 0.010
-2026-04-25 16:57:57 | INFO    | rl_trading.agent | Step 25000 | Mean episode reward: -449.060186 | ent_coef: 0.0100
-2026-04-25 16:59:22 | INFO    | rl_trading.agent | Step 50000 | Mean episode reward: -417.355798 | ent_coef: 0.0100
-2026-04-25 17:00:44 | INFO    | rl_trading.agent | Step 75000 | Mean episode reward: -403.357370 | ent_coef: 0.0100
-2026-04-25 17:01:58 | INFO    | rl_trading.agent | Step 100000 | Mean episode reward: -380.738709 | ent_coef: 0.0100
-2026-04-25 17:03:11 | INFO    | rl_trading.agent | Step 125000 | Mean episode reward: -364.346894 | ent_coef: 0.0100
-2026-04-25 17:04:25 | INFO    | rl_trading.agent | Step 150000 | Mean episode reward: -348.889095 | ent_coef: 0.0100
-2026-04-25 17:05:38 | INFO    | rl_trading.agent | Step 175000 | Mean episode reward: -333.532813 | ent_coef: 0.0100
-2026-04-25 17:06:51 | INFO    | rl_trading.agent | Step 200000 | Mean episode reward: -309.880291 | ent_coef: 0.0100
-2026-04-25 17:08:06 | INFO    | rl_trading.agent | Step 225000 | Mean episode reward: -300.339386 | ent_coef: 0.0100
-2026-04-25 17:09:24 | INFO    | rl_trading.agent | Step 250000 | Mean episode reward: -289.961198 | ent_coef: 0.0100
-2026-04-25 17:10:37 | INFO    | rl_trading.agent | Step 275000 | Mean episode reward: -280.722152 | ent_coef: 0.0100
-2026-04-25 17:11:51 | INFO    | rl_trading.agent | Step 300000 | Mean episode reward: -264.807452 | ent_coef: 0.0100
-2026-04-25 17:13:04 | INFO    | rl_trading.agent | Step 325000 | Mean episode reward: -257.444859 | ent_coef: 0.0100
-2026-04-25 17:14:17 | INFO    | rl_trading.agent | Step 350000 | Mean episode reward: -249.772754 | ent_coef: 0.0100
-2026-04-25 17:15:30 | INFO    | rl_trading.agent | Step 375000 | Mean episode reward: -243.636355 | ent_coef: 0.0100
-2026-04-25 17:16:43 | INFO    | rl_trading.agent | Step 400000 | Mean episode reward: -232.044329 | ent_coef: 0.0100
-2026-04-25 17:17:58 | INFO    | rl_trading.agent | Step 425000 | Mean episode reward: -225.945431 | ent_coef: 0.0100
-2026-04-25 17:19:11 | INFO    | rl_trading.agent | Step 450000 | Mean episode reward: -221.184185 | ent_coef: 0.0100
-2026-04-25 17:20:24 | INFO    | rl_trading.agent | Step 475000 | Mean episode reward: -216.400337 | ent_coef: 0.0100
-2026-04-25 17:21:42 | INFO    | rl_trading.agent | Step 500000 | Mean episode reward: -212.203802 | ent_coef: 0.0100
-2026-04-25 17:28:23 | INFO    | rl_trading.wfo | Fold 13 OOS -- final balance: 790.98  (-20.90%)  trades: 1206  positions: sell=62.1% flat=0.0% buy=37.9%  turnover=0.0032
-2026-04-25 17:28:23 | INFO    | rl_trading.wfo | Fold 14/21  train [2016-05-08 -> 2017-05-08]  test [2017-05-08 -> 2018-05-08]
-2026-04-25 17:28:24 | INFO    | rl_trading.agent | Built RecurrentPPO -- LSTM(128x1), LR 1.0e-04 -> 0, ent 0.010 -> 0.010
-2026-04-25 17:29:51 | INFO    | rl_trading.agent | Step 25000 | Mean episode reward: -430.809574 | ent_coef: 0.0100
-2026-04-25 17:31:16 | INFO    | rl_trading.agent | Step 50000 | Mean episode reward: -407.888625 | ent_coef: 0.0100
-2026-04-25 17:32:33 | INFO    | rl_trading.agent | Step 75000 | Mean episode reward: -387.067766 | ent_coef: 0.0100
-2026-04-25 17:33:46 | INFO    | rl_trading.agent | Step 100000 | Mean episode reward: -373.968372 | ent_coef: 0.0100
-2026-04-25 17:34:59 | INFO    | rl_trading.agent | Step 125000 | Mean episode reward: -359.470904 | ent_coef: 0.0100
-2026-04-25 17:36:12 | INFO    | rl_trading.agent | Step 150000 | Mean episode reward: -344.460479 | ent_coef: 0.0100
-2026-04-25 17:37:25 | INFO    | rl_trading.agent | Step 175000 | Mean episode reward: -311.522143 | ent_coef: 0.0100
-2026-04-25 17:38:40 | INFO    | rl_trading.agent | Step 200000 | Mean episode reward: -295.674571 | ent_coef: 0.0100
-2026-04-25 17:39:54 | INFO    | rl_trading.agent | Step 225000 | Mean episode reward: -284.344169 | ent_coef: 0.0100
-2026-04-25 17:41:13 | INFO    | rl_trading.agent | Step 250000 | Mean episode reward: -274.895070 | ent_coef: 0.0100
-2026-04-25 17:42:27 | INFO    | rl_trading.agent | Step 275000 | Mean episode reward: -264.042366 | ent_coef: 0.0100
-2026-04-25 17:43:42 | INFO    | rl_trading.agent | Step 300000 | Mean episode reward: -242.174259 | ent_coef: 0.0100
-2026-04-25 17:44:56 | INFO    | rl_trading.agent | Step 325000 | Mean episode reward: -232.238067 | ent_coef: 0.0100
-2026-04-25 17:46:10 | INFO    | rl_trading.agent | Step 350000 | Mean episode reward: -219.471492 | ent_coef: 0.0100
-2026-04-25 17:47:24 | INFO    | rl_trading.agent | Step 375000 | Mean episode reward: -211.673162 | ent_coef: 0.0100
-2026-04-25 17:48:38 | INFO    | rl_trading.agent | Step 400000 | Mean episode reward: -196.624348 | ent_coef: 0.0100
-2026-04-25 17:49:52 | INFO    | rl_trading.agent | Step 425000 | Mean episode reward: -191.912370 | ent_coef: 0.0100
-2026-04-25 17:51:05 | INFO    | rl_trading.agent | Step 450000 | Mean episode reward: -187.633498 | ent_coef: 0.0100
-2026-04-25 17:52:18 | INFO    | rl_trading.agent | Step 475000 | Mean episode reward: -182.845028 | ent_coef: 0.0100
-2026-04-25 17:53:38 | INFO    | rl_trading.agent | Step 500000 | Mean episode reward: -174.325206 | ent_coef: 0.0100
-2026-04-25 18:00:17 | INFO    | rl_trading.wfo | Fold 14 OOS -- final balance: 953.58  (-4.64%)  trades: 614  positions: sell=66.5% flat=0.2% buy=33.2%  turnover=0.0016
-2026-04-25 18:00:17 | INFO    | rl_trading.wfo | Fold 15/21  train [2017-05-08 -> 2018-05-08]  test [2018-05-08 -> 2019-05-08]
-2026-04-25 18:00:17 | INFO    | rl_trading.agent | Built RecurrentPPO -- LSTM(128x1), LR 1.0e-04 -> 0, ent 0.010 -> 0.010
-2026-04-25 18:01:44 | INFO    | rl_trading.agent | Step 25000 | Mean episode reward: -443.454401 | ent_coef: 0.0100
-2026-04-25 18:03:06 | INFO    | rl_trading.agent | Step 50000 | Mean episode reward: -425.851563 | ent_coef: 0.0100
-2026-04-25 18:04:24 | INFO    | rl_trading.agent | Step 75000 | Mean episode reward: -410.022343 | ent_coef: 0.0100
-2026-04-25 18:05:37 | INFO    | rl_trading.agent | Step 100000 | Mean episode reward: -380.987828 | ent_coef: 0.0100
-2026-04-25 18:06:52 | INFO    | rl_trading.agent | Step 125000 | Mean episode reward: -361.418337 | ent_coef: 0.0100
-2026-04-25 18:08:05 | INFO    | rl_trading.agent | Step 150000 | Mean episode reward: -341.659709 | ent_coef: 0.0100
-2026-04-25 18:09:18 | INFO    | rl_trading.agent | Step 175000 | Mean episode reward: -316.599596 | ent_coef: 0.0100
-2026-04-25 18:10:31 | INFO    | rl_trading.agent | Step 200000 | Mean episode reward: -294.389935 | ent_coef: 0.0100
-2026-04-25 18:11:46 | INFO    | rl_trading.agent | Step 225000 | Mean episode reward: -236.088563 | ent_coef: 0.0100
-2026-04-25 18:13:04 | INFO    | rl_trading.agent | Step 250000 | Mean episode reward: -212.763830 | ent_coef: 0.0100
-2026-04-25 18:14:17 | INFO    | rl_trading.agent | Step 275000 | Mean episode reward: -203.565200 | ent_coef: 0.0100
-2026-04-25 18:15:30 | INFO    | rl_trading.agent | Step 300000 | Mean episode reward: -194.883917 | ent_coef: 0.0100
-2026-04-25 18:16:45 | INFO    | rl_trading.agent | Step 325000 | Mean episode reward: -179.582921 | ent_coef: 0.0100
-2026-04-25 18:17:58 | INFO    | rl_trading.agent | Step 350000 | Mean episode reward: -172.278776 | ent_coef: 0.0100
-2026-04-25 18:19:11 | INFO    | rl_trading.agent | Step 375000 | Mean episode reward: -164.127747 | ent_coef: 0.0100
-2026-04-25 18:20:24 | INFO    | rl_trading.agent | Step 400000 | Mean episode reward: -156.833832 | ent_coef: 0.0100
-2026-04-25 18:21:37 | INFO    | rl_trading.agent | Step 425000 | Mean episode reward: -144.791537 | ent_coef: 0.0100
-2026-04-25 18:22:52 | INFO    | rl_trading.agent | Step 450000 | Mean episode reward: -136.430781 | ent_coef: 0.0100
-2026-04-25 18:24:05 | INFO    | rl_trading.agent | Step 475000 | Mean episode reward: -130.629185 | ent_coef: 0.0100
-2026-04-25 18:25:23 | INFO    | rl_trading.agent | Step 500000 | Mean episode reward: -124.576599 | ent_coef: 0.0100
-2026-04-25 18:32:04 | INFO    | rl_trading.wfo | Fold 15 OOS -- final balance: 850.38  (-14.96%)  trades: 1002  positions: sell=33.7% flat=0.0% buy=66.3%  turnover=0.0027
-2026-04-25 18:32:04 | INFO    | rl_trading.wfo | Fold 16/21  train [2018-05-08 -> 2019-05-08]  test [2019-05-08 -> 2020-05-08]
-2026-04-25 18:32:05 | INFO    | rl_trading.agent | Built RecurrentPPO -- LSTM(128x1), LR 1.0e-04 -> 0, ent 0.010 -> 0.010
-2026-04-25 18:33:31 | INFO    | rl_trading.agent | Step 25000 | Mean episode reward: -446.704694 | ent_coef: 0.0100
-2026-04-25 18:34:54 | INFO    | rl_trading.agent | Step 50000 | Mean episode reward: -423.336985 | ent_coef: 0.0100
-2026-04-25 18:36:10 | INFO    | rl_trading.agent | Step 75000 | Mean episode reward: -392.362041 | ent_coef: 0.0100
-2026-04-25 18:37:25 | INFO    | rl_trading.agent | Step 100000 | Mean episode reward: -378.338416 | ent_coef: 0.0100
-2026-04-25 18:38:39 | INFO    | rl_trading.agent | Step 125000 | Mean episode reward: -361.780521 | ent_coef: 0.0100
-2026-04-25 18:39:53 | INFO    | rl_trading.agent | Step 150000 | Mean episode reward: -347.101662 | ent_coef: 0.0100
-2026-04-25 18:41:06 | INFO    | rl_trading.agent | Step 175000 | Mean episode reward: -332.136529 | ent_coef: 0.0100
-2026-04-25 18:42:22 | INFO    | rl_trading.agent | Step 200000 | Mean episode reward: -308.414725 | ent_coef: 0.0100
-2026-04-25 18:43:35 | INFO    | rl_trading.agent | Step 225000 | Mean episode reward: -296.564458 | ent_coef: 0.0100
-2026-04-25 18:44:54 | INFO    | rl_trading.agent | Step 250000 | Mean episode reward: -284.040194 | ent_coef: 0.0100
-2026-04-25 18:46:08 | INFO    | rl_trading.agent | Step 275000 | Mean episode reward: -276.053322 | ent_coef: 0.0100
-2026-04-25 18:47:23 | INFO    | rl_trading.agent | Step 300000 | Mean episode reward: -258.228577 | ent_coef: 0.0100
-2026-04-25 18:48:36 | INFO    | rl_trading.agent | Step 325000 | Mean episode reward: -249.798466 | ent_coef: 0.0100
-2026-04-25 18:49:49 | INFO    | rl_trading.agent | Step 350000 | Mean episode reward: -242.202296 | ent_coef: 0.0100
-2026-04-25 18:51:02 | INFO    | rl_trading.agent | Step 375000 | Mean episode reward: -234.547640 | ent_coef: 0.0100
-2026-04-25 18:52:17 | INFO    | rl_trading.agent | Step 400000 | Mean episode reward: -222.715037 | ent_coef: 0.0100
-2026-04-25 18:53:30 | INFO    | rl_trading.agent | Step 425000 | Mean episode reward: -216.117321 | ent_coef: 0.0100
-2026-04-25 18:54:43 | INFO    | rl_trading.agent | Step 450000 | Mean episode reward: -209.845506 | ent_coef: 0.0100
-2026-04-25 18:55:56 | INFO    | rl_trading.agent | Step 475000 | Mean episode reward: -204.675754 | ent_coef: 0.0100
-2026-04-25 18:57:16 | INFO    | rl_trading.agent | Step 500000 | Mean episode reward: -194.731510 | ent_coef: 0.0100
-2026-04-25 19:03:55 | INFO    | rl_trading.wfo | Fold 16 OOS -- final balance: 989.66  (-1.03%)  trades: 784  positions: sell=72.1% flat=0.9% buy=27.0%  turnover=0.0021
-2026-04-25 19:03:55 | INFO    | rl_trading.wfo | Fold 17/21  train [2019-05-08 -> 2020-05-08]  test [2020-05-08 -> 2021-05-08]
-2026-04-25 19:03:55 | INFO    | rl_trading.agent | Built RecurrentPPO -- LSTM(128x1), LR 1.0e-04 -> 0, ent 0.010 -> 0.010
-2026-04-25 19:05:22 | INFO    | rl_trading.agent | Step 25000 | Mean episode reward: -483.200047 | ent_coef: 0.0100
-2026-04-25 19:06:45 | INFO    | rl_trading.agent | Step 50000 | Mean episode reward: -443.173520 | ent_coef: 0.0100
-2026-04-25 19:08:00 | INFO    | rl_trading.agent | Step 75000 | Mean episode reward: -419.954491 | ent_coef: 0.0100
-2026-04-25 19:09:13 | INFO    | rl_trading.agent | Step 100000 | Mean episode reward: -401.478143 | ent_coef: 0.0100
-2026-04-25 19:10:28 | INFO    | rl_trading.agent | Step 125000 | Mean episode reward: -364.064216 | ent_coef: 0.0100
-2026-04-25 19:11:41 | INFO    | rl_trading.agent | Step 150000 | Mean episode reward: -345.685188 | ent_coef: 0.0100
-2026-04-25 19:12:54 | INFO    | rl_trading.agent | Step 175000 | Mean episode reward: -329.351697 | ent_coef: 0.0100
-2026-04-25 19:14:08 | INFO    | rl_trading.agent | Step 200000 | Mean episode reward: -315.834586 | ent_coef: 0.0100
-2026-04-25 19:15:21 | INFO    | rl_trading.agent | Step 225000 | Mean episode reward: -290.829782 | ent_coef: 0.0100
-2026-04-25 19:16:41 | INFO    | rl_trading.agent | Step 250000 | Mean episode reward: -280.962389 | ent_coef: 0.0100
-2026-04-25 19:17:54 | INFO    | rl_trading.agent | Step 275000 | Mean episode reward: -269.826243 | ent_coef: 0.0100
-2026-04-25 19:19:08 | INFO    | rl_trading.agent | Step 300000 | Mean episode reward: -260.494403 | ent_coef: 0.0100
-2026-04-25 19:20:20 | INFO    | rl_trading.agent | Step 325000 | Mean episode reward: -240.752821 | ent_coef: 0.0100
-2026-04-25 19:21:36 | INFO    | rl_trading.agent | Step 350000 | Mean episode reward: -232.158919 | ent_coef: 0.0100
-2026-04-25 19:22:49 | INFO    | rl_trading.agent | Step 375000 | Mean episode reward: -225.420537 | ent_coef: 0.0100
-2026-04-25 19:24:02 | INFO    | rl_trading.agent | Step 400000 | Mean episode reward: -217.517052 | ent_coef: 0.0100
-2026-04-25 19:25:15 | INFO    | rl_trading.agent | Step 425000 | Mean episode reward: -211.832504 | ent_coef: 0.0100
-2026-04-25 19:26:30 | INFO    | rl_trading.agent | Step 450000 | Mean episode reward: -198.784682 | ent_coef: 0.0100
-2026-04-25 19:27:43 | INFO    | rl_trading.agent | Step 475000 | Mean episode reward: -193.369111 | ent_coef: 0.0100
-2026-04-25 19:29:01 | INFO    | rl_trading.agent | Step 500000 | Mean episode reward: -187.970619 | ent_coef: 0.0100
-2026-04-25 19:35:36 | INFO    | rl_trading.wfo | Fold 17 OOS -- final balance: 929.71  (-7.03%)  trades: 1690  positions: sell=57.0% flat=0.0% buy=43.0%  turnover=0.0046
-2026-04-25 19:35:36 | INFO    | rl_trading.wfo | Fold 18/21  train [2020-05-08 -> 2021-05-08]  test [2021-05-08 -> 2022-05-08]
-2026-04-25 19:35:36 | INFO    | rl_trading.agent | Built RecurrentPPO -- LSTM(128x1), LR 1.0e-04 -> 0, ent 0.010 -> 0.010
-2026-04-25 19:37:02 | INFO    | rl_trading.agent | Step 25000 | Mean episode reward: -436.073440 | ent_coef: 0.0100
-2026-04-25 19:38:28 | INFO    | rl_trading.agent | Step 50000 | Mean episode reward: -416.166958 | ent_coef: 0.0100
-2026-04-25 19:39:43 | INFO    | rl_trading.agent | Step 75000 | Mean episode reward: -391.124882 | ent_coef: 0.0100
-2026-04-25 19:40:57 | INFO    | rl_trading.agent | Step 100000 | Mean episode reward: -380.224147 | ent_coef: 0.0100
-2026-04-25 19:42:10 | INFO    | rl_trading.agent | Step 125000 | Mean episode reward: -342.399652 | ent_coef: 0.0100
-2026-04-25 19:43:26 | INFO    | rl_trading.agent | Step 150000 | Mean episode reward: -326.130043 | ent_coef: 0.0100
-2026-04-25 19:44:40 | INFO    | rl_trading.agent | Step 175000 | Mean episode reward: -310.457648 | ent_coef: 0.0100
-2026-04-25 19:45:53 | INFO    | rl_trading.agent | Step 200000 | Mean episode reward: -292.664019 | ent_coef: 0.0100
-2026-04-25 19:47:07 | INFO    | rl_trading.agent | Step 225000 | Mean episode reward: -273.967447 | ent_coef: 0.0100
-2026-04-25 19:48:27 | INFO    | rl_trading.agent | Step 250000 | Mean episode reward: -248.698786 | ent_coef: 0.0100
-2026-04-25 19:49:41 | INFO    | rl_trading.agent | Step 275000 | Mean episode reward: -240.326370 | ent_coef: 0.0100
-2026-04-25 19:50:54 | INFO    | rl_trading.agent | Step 300000 | Mean episode reward: -231.649130 | ent_coef: 0.0100
-2026-04-25 19:52:07 | INFO    | rl_trading.agent | Step 325000 | Mean episode reward: -220.983035 | ent_coef: 0.0100
-2026-04-25 19:53:21 | INFO    | rl_trading.agent | Step 350000 | Mean episode reward: -198.050840 | ent_coef: 0.0100
-2026-04-25 19:54:34 | INFO    | rl_trading.agent | Step 375000 | Mean episode reward: -190.732160 | ent_coef: 0.0100
-2026-04-25 19:55:47 | INFO    | rl_trading.agent | Step 400000 | Mean episode reward: -183.518612 | ent_coef: 0.0100
-2026-04-25 19:57:00 | INFO    | rl_trading.agent | Step 425000 | Mean episode reward: -177.606057 | ent_coef: 0.0100
-2026-04-25 19:58:11 | INFO    | rl_trading.agent | Step 450000 | Mean episode reward: -163.745621 | ent_coef: 0.0100
-2026-04-25 19:59:17 | INFO    | rl_trading.agent | Step 475000 | Mean episode reward: -157.422914 | ent_coef: 0.0100
-2026-04-25 20:00:24 | INFO    | rl_trading.agent | Step 500000 | Mean episode reward: -153.285351 | ent_coef: 0.0100
-2026-04-25 20:06:26 | INFO    | rl_trading.wfo | Fold 18 OOS -- final balance: 900.86  (-9.91%)  trades: 811  positions: sell=33.8% flat=0.0% buy=66.2%  turnover=0.0022
-2026-04-25 20:06:26 | INFO    | rl_trading.wfo | Fold 19/21  train [2021-05-08 -> 2022-05-08]  test [2022-05-08 -> 2023-05-08]
-2026-04-25 20:06:26 | INFO    | rl_trading.agent | Built RecurrentPPO -- LSTM(128x1), LR 1.0e-04 -> 0, ent 0.010 -> 0.010
-2026-04-25 20:07:42 | INFO    | rl_trading.agent | Step 25000 | Mean episode reward: -483.967727 | ent_coef: 0.0100
-2026-04-25 20:08:56 | INFO    | rl_trading.agent | Step 50000 | Mean episode reward: -456.434580 | ent_coef: 0.0100
-2026-04-25 20:10:02 | INFO    | rl_trading.agent | Step 75000 | Mean episode reward: -431.699813 | ent_coef: 0.0100
-2026-04-25 20:11:07 | INFO    | rl_trading.agent | Step 100000 | Mean episode reward: -414.033528 | ent_coef: 0.0100
-2026-04-25 20:12:10 | INFO    | rl_trading.agent | Step 125000 | Mean episode reward: -392.784011 | ent_coef: 0.0100
-2026-04-25 20:13:18 | INFO    | rl_trading.agent | Step 150000 | Mean episode reward: -373.236418 | ent_coef: 0.0100
-2026-04-25 20:14:21 | INFO    | rl_trading.agent | Step 175000 | Mean episode reward: -354.280418 | ent_coef: 0.0100
-2026-04-25 20:15:26 | INFO    | rl_trading.agent | Step 200000 | Mean episode reward: -325.459919 | ent_coef: 0.0100
-2026-04-25 20:16:30 | INFO    | rl_trading.agent | Step 225000 | Mean episode reward: -311.716432 | ent_coef: 0.0100
-2026-04-25 20:17:38 | INFO    | rl_trading.agent | Step 250000 | Mean episode reward: -299.717216 | ent_coef: 0.0100
-2026-04-25 20:18:41 | INFO    | rl_trading.agent | Step 275000 | Mean episode reward: -288.760940 | ent_coef: 0.0100
-2026-04-25 20:19:47 | INFO    | rl_trading.agent | Step 300000 | Mean episode reward: -269.756514 | ent_coef: 0.0100
-2026-04-25 20:20:50 | INFO    | rl_trading.agent | Step 325000 | Mean episode reward: -258.133651 | ent_coef: 0.0100
-2026-04-25 20:21:53 | INFO    | rl_trading.agent | Step 350000 | Mean episode reward: -248.586151 | ent_coef: 0.0100
-2026-04-25 20:22:57 | INFO    | rl_trading.agent | Step 375000 | Mean episode reward: -240.358141 | ent_coef: 0.0100
-2026-04-25 20:24:02 | INFO    | rl_trading.agent | Step 400000 | Mean episode reward: -225.034113 | ent_coef: 0.0100
-2026-04-25 20:25:06 | INFO    | rl_trading.agent | Step 425000 | Mean episode reward: -217.226906 | ent_coef: 0.0100
-2026-04-25 20:26:09 | INFO    | rl_trading.agent | Step 450000 | Mean episode reward: -211.225736 | ent_coef: 0.0100
-2026-04-25 20:27:13 | INFO    | rl_trading.agent | Step 475000 | Mean episode reward: -204.982276 | ent_coef: 0.0100
-2026-04-25 20:28:22 | INFO    | rl_trading.agent | Step 500000 | Mean episode reward: -193.857156 | ent_coef: 0.0100
-2026-04-25 20:34:25 | INFO    | rl_trading.wfo | Fold 19 OOS -- final balance: 720.37  (-27.96%)  trades: 1748  positions: sell=47.0% flat=0.0% buy=53.0%  turnover=0.0047
-2026-04-25 20:34:25 | INFO    | rl_trading.wfo | Fold 20/21  train [2022-05-08 -> 2023-05-08]  test [2023-05-08 -> 2024-05-08]
-2026-04-25 20:34:25 | INFO    | rl_trading.agent | Built RecurrentPPO -- LSTM(128x1), LR 1.0e-04 -> 0, ent 0.010 -> 0.010
-2026-04-25 20:35:41 | INFO    | rl_trading.agent | Step 25000 | Mean episode reward: -468.582218 | ent_coef: 0.0100
-2026-04-25 20:36:55 | INFO    | rl_trading.agent | Step 50000 | Mean episode reward: -434.749855 | ent_coef: 0.0100
-2026-04-25 20:38:02 | INFO    | rl_trading.agent | Step 75000 | Mean episode reward: -400.181269 | ent_coef: 0.0100
-2026-04-25 20:39:06 | INFO    | rl_trading.agent | Step 100000 | Mean episode reward: -384.212537 | ent_coef: 0.0100
-2026-04-25 20:40:10 | INFO    | rl_trading.agent | Step 125000 | Mean episode reward: -362.958686 | ent_coef: 0.0100
-2026-04-25 20:41:13 | INFO    | rl_trading.agent | Step 150000 | Mean episode reward: -346.289186 | ent_coef: 0.0100
-2026-04-25 20:42:17 | INFO    | rl_trading.agent | Step 175000 | Mean episode reward: -311.429559 | ent_coef: 0.0100
-2026-04-25 20:43:23 | INFO    | rl_trading.agent | Step 200000 | Mean episode reward: -298.443624 | ent_coef: 0.0100
-2026-04-25 20:44:26 | INFO    | rl_trading.agent | Step 225000 | Mean episode reward: -285.054444 | ent_coef: 0.0100
-2026-04-25 20:45:34 | INFO    | rl_trading.agent | Step 250000 | Mean episode reward: -271.879140 | ent_coef: 0.0100
-2026-04-25 20:46:40 | INFO    | rl_trading.agent | Step 275000 | Mean episode reward: -250.651004 | ent_coef: 0.0100
-2026-04-25 20:47:43 | INFO    | rl_trading.agent | Step 300000 | Mean episode reward: -241.155909 | ent_coef: 0.0100
-2026-04-25 20:48:47 | INFO    | rl_trading.agent | Step 325000 | Mean episode reward: -232.047007 | ent_coef: 0.0100
-2026-04-25 20:49:50 | INFO    | rl_trading.agent | Step 350000 | Mean episode reward: -221.993512 | ent_coef: 0.0100
-2026-04-25 20:50:54 | INFO    | rl_trading.agent | Step 375000 | Mean episode reward: -206.939362 | ent_coef: 0.0100
-2026-04-25 20:52:00 | INFO    | rl_trading.agent | Step 400000 | Mean episode reward: -201.166693 | ent_coef: 0.0100
-2026-04-25 20:53:03 | INFO    | rl_trading.agent | Step 425000 | Mean episode reward: -195.277870 | ent_coef: 0.0100
-2026-04-25 20:54:07 | INFO    | rl_trading.agent | Step 450000 | Mean episode reward: -189.237804 | ent_coef: 0.0100
-2026-04-25 20:55:10 | INFO    | rl_trading.agent | Step 475000 | Mean episode reward: -177.546986 | ent_coef: 0.0100
-2026-04-25 20:56:20 | INFO    | rl_trading.agent | Step 500000 | Mean episode reward: -172.503637 | ent_coef: 0.0100
-2026-04-25 21:02:24 | INFO    | rl_trading.wfo | Fold 20 OOS -- final balance: 942.09  (-5.79%)  trades: 334  positions: sell=48.5% flat=0.0% buy=51.5%  turnover=0.0009
-2026-04-25 21:02:24 | INFO    | rl_trading.wfo | Fold 21/21  train [2023-05-08 -> 2024-05-08]  test [2024-05-08 -> 2025-05-08]
-2026-04-25 21:02:24 | INFO    | rl_trading.agent | Built RecurrentPPO -- LSTM(128x1), LR 1.0e-04 -> 0, ent 0.010 -> 0.010
-2026-04-25 21:03:40 | INFO    | rl_trading.agent | Step 25000 | Mean episode reward: -457.179959 | ent_coef: 0.0100
-2026-04-25 21:04:53 | INFO    | rl_trading.agent | Step 50000 | Mean episode reward: -441.374455 | ent_coef: 0.0100
-2026-04-25 21:06:00 | INFO    | rl_trading.agent | Step 75000 | Mean episode reward: -417.299247 | ent_coef: 0.0100
-2026-04-25 21:07:04 | INFO    | rl_trading.agent | Step 100000 | Mean episode reward: -399.552366 | ent_coef: 0.0100
-2026-04-25 21:08:07 | INFO    | rl_trading.agent | Step 125000 | Mean episode reward: -380.765898 | ent_coef: 0.0100
-2026-04-25 21:09:11 | INFO    | rl_trading.agent | Step 150000 | Mean episode reward: -352.996995 | ent_coef: 0.0100
-2026-04-25 21:10:14 | INFO    | rl_trading.agent | Step 175000 | Mean episode reward: -319.430926 | ent_coef: 0.0100
-2026-04-25 21:11:19 | INFO    | rl_trading.agent | Step 200000 | Mean episode reward: -303.738575 | ent_coef: 0.0100
-2026-04-25 21:12:22 | INFO    | rl_trading.agent | Step 225000 | Mean episode reward: -288.652155 | ent_coef: 0.0100
-2026-04-25 21:13:30 | INFO    | rl_trading.agent | Step 250000 | Mean episode reward: -277.816535 | ent_coef: 0.0100
-2026-04-25 21:14:36 | INFO    | rl_trading.agent | Step 275000 | Mean episode reward: -251.042665 | ent_coef: 0.0100
-2026-04-25 21:15:39 | INFO    | rl_trading.agent | Step 300000 | Mean episode reward: -245.083221 | ent_coef: 0.0100
-2026-04-25 21:16:43 | INFO    | rl_trading.agent | Step 325000 | Mean episode reward: -234.537172 | ent_coef: 0.0100
-2026-04-25 21:17:47 | INFO    | rl_trading.agent | Step 350000 | Mean episode reward: -222.833595 | ent_coef: 0.0100
-2026-04-25 21:18:50 | INFO    | rl_trading.agent | Step 375000 | Mean episode reward: -186.886960 | ent_coef: 0.0100
-2026-04-25 21:19:55 | INFO    | rl_trading.agent | Step 400000 | Mean episode reward: -179.736601 | ent_coef: 0.0100
-2026-04-25 21:20:58 | INFO    | rl_trading.agent | Step 425000 | Mean episode reward: -173.273733 | ent_coef: 0.0100
-2026-04-25 21:22:02 | INFO    | rl_trading.agent | Step 450000 | Mean episode reward: -163.543952 | ent_coef: 0.0100
-2026-04-25 21:23:05 | INFO    | rl_trading.agent | Step 475000 | Mean episode reward: -143.411194 | ent_coef: 0.0100
-2026-04-25 21:24:15 | INFO    | rl_trading.agent | Step 500000 | Mean episode reward: -131.490938 | ent_coef: 0.0100
-2026-04-25 21:30:19 | INFO    | rl_trading.wfo | Fold 21 OOS -- final balance: 1070.77  (7.08%)  trades: 45  positions: sell=7.5% flat=0.0% buy=92.5%  turnover=0.0001
+2026-04-26 09:04:02 | INFO    | rl_trading.features | Built 17 features, total rows 8557258
+2026-04-26 09:04:03 | INFO    | rl_trading.wfo | WFO for EURUSD -- 22 folds (12m train / 1m test)
+2026-04-26 09:04:03 | INFO    | rl_trading.wfo | Fold 1/22  train [2003-05-08 -> 2004-05-08]  test [2004-05-08 -> 2004-06-08]
+2026-04-26 09:04:05 | INFO    | rl_trading.agent | Built RecurrentPPO -- LSTM(128x1), LR 1.0e-04 -> 0, ent 0.010 -> 0.010
+2026-04-26 09:05:31 | INFO    | rl_trading.agent | Step 25000 | Mean episode reward: -394.990632 | ent_coef: 0.0100
+2026-04-26 09:06:57 | INFO    | rl_trading.agent | Step 50000 | Mean episode reward: -372.480747 | ent_coef: 0.0100
+2026-04-26 09:08:16 | INFO    | rl_trading.agent | Step 75000 | Mean episode reward: -351.218004 | ent_coef: 0.0100
+2026-04-26 09:09:30 | INFO    | rl_trading.agent | Step 100000 | Mean episode reward: -338.317710 | ent_coef: 0.0100
+2026-04-26 09:10:44 | INFO    | rl_trading.agent | Step 125000 | Mean episode reward: -324.145625 | ent_coef: 0.0100
+2026-04-26 09:11:59 | INFO    | rl_trading.agent | Step 150000 | Mean episode reward: -295.207696 | ent_coef: 0.0100
+2026-04-26 09:13:12 | INFO    | rl_trading.agent | Step 175000 | Mean episode reward: -280.982983 | ent_coef: 0.0100
+2026-04-26 09:14:25 | INFO    | rl_trading.agent | Step 200000 | Mean episode reward: -266.783675 | ent_coef: 0.0100
+2026-04-26 09:15:39 | INFO    | rl_trading.agent | Step 225000 | Mean episode reward: -255.906400 | ent_coef: 0.0100
+2026-04-26 09:16:59 | INFO    | rl_trading.agent | Step 250000 | Mean episode reward: -232.292561 | ent_coef: 0.0100
+2026-04-26 09:18:17 | INFO    | rl_trading.agent | Step 275000 | Mean episode reward: -222.442011 | ent_coef: 0.0100
+2026-04-26 09:19:31 | INFO    | rl_trading.agent | Step 300000 | Mean episode reward: -213.107121 | ent_coef: 0.0100
+2026-04-26 09:20:44 | INFO    | rl_trading.agent | Step 325000 | Mean episode reward: -204.929924 | ent_coef: 0.0100
+2026-04-26 09:21:58 | INFO    | rl_trading.agent | Step 350000 | Mean episode reward: -188.402202 | ent_coef: 0.0100
+2026-04-26 09:23:13 | INFO    | rl_trading.agent | Step 375000 | Mean episode reward: -180.853998 | ent_coef: 0.0100
+2026-04-26 09:24:27 | INFO    | rl_trading.agent | Step 400000 | Mean episode reward: -173.736983 | ent_coef: 0.0100
+2026-04-26 09:25:40 | INFO    | rl_trading.agent | Step 425000 | Mean episode reward: -166.708943 | ent_coef: 0.0100
+2026-04-26 09:26:53 | INFO    | rl_trading.agent | Step 450000 | Mean episode reward: -154.167890 | ent_coef: 0.0100
+2026-04-26 09:28:09 | INFO    | rl_trading.agent | Step 475000 | Mean episode reward: -148.729121 | ent_coef: 0.0100
+2026-04-26 09:29:27 | INFO    | rl_trading.agent | Step 500000 | Mean episode reward: -143.432286 | ent_coef: 0.0100
+2026-04-26 09:30:11 | INFO    | rl_trading.wfo | Fold 1 OOS -- final balance: 1044.12  (4.41%)  trades: 71  positions: sell=3.4% flat=0.0% buy=96.6%  turnover=0.0023
+2026-04-26 09:30:11 | INFO    | rl_trading.wfo | Fold 2/22  train [2004-05-08 -> 2005-05-08]  test [2005-05-08 -> 2005-06-08]
+2026-04-26 09:30:11 | INFO    | rl_trading.agent | Built RecurrentPPO -- LSTM(128x1), LR 1.0e-04 -> 0, ent 0.010 -> 0.010
+2026-04-26 09:31:37 | INFO    | rl_trading.agent | Step 25000 | Mean episode reward: -465.301447 | ent_coef: 0.0100
+2026-04-26 09:33:02 | INFO    | rl_trading.agent | Step 50000 | Mean episode reward: -445.553150 | ent_coef: 0.0100
+2026-04-26 09:34:20 | INFO    | rl_trading.agent | Step 75000 | Mean episode reward: -416.957064 | ent_coef: 0.0100
+2026-04-26 09:35:33 | INFO    | rl_trading.agent | Step 100000 | Mean episode reward: -400.518171 | ent_coef: 0.0100
+2026-04-26 09:36:47 | INFO    | rl_trading.agent | Step 125000 | Mean episode reward: -379.034846 | ent_coef: 0.0100
+2026-04-26 09:38:00 | INFO    | rl_trading.agent | Step 150000 | Mean episode reward: -358.381290 | ent_coef: 0.0100
+2026-04-26 09:39:14 | INFO    | rl_trading.agent | Step 175000 | Mean episode reward: -330.135081 | ent_coef: 0.0100
+2026-04-26 09:40:30 | INFO    | rl_trading.agent | Step 200000 | Mean episode reward: -316.824717 | ent_coef: 0.0100
+2026-04-26 09:41:44 | INFO    | rl_trading.agent | Step 225000 | Mean episode reward: -304.314453 | ent_coef: 0.0100
+2026-04-26 09:43:04 | INFO    | rl_trading.agent | Step 250000 | Mean episode reward: -291.643940 | ent_coef: 0.0100
+2026-04-26 09:44:20 | INFO    | rl_trading.agent | Step 275000 | Mean episode reward: -269.210688 | ent_coef: 0.0100
+2026-04-26 09:45:34 | INFO    | rl_trading.agent | Step 300000 | Mean episode reward: -259.188704 | ent_coef: 0.0100
+2026-04-26 09:46:48 | INFO    | rl_trading.agent | Step 325000 | Mean episode reward: -248.518049 | ent_coef: 0.0100
+2026-04-26 09:48:02 | INFO    | rl_trading.agent | Step 350000 | Mean episode reward: -239.499438 | ent_coef: 0.0100
+2026-04-26 09:49:15 | INFO    | rl_trading.agent | Step 375000 | Mean episode reward: -231.803710 | ent_coef: 0.0100
+2026-04-26 09:50:31 | INFO    | rl_trading.agent | Step 400000 | Mean episode reward: -218.019348 | ent_coef: 0.0100
+2026-04-26 09:51:44 | INFO    | rl_trading.agent | Step 425000 | Mean episode reward: -213.106593 | ent_coef: 0.0100
+2026-04-26 09:52:57 | INFO    | rl_trading.agent | Step 450000 | Mean episode reward: -208.485107 | ent_coef: 0.0100
+2026-04-26 09:54:11 | INFO    | rl_trading.agent | Step 475000 | Mean episode reward: -203.406413 | ent_coef: 0.0100
+2026-04-26 09:55:31 | INFO    | rl_trading.agent | Step 500000 | Mean episode reward: -194.459661 | ent_coef: 0.0100
+2026-04-26 09:56:16 | INFO    | rl_trading.wfo | Fold 2 OOS -- final balance: 985.11  (-1.49%)  trades: 43  positions: sell=17.0% flat=0.4% buy=82.6%  turnover=0.0013
+2026-04-26 09:56:16 | INFO    | rl_trading.wfo | Fold 3/22  train [2005-05-08 -> 2006-05-08]  test [2006-05-08 -> 2006-06-08]
+2026-04-26 09:56:16 | INFO    | rl_trading.agent | Built RecurrentPPO -- LSTM(128x1), LR 1.0e-04 -> 0, ent 0.010 -> 0.010
+2026-04-26 09:57:42 | INFO    | rl_trading.agent | Step 25000 | Mean episode reward: -459.194460 | ent_coef: 0.0100
+2026-04-26 09:59:04 | INFO    | rl_trading.agent | Step 50000 | Mean episode reward: -443.464612 | ent_coef: 0.0100
+2026-04-26 10:00:21 | INFO    | rl_trading.agent | Step 75000 | Mean episode reward: -415.602334 | ent_coef: 0.0100
+2026-04-26 10:01:34 | INFO    | rl_trading.agent | Step 100000 | Mean episode reward: -396.850975 | ent_coef: 0.0100
+2026-04-26 10:02:48 | INFO    | rl_trading.agent | Step 125000 | Mean episode reward: -375.091767 | ent_coef: 0.0100
+2026-04-26 10:04:03 | INFO    | rl_trading.agent | Step 150000 | Mean episode reward: -336.273617 | ent_coef: 0.0100
+2026-04-26 10:05:16 | INFO    | rl_trading.agent | Step 175000 | Mean episode reward: -318.138166 | ent_coef: 0.0100
+2026-04-26 10:06:29 | INFO    | rl_trading.agent | Step 200000 | Mean episode reward: -303.663437 | ent_coef: 0.0100
+2026-04-26 10:07:42 | INFO    | rl_trading.agent | Step 225000 | Mean episode reward: -291.179483 | ent_coef: 0.0100
+2026-04-26 10:09:02 | INFO    | rl_trading.agent | Step 250000 | Mean episode reward: -269.098280 | ent_coef: 0.0100
+2026-04-26 10:10:16 | INFO    | rl_trading.agent | Step 275000 | Mean episode reward: -259.778616 | ent_coef: 0.0100
+2026-04-26 10:11:29 | INFO    | rl_trading.agent | Step 300000 | Mean episode reward: -249.899733 | ent_coef: 0.0100
+2026-04-26 10:12:42 | INFO    | rl_trading.agent | Step 325000 | Mean episode reward: -241.399661 | ent_coef: 0.0100
+2026-04-26 10:13:56 | INFO    | rl_trading.agent | Step 350000 | Mean episode reward: -225.139627 | ent_coef: 0.0100
+2026-04-26 10:15:11 | INFO    | rl_trading.agent | Step 375000 | Mean episode reward: -216.888467 | ent_coef: 0.0100
+2026-04-26 10:16:24 | INFO    | rl_trading.agent | Step 400000 | Mean episode reward: -210.378184 | ent_coef: 0.0100
+2026-04-26 10:17:37 | INFO    | rl_trading.agent | Step 425000 | Mean episode reward: -203.579877 | ent_coef: 0.0100
+2026-04-26 10:18:51 | INFO    | rl_trading.agent | Step 450000 | Mean episode reward: -192.327249 | ent_coef: 0.0100
+2026-04-26 10:20:06 | INFO    | rl_trading.agent | Step 475000 | Mean episode reward: -186.596956 | ent_coef: 0.0100
+2026-04-26 10:21:25 | INFO    | rl_trading.agent | Step 500000 | Mean episode reward: -181.809386 | ent_coef: 0.0100
+2026-04-26 10:22:10 | INFO    | rl_trading.wfo | Fold 3 OOS -- final balance: 993.36  (-0.66%)  trades: 174  positions: sell=58.7% flat=0.0% buy=41.3%  turnover=0.0053
+2026-04-26 10:22:10 | INFO    | rl_trading.wfo | Fold 4/22  train [2006-05-08 -> 2007-05-08]  test [2007-05-08 -> 2007-06-08]
+2026-04-26 10:22:11 | INFO    | rl_trading.agent | Built RecurrentPPO -- LSTM(128x1), LR 1.0e-04 -> 0, ent 0.010 -> 0.010
+2026-04-26 10:23:39 | INFO    | rl_trading.agent | Step 25000 | Mean episode reward: -458.296697 | ent_coef: 0.0100
+2026-04-26 10:25:04 | INFO    | rl_trading.agent | Step 50000 | Mean episode reward: -433.968967 | ent_coef: 0.0100
+2026-04-26 10:26:24 | INFO    | rl_trading.agent | Step 75000 | Mean episode reward: -407.284659 | ent_coef: 0.0100
+2026-04-26 10:27:39 | INFO    | rl_trading.agent | Step 100000 | Mean episode reward: -400.121238 | ent_coef: 0.0100
+2026-04-26 10:28:53 | INFO    | rl_trading.agent | Step 125000 | Mean episode reward: -391.366222 | ent_coef: 0.0100
+2026-04-26 10:30:08 | INFO    | rl_trading.agent | Step 150000 | Mean episode reward: -367.484161 | ent_coef: 0.0100
+2026-04-26 10:31:22 | INFO    | rl_trading.agent | Step 175000 | Mean episode reward: -354.759854 | ent_coef: 0.0100
+2026-04-26 10:32:36 | INFO    | rl_trading.agent | Step 200000 | Mean episode reward: -343.861597 | ent_coef: 0.0100
+2026-04-26 10:33:49 | INFO    | rl_trading.agent | Step 225000 | Mean episode reward: -332.228635 | ent_coef: 0.0100
+2026-04-26 10:35:10 | INFO    | rl_trading.agent | Step 250000 | Mean episode reward: -311.618396 | ent_coef: 0.0100
+2026-04-26 10:36:23 | INFO    | rl_trading.agent | Step 275000 | Mean episode reward: -300.182480 | ent_coef: 0.0100
+2026-04-26 10:37:37 | INFO    | rl_trading.agent | Step 300000 | Mean episode reward: -289.510560 | ent_coef: 0.0100
+2026-04-26 10:38:51 | INFO    | rl_trading.agent | Step 325000 | Mean episode reward: -279.722038 | ent_coef: 0.0100
+2026-04-26 10:40:07 | INFO    | rl_trading.agent | Step 350000 | Mean episode reward: -264.114597 | ent_coef: 0.0100
+2026-04-26 10:41:21 | INFO    | rl_trading.agent | Step 375000 | Mean episode reward: -255.782821 | ent_coef: 0.0100
+2026-04-26 10:42:35 | INFO    | rl_trading.agent | Step 400000 | Mean episode reward: -248.667085 | ent_coef: 0.0100
+2026-04-26 10:43:49 | INFO    | rl_trading.agent | Step 425000 | Mean episode reward: -242.101029 | ent_coef: 0.0100
+2026-04-26 10:45:03 | INFO    | rl_trading.agent | Step 450000 | Mean episode reward: -228.367592 | ent_coef: 0.0100
+2026-04-26 10:46:19 | INFO    | rl_trading.agent | Step 475000 | Mean episode reward: -222.190049 | ent_coef: 0.0100
+2026-04-26 10:47:38 | INFO    | rl_trading.agent | Step 500000 | Mean episode reward: -217.160611 | ent_coef: 0.0100
+2026-04-26 10:48:25 | INFO    | rl_trading.wfo | Fold 4 OOS -- final balance: 1022.16  (2.22%)  trades: 31  positions: sell=59.9% flat=1.4% buy=38.7%  turnover=0.0009
+2026-04-26 10:48:25 | INFO    | rl_trading.wfo | Fold 5/22  train [2007-05-08 -> 2008-05-08]  test [2008-05-08 -> 2008-06-08]
+2026-04-26 10:48:25 | INFO    | rl_trading.agent | Built RecurrentPPO -- LSTM(128x1), LR 1.0e-04 -> 0, ent 0.010 -> 0.010
+2026-04-26 10:49:52 | INFO    | rl_trading.agent | Step 25000 | Mean episode reward: -459.652383 | ent_coef: 0.0100
+2026-04-26 10:51:17 | INFO    | rl_trading.agent | Step 50000 | Mean episode reward: -436.295042 | ent_coef: 0.0100
+2026-04-26 10:52:35 | INFO    | rl_trading.agent | Step 75000 | Mean episode reward: -416.069609 | ent_coef: 0.0100
+2026-04-26 10:53:49 | INFO    | rl_trading.agent | Step 100000 | Mean episode reward: -400.385057 | ent_coef: 0.0100
+2026-04-26 10:55:03 | INFO    | rl_trading.agent | Step 125000 | Mean episode reward: -382.270200 | ent_coef: 0.0100
+2026-04-26 10:56:18 | INFO    | rl_trading.agent | Step 150000 | Mean episode reward: -357.111315 | ent_coef: 0.0100
+2026-04-26 10:57:34 | INFO    | rl_trading.agent | Step 175000 | Mean episode reward: -315.360485 | ent_coef: 0.0100
+2026-04-26 10:58:48 | INFO    | rl_trading.agent | Step 200000 | Mean episode reward: -288.551004 | ent_coef: 0.0100
+2026-04-26 11:00:02 | INFO    | rl_trading.agent | Step 225000 | Mean episode reward: -271.588158 | ent_coef: 0.0100
+2026-04-26 11:01:20 | INFO    | rl_trading.agent | Step 250000 | Mean episode reward: -258.472133 | ent_coef: 0.0100
+2026-04-26 11:02:35 | INFO    | rl_trading.agent | Step 275000 | Mean episode reward: -233.226850 | ent_coef: 0.0100
+2026-04-26 11:03:49 | INFO    | rl_trading.agent | Step 300000 | Mean episode reward: -226.231463 | ent_coef: 0.0100
+2026-04-26 11:05:02 | INFO    | rl_trading.agent | Step 325000 | Mean episode reward: -218.297743 | ent_coef: 0.0100
+2026-04-26 11:06:16 | INFO    | rl_trading.agent | Step 350000 | Mean episode reward: -207.931936 | ent_coef: 0.0100
+2026-04-26 11:07:29 | INFO    | rl_trading.agent | Step 375000 | Mean episode reward: -195.280253 | ent_coef: 0.0100
+2026-04-26 11:08:45 | INFO    | rl_trading.agent | Step 400000 | Mean episode reward: -190.564232 | ent_coef: 0.0100
+2026-04-26 11:09:58 | INFO    | rl_trading.agent | Step 425000 | Mean episode reward: -184.882520 | ent_coef: 0.0100
+2026-04-26 11:11:11 | INFO    | rl_trading.agent | Step 450000 | Mean episode reward: -179.689712 | ent_coef: 0.0100
+2026-04-26 11:12:25 | INFO    | rl_trading.agent | Step 475000 | Mean episode reward: -171.403523 | ent_coef: 0.0100
+2026-04-26 11:13:45 | INFO    | rl_trading.agent | Step 500000 | Mean episode reward: -167.742342 | ent_coef: 0.0100
+2026-04-26 11:14:29 | INFO    | rl_trading.wfo | Fold 5 OOS -- final balance: 1016.38  (1.64%)  trades: 190  positions: sell=58.4% flat=1.1% buy=40.5%  turnover=0.0061
+2026-04-26 11:14:29 | INFO    | rl_trading.wfo | Fold 6/22  train [2008-05-08 -> 2009-05-08]  test [2009-05-08 -> 2009-06-08]
+2026-04-26 11:14:29 | INFO    | rl_trading.agent | Built RecurrentPPO -- LSTM(128x1), LR 1.0e-04 -> 0, ent 0.010 -> 0.010
+2026-04-26 11:15:57 | INFO    | rl_trading.agent | Step 25000 | Mean episode reward: -459.268484 | ent_coef: 0.0100
+2026-04-26 11:17:23 | INFO    | rl_trading.agent | Step 50000 | Mean episode reward: -443.347891 | ent_coef: 0.0100
+2026-04-26 11:18:43 | INFO    | rl_trading.agent | Step 75000 | Mean episode reward: -397.589742 | ent_coef: 0.0100
+2026-04-26 11:19:59 | INFO    | rl_trading.agent | Step 100000 | Mean episode reward: -386.505086 | ent_coef: 0.0100
+2026-04-26 11:21:13 | INFO    | rl_trading.agent | Step 125000 | Mean episode reward: -369.854662 | ent_coef: 0.0100
+2026-04-26 11:22:27 | INFO    | rl_trading.agent | Step 150000 | Mean episode reward: -353.808672 | ent_coef: 0.0100
+2026-04-26 11:23:42 | INFO    | rl_trading.agent | Step 175000 | Mean episode reward: -325.355224 | ent_coef: 0.0100
+2026-04-26 11:24:56 | INFO    | rl_trading.agent | Step 200000 | Mean episode reward: -312.637048 | ent_coef: 0.0100
+2026-04-26 11:26:10 | INFO    | rl_trading.agent | Step 225000 | Mean episode reward: -299.191681 | ent_coef: 0.0100
+2026-04-26 11:27:28 | INFO    | rl_trading.agent | Step 250000 | Mean episode reward: -288.507638 | ent_coef: 0.0100
+2026-04-26 11:28:44 | INFO    | rl_trading.agent | Step 275000 | Mean episode reward: -267.806994 | ent_coef: 0.0100
+2026-04-26 11:29:58 | INFO    | rl_trading.agent | Step 300000 | Mean episode reward: -259.023443 | ent_coef: 0.0100
+2026-04-26 11:31:11 | INFO    | rl_trading.agent | Step 325000 | Mean episode reward: -250.473038 | ent_coef: 0.0100
+2026-04-26 11:32:25 | INFO    | rl_trading.agent | Step 350000 | Mean episode reward: -241.859752 | ent_coef: 0.0100
+2026-04-26 11:33:42 | INFO    | rl_trading.agent | Step 375000 | Mean episode reward: -226.962106 | ent_coef: 0.0100
+2026-04-26 11:34:56 | INFO    | rl_trading.agent | Step 400000 | Mean episode reward: -219.945513 | ent_coef: 0.0100
+2026-04-26 11:36:10 | INFO    | rl_trading.agent | Step 425000 | Mean episode reward: -213.278440 | ent_coef: 0.0100
+2026-04-26 11:37:25 | INFO    | rl_trading.agent | Step 450000 | Mean episode reward: -207.160026 | ent_coef: 0.0100
+2026-04-26 11:38:40 | INFO    | rl_trading.agent | Step 475000 | Mean episode reward: -196.040944 | ent_coef: 0.0100
+2026-04-26 11:40:01 | INFO    | rl_trading.agent | Step 500000 | Mean episode reward: -191.407603 | ent_coef: 0.0100
+2026-04-26 11:40:45 | INFO    | rl_trading.wfo | Fold 6 OOS -- final balance: 1049.00  (4.90%)  trades: 118  positions: sell=0.0% flat=28.0% buy=72.0%  turnover=0.0039
+2026-04-26 11:40:45 | INFO    | rl_trading.wfo | Fold 7/22  train [2009-05-08 -> 2010-05-08]  test [2010-05-08 -> 2010-06-08]
+2026-04-26 11:40:45 | INFO    | rl_trading.agent | Built RecurrentPPO -- LSTM(128x1), LR 1.0e-04 -> 0, ent 0.010 -> 0.010
+2026-04-26 11:42:16 | INFO    | rl_trading.agent | Step 25000 | Mean episode reward: -456.531696 | ent_coef: 0.0100
+2026-04-26 11:43:43 | INFO    | rl_trading.agent | Step 50000 | Mean episode reward: -423.241911 | ent_coef: 0.0100
+2026-04-26 11:45:02 | INFO    | rl_trading.agent | Step 75000 | Mean episode reward: -410.612272 | ent_coef: 0.0100
+2026-04-26 11:46:18 | INFO    | rl_trading.agent | Step 100000 | Mean episode reward: -389.857673 | ent_coef: 0.0100
+2026-04-26 11:47:32 | INFO    | rl_trading.agent | Step 125000 | Mean episode reward: -380.300994 | ent_coef: 0.0100
+2026-04-26 11:48:48 | INFO    | rl_trading.agent | Step 150000 | Mean episode reward: -351.255307 | ent_coef: 0.0100
+2026-04-26 11:50:01 | INFO    | rl_trading.agent | Step 175000 | Mean episode reward: -339.312368 | ent_coef: 0.0100
+2026-04-26 11:51:15 | INFO    | rl_trading.agent | Step 200000 | Mean episode reward: -328.222372 | ent_coef: 0.0100
+2026-04-26 11:52:28 | INFO    | rl_trading.agent | Step 225000 | Mean episode reward: -318.027778 | ent_coef: 0.0100
+2026-04-26 11:53:49 | INFO    | rl_trading.agent | Step 250000 | Mean episode reward: -298.506990 | ent_coef: 0.0100
+2026-04-26 11:55:02 | INFO    | rl_trading.agent | Step 275000 | Mean episode reward: -289.952803 | ent_coef: 0.0100
+2026-04-26 11:56:15 | INFO    | rl_trading.agent | Step 300000 | Mean episode reward: -281.225533 | ent_coef: 0.0100
+2026-04-26 11:57:28 | INFO    | rl_trading.agent | Step 325000 | Mean episode reward: -273.216820 | ent_coef: 0.0100
+2026-04-26 11:58:43 | INFO    | rl_trading.agent | Step 350000 | Mean episode reward: -258.384412 | ent_coef: 0.0100
+2026-04-26 11:59:57 | INFO    | rl_trading.agent | Step 375000 | Mean episode reward: -251.942865 | ent_coef: 0.0100
+2026-04-26 12:01:10 | INFO    | rl_trading.agent | Step 400000 | Mean episode reward: -245.714317 | ent_coef: 0.0100
+2026-04-26 12:02:24 | INFO    | rl_trading.agent | Step 425000 | Mean episode reward: -239.657134 | ent_coef: 0.0100
+2026-04-26 12:03:37 | INFO    | rl_trading.agent | Step 450000 | Mean episode reward: -228.252402 | ent_coef: 0.0100
+2026-04-26 12:04:52 | INFO    | rl_trading.agent | Step 475000 | Mean episode reward: -222.656159 | ent_coef: 0.0100
+2026-04-26 12:06:11 | INFO    | rl_trading.agent | Step 500000 | Mean episode reward: -218.134783 | ent_coef: 0.0100
+2026-04-26 12:06:54 | INFO    | rl_trading.wfo | Fold 7 OOS -- final balance: 917.87  (-8.21%)  trades: 198  positions: sell=19.8% flat=0.0% buy=80.2%  turnover=0.0065
+2026-04-26 12:06:54 | INFO    | rl_trading.wfo | Fold 8/22  train [2010-05-08 -> 2011-05-08]  test [2011-05-08 -> 2011-06-08]
+2026-04-26 12:06:54 | INFO    | rl_trading.agent | Built RecurrentPPO -- LSTM(128x1), LR 1.0e-04 -> 0, ent 0.010 -> 0.010
+2026-04-26 12:08:22 | INFO    | rl_trading.agent | Step 25000 | Mean episode reward: -237.605833 | ent_coef: 0.0100
+2026-04-26 12:09:47 | INFO    | rl_trading.agent | Step 50000 | Mean episode reward: -186.758457 | ent_coef: 0.0100
+2026-04-26 12:11:08 | INFO    | rl_trading.agent | Step 75000 | Mean episode reward: -130.235063 | ent_coef: 0.0100
+2026-04-26 12:12:23 | INFO    | rl_trading.agent | Step 100000 | Mean episode reward: -108.889499 | ent_coef: 0.0100
+2026-04-26 12:13:37 | INFO    | rl_trading.agent | Step 125000 | Mean episode reward: -113.705311 | ent_coef: 0.0100
+2026-04-26 12:14:50 | INFO    | rl_trading.agent | Step 150000 | Mean episode reward: -113.910361 | ent_coef: 0.0100
+2026-04-26 12:16:03 | INFO    | rl_trading.agent | Step 175000 | Mean episode reward: -89.325467 | ent_coef: 0.0100
+2026-04-26 12:17:18 | INFO    | rl_trading.agent | Step 200000 | Mean episode reward: -65.189869 | ent_coef: 0.0100
+2026-04-26 12:18:32 | INFO    | rl_trading.agent | Step 225000 | Mean episode reward: -43.483691 | ent_coef: 0.0100
+2026-04-26 12:19:50 | INFO    | rl_trading.agent | Step 250000 | Mean episode reward: -23.521141 | ent_coef: 0.0100
+2026-04-26 12:21:06 | INFO    | rl_trading.agent | Step 275000 | Mean episode reward: -9.322374 | ent_coef: 0.0100
+2026-04-26 12:22:20 | INFO    | rl_trading.agent | Step 300000 | Mean episode reward: -11.802960 | ent_coef: 0.0100
+2026-04-26 12:23:33 | INFO    | rl_trading.agent | Step 325000 | Mean episode reward: -13.838685 | ent_coef: 0.0100
+2026-04-26 12:24:47 | INFO    | rl_trading.agent | Step 350000 | Mean episode reward: 2.440161 | ent_coef: 0.0100
+2026-04-26 12:26:00 | INFO    | rl_trading.agent | Step 375000 | Mean episode reward: 16.198334 | ent_coef: 0.0100
+2026-04-26 12:27:16 | INFO    | rl_trading.agent | Step 400000 | Mean episode reward: 30.723615 | ent_coef: 0.0100
+2026-04-26 12:28:29 | INFO    | rl_trading.agent | Step 425000 | Mean episode reward: 44.425938 | ent_coef: 0.0100
+2026-04-26 12:29:43 | INFO    | rl_trading.agent | Step 450000 | Mean episode reward: 56.888085 | ent_coef: 0.0100
+2026-04-26 12:30:56 | INFO    | rl_trading.agent | Step 475000 | Mean episode reward: 80.060110 | ent_coef: 0.0100
+2026-04-26 12:32:17 | INFO    | rl_trading.agent | Step 500000 | Mean episode reward: 90.649889 | ent_coef: 0.0100
+2026-04-26 12:33:01 | INFO    | rl_trading.wfo | Fold 8 OOS -- final balance: 1031.81  (3.18%)  trades: 16  positions: sell=99.8% flat=0.2% buy=0.0%  turnover=0.0005
+2026-04-26 12:33:01 | INFO    | rl_trading.wfo | Fold 9/22  train [2011-05-08 -> 2012-05-08]  test [2012-05-08 -> 2012-06-08]
+2026-04-26 12:33:02 | INFO    | rl_trading.agent | Built RecurrentPPO -- LSTM(128x1), LR 1.0e-04 -> 0, ent 0.010 -> 0.010
+2026-04-26 12:34:29 | INFO    | rl_trading.agent | Step 25000 | Mean episode reward: -432.138872 | ent_coef: 0.0100
+2026-04-26 12:35:56 | INFO    | rl_trading.agent | Step 50000 | Mean episode reward: -424.071339 | ent_coef: 0.0100
+2026-04-26 12:37:15 | INFO    | rl_trading.agent | Step 75000 | Mean episode reward: -403.489986 | ent_coef: 0.0100
+2026-04-26 12:38:30 | INFO    | rl_trading.agent | Step 100000 | Mean episode reward: -384.320178 | ent_coef: 0.0100
+2026-04-26 12:39:45 | INFO    | rl_trading.agent | Step 125000 | Mean episode reward: -368.915575 | ent_coef: 0.0100
+2026-04-26 12:41:00 | INFO    | rl_trading.agent | Step 150000 | Mean episode reward: -352.789492 | ent_coef: 0.0100
+2026-04-26 12:42:14 | INFO    | rl_trading.agent | Step 175000 | Mean episode reward: -339.444200 | ent_coef: 0.0100
+2026-04-26 12:43:28 | INFO    | rl_trading.agent | Step 200000 | Mean episode reward: -313.302309 | ent_coef: 0.0100
+2026-04-26 12:44:44 | INFO    | rl_trading.agent | Step 225000 | Mean episode reward: -302.756637 | ent_coef: 0.0100
+2026-04-26 12:46:03 | INFO    | rl_trading.agent | Step 250000 | Mean episode reward: -293.312371 | ent_coef: 0.0100
+2026-04-26 12:47:17 | INFO    | rl_trading.agent | Step 275000 | Mean episode reward: -284.978884 | ent_coef: 0.0100
+2026-04-26 12:48:31 | INFO    | rl_trading.agent | Step 300000 | Mean episode reward: -277.338207 | ent_coef: 0.0100
+2026-04-26 12:49:46 | INFO    | rl_trading.agent | Step 325000 | Mean episode reward: -263.013134 | ent_coef: 0.0100
+2026-04-26 12:51:00 | INFO    | rl_trading.agent | Step 350000 | Mean episode reward: -256.646087 | ent_coef: 0.0100
+2026-04-26 12:52:14 | INFO    | rl_trading.agent | Step 375000 | Mean episode reward: -249.691839 | ent_coef: 0.0100
+2026-04-26 12:53:27 | INFO    | rl_trading.agent | Step 400000 | Mean episode reward: -243.027848 | ent_coef: 0.0100
+2026-04-26 12:54:42 | INFO    | rl_trading.agent | Step 425000 | Mean episode reward: -232.506933 | ent_coef: 0.0100
+2026-04-26 12:55:56 | INFO    | rl_trading.agent | Step 450000 | Mean episode reward: -227.115666 | ent_coef: 0.0100
+2026-04-26 12:57:10 | INFO    | rl_trading.agent | Step 475000 | Mean episode reward: -222.159266 | ent_coef: 0.0100
+2026-04-26 12:58:28 | INFO    | rl_trading.agent | Step 500000 | Mean episode reward: -217.264928 | ent_coef: 0.0100
+2026-04-26 12:59:16 | INFO    | rl_trading.wfo | Fold 9 OOS -- final balance: 1054.72  (5.47%)  trades: 84  positions: sell=56.2% flat=0.0% buy=43.8%  turnover=0.0025
+2026-04-26 12:59:16 | INFO    | rl_trading.wfo | Fold 10/22  train [2012-05-08 -> 2013-05-08]  test [2013-05-08 -> 2013-06-08]
+2026-04-26 12:59:17 | INFO    | rl_trading.agent | Built RecurrentPPO -- LSTM(128x1), LR 1.0e-04 -> 0, ent 0.010 -> 0.010
+2026-04-26 13:00:44 | INFO    | rl_trading.agent | Step 25000 | Mean episode reward: -445.281326 | ent_coef: 0.0100
+2026-04-26 13:02:09 | INFO    | rl_trading.agent | Step 50000 | Mean episode reward: -417.974059 | ent_coef: 0.0100
+2026-04-26 13:03:25 | INFO    | rl_trading.agent | Step 75000 | Mean episode reward: -393.479950 | ent_coef: 0.0100
+2026-04-26 13:04:38 | INFO    | rl_trading.agent | Step 100000 | Mean episode reward: -379.560317 | ent_coef: 0.0100
+2026-04-26 13:05:51 | INFO    | rl_trading.agent | Step 125000 | Mean episode reward: -357.123632 | ent_coef: 0.0100
+2026-04-26 13:07:07 | INFO    | rl_trading.agent | Step 150000 | Mean episode reward: -322.628905 | ent_coef: 0.0100
+2026-04-26 13:08:21 | INFO    | rl_trading.agent | Step 175000 | Mean episode reward: -307.155711 | ent_coef: 0.0100
+2026-04-26 13:09:34 | INFO    | rl_trading.agent | Step 200000 | Mean episode reward: -292.946565 | ent_coef: 0.0100
+2026-04-26 13:10:48 | INFO    | rl_trading.agent | Step 225000 | Mean episode reward: -280.563484 | ent_coef: 0.0100
+2026-04-26 13:12:08 | INFO    | rl_trading.agent | Step 250000 | Mean episode reward: -255.524159 | ent_coef: 0.0100
+2026-04-26 13:13:22 | INFO    | rl_trading.agent | Step 275000 | Mean episode reward: -244.405577 | ent_coef: 0.0100
+2026-04-26 13:14:36 | INFO    | rl_trading.agent | Step 300000 | Mean episode reward: -235.624898 | ent_coef: 0.0100
+2026-04-26 13:15:49 | INFO    | rl_trading.agent | Step 325000 | Mean episode reward: -226.846101 | ent_coef: 0.0100
+2026-04-26 13:17:03 | INFO    | rl_trading.agent | Step 350000 | Mean episode reward: -207.464848 | ent_coef: 0.0100
+2026-04-26 13:18:18 | INFO    | rl_trading.agent | Step 375000 | Mean episode reward: -198.716901 | ent_coef: 0.0100
+2026-04-26 13:19:32 | INFO    | rl_trading.agent | Step 400000 | Mean episode reward: -191.730021 | ent_coef: 0.0100
+2026-04-26 13:20:45 | INFO    | rl_trading.agent | Step 425000 | Mean episode reward: -186.037568 | ent_coef: 0.0100
+2026-04-26 13:21:59 | INFO    | rl_trading.agent | Step 450000 | Mean episode reward: -172.971708 | ent_coef: 0.0100
+2026-04-26 13:23:14 | INFO    | rl_trading.agent | Step 475000 | Mean episode reward: -167.618897 | ent_coef: 0.0100
+2026-04-26 13:24:33 | INFO    | rl_trading.agent | Step 500000 | Mean episode reward: -162.709564 | ent_coef: 0.0100
+2026-04-26 13:25:18 | INFO    | rl_trading.wfo | Fold 10 OOS -- final balance: 1006.15  (0.61%)  trades: 124  positions: sell=64.5% flat=0.0% buy=35.5%  turnover=0.0038
+2026-04-26 13:25:18 | INFO    | rl_trading.wfo | Fold 11/22  train [2013-05-08 -> 2014-05-08]  test [2014-05-08 -> 2014-06-08]
+2026-04-26 13:25:19 | INFO    | rl_trading.agent | Built RecurrentPPO -- LSTM(128x1), LR 1.0e-04 -> 0, ent 0.010 -> 0.010
+2026-04-26 13:26:51 | INFO    | rl_trading.agent | Step 25000 | Mean episode reward: -438.191932 | ent_coef: 0.0100
+2026-04-26 13:28:22 | INFO    | rl_trading.agent | Step 50000 | Mean episode reward: -417.170751 | ent_coef: 0.0100
+2026-04-26 13:29:38 | INFO    | rl_trading.agent | Step 75000 | Mean episode reward: -400.829519 | ent_coef: 0.0100
+2026-04-26 13:30:54 | INFO    | rl_trading.agent | Step 100000 | Mean episode reward: -375.016585 | ent_coef: 0.0100
+2026-04-26 13:32:07 | INFO    | rl_trading.agent | Step 125000 | Mean episode reward: -361.726955 | ent_coef: 0.0100
+2026-04-26 13:33:21 | INFO    | rl_trading.agent | Step 150000 | Mean episode reward: -346.206443 | ent_coef: 0.0100
+2026-04-26 13:34:34 | INFO    | rl_trading.agent | Step 175000 | Mean episode reward: -330.658543 | ent_coef: 0.0100
+2026-04-26 13:35:47 | INFO    | rl_trading.agent | Step 200000 | Mean episode reward: -301.282035 | ent_coef: 0.0100
+2026-04-26 13:37:03 | INFO    | rl_trading.agent | Step 225000 | Mean episode reward: -289.900945 | ent_coef: 0.0100
+2026-04-26 13:38:22 | INFO    | rl_trading.agent | Step 250000 | Mean episode reward: -280.478062 | ent_coef: 0.0100
+2026-04-26 13:39:35 | INFO    | rl_trading.agent | Step 275000 | Mean episode reward: -271.256108 | ent_coef: 0.0100
+2026-04-26 13:40:52 | INFO    | rl_trading.agent | Step 300000 | Mean episode reward: -253.216307 | ent_coef: 0.0100
+2026-04-26 13:42:06 | INFO    | rl_trading.agent | Step 325000 | Mean episode reward: -246.737867 | ent_coef: 0.0100
+2026-04-26 13:43:20 | INFO    | rl_trading.agent | Step 350000 | Mean episode reward: -240.578439 | ent_coef: 0.0100
+2026-04-26 13:44:34 | INFO    | rl_trading.agent | Step 375000 | Mean episode reward: -232.942550 | ent_coef: 0.0100
+2026-04-26 13:45:48 | INFO    | rl_trading.agent | Step 400000 | Mean episode reward: -222.214364 | ent_coef: 0.0100
+2026-04-26 13:47:04 | INFO    | rl_trading.agent | Step 425000 | Mean episode reward: -215.979258 | ent_coef: 0.0100
+2026-04-26 13:48:17 | INFO    | rl_trading.agent | Step 450000 | Mean episode reward: -211.790902 | ent_coef: 0.0100
+2026-04-26 13:49:31 | INFO    | rl_trading.agent | Step 475000 | Mean episode reward: -207.602466 | ent_coef: 0.0100
+2026-04-26 13:50:49 | INFO    | rl_trading.agent | Step 500000 | Mean episode reward: -200.139100 | ent_coef: 0.0100
+2026-04-26 13:51:35 | INFO    | rl_trading.wfo | Fold 11 OOS -- final balance: 998.74  (-0.13%)  trades: 57  positions: sell=54.3% flat=0.0% buy=45.7%  turnover=0.0018
+2026-04-26 13:51:35 | INFO    | rl_trading.wfo | Fold 12/22  train [2014-05-08 -> 2015-05-08]  test [2015-05-08 -> 2015-06-08]
+2026-04-26 13:51:35 | INFO    | rl_trading.agent | Built RecurrentPPO -- LSTM(128x1), LR 1.0e-04 -> 0, ent 0.010 -> 0.010
+2026-04-26 13:53:02 | INFO    | rl_trading.agent | Step 25000 | Mean episode reward: -450.702746 | ent_coef: 0.0100
+2026-04-26 13:54:26 | INFO    | rl_trading.agent | Step 50000 | Mean episode reward: -426.071477 | ent_coef: 0.0100
+2026-04-26 13:55:44 | INFO    | rl_trading.agent | Step 75000 | Mean episode reward: -398.432018 | ent_coef: 0.0100
+2026-04-26 13:56:59 | INFO    | rl_trading.agent | Step 100000 | Mean episode reward: -381.899434 | ent_coef: 0.0100
+2026-04-26 13:58:13 | INFO    | rl_trading.agent | Step 125000 | Mean episode reward: -361.295440 | ent_coef: 0.0100
+2026-04-26 13:59:26 | INFO    | rl_trading.agent | Step 150000 | Mean episode reward: -344.561870 | ent_coef: 0.0100
+2026-04-26 14:00:41 | INFO    | rl_trading.agent | Step 175000 | Mean episode reward: -313.822095 | ent_coef: 0.0100
+2026-04-26 14:01:56 | INFO    | rl_trading.agent | Step 200000 | Mean episode reward: -300.111388 | ent_coef: 0.0100
+2026-04-26 14:03:10 | INFO    | rl_trading.agent | Step 225000 | Mean episode reward: -287.026757 | ent_coef: 0.0100
+2026-04-26 14:04:29 | INFO    | rl_trading.agent | Step 250000 | Mean episode reward: -274.670730 | ent_coef: 0.0100
+2026-04-26 14:05:42 | INFO    | rl_trading.agent | Step 275000 | Mean episode reward: -262.796273 | ent_coef: 0.0100
+2026-04-26 14:06:58 | INFO    | rl_trading.agent | Step 300000 | Mean episode reward: -238.330068 | ent_coef: 0.0100
+2026-04-26 14:08:12 | INFO    | rl_trading.agent | Step 325000 | Mean episode reward: -226.672592 | ent_coef: 0.0100
+2026-04-26 14:09:26 | INFO    | rl_trading.agent | Step 350000 | Mean episode reward: -212.195629 | ent_coef: 0.0100
+2026-04-26 14:10:39 | INFO    | rl_trading.agent | Step 375000 | Mean episode reward: -203.590907 | ent_coef: 0.0100
+2026-04-26 14:11:55 | INFO    | rl_trading.agent | Step 400000 | Mean episode reward: -187.454479 | ent_coef: 0.0100
+2026-04-26 14:13:08 | INFO    | rl_trading.agent | Step 425000 | Mean episode reward: -181.332340 | ent_coef: 0.0100
+2026-04-26 14:14:22 | INFO    | rl_trading.agent | Step 450000 | Mean episode reward: -165.461423 | ent_coef: 0.0100
+2026-04-26 14:15:36 | INFO    | rl_trading.agent | Step 475000 | Mean episode reward: -159.658776 | ent_coef: 0.0100
+2026-04-26 14:16:56 | INFO    | rl_trading.agent | Step 500000 | Mean episode reward: -145.626044 | ent_coef: 0.0100
+2026-04-26 14:17:39 | INFO    | rl_trading.wfo | Fold 12 OOS -- final balance: 979.28  (-2.07%)  trades: 50  positions: sell=67.7% flat=0.0% buy=32.3%  turnover=0.0017
+2026-04-26 14:17:39 | INFO    | rl_trading.wfo | Fold 13/22  train [2015-05-08 -> 2016-05-08]  test [2016-05-08 -> 2016-06-08]
+2026-04-26 14:17:39 | INFO    | rl_trading.agent | Built RecurrentPPO -- LSTM(128x1), LR 1.0e-04 -> 0, ent 0.010 -> 0.010
+2026-04-26 14:19:07 | INFO    | rl_trading.agent | Step 25000 | Mean episode reward: -449.060186 | ent_coef: 0.0100
+2026-04-26 14:20:33 | INFO    | rl_trading.agent | Step 50000 | Mean episode reward: -417.355798 | ent_coef: 0.0100
+2026-04-26 14:21:55 | INFO    | rl_trading.agent | Step 75000 | Mean episode reward: -403.357370 | ent_coef: 0.0100
+2026-04-26 14:23:10 | INFO    | rl_trading.agent | Step 100000 | Mean episode reward: -380.738709 | ent_coef: 0.0100
+2026-04-26 14:24:24 | INFO    | rl_trading.agent | Step 125000 | Mean episode reward: -364.346894 | ent_coef: 0.0100
+2026-04-26 14:25:38 | INFO    | rl_trading.agent | Step 150000 | Mean episode reward: -348.889095 | ent_coef: 0.0100
+2026-04-26 14:26:51 | INFO    | rl_trading.agent | Step 175000 | Mean episode reward: -333.532813 | ent_coef: 0.0100
+2026-04-26 14:28:05 | INFO    | rl_trading.agent | Step 200000 | Mean episode reward: -309.880291 | ent_coef: 0.0100
+2026-04-26 14:29:20 | INFO    | rl_trading.agent | Step 225000 | Mean episode reward: -300.339386 | ent_coef: 0.0100
+2026-04-26 14:30:39 | INFO    | rl_trading.agent | Step 250000 | Mean episode reward: -289.961198 | ent_coef: 0.0100
+2026-04-26 14:31:53 | INFO    | rl_trading.agent | Step 275000 | Mean episode reward: -280.722152 | ent_coef: 0.0100
+2026-04-26 14:33:08 | INFO    | rl_trading.agent | Step 300000 | Mean episode reward: -264.807452 | ent_coef: 0.0100
+2026-04-26 14:34:21 | INFO    | rl_trading.agent | Step 325000 | Mean episode reward: -257.444859 | ent_coef: 0.0100
+2026-04-26 14:35:35 | INFO    | rl_trading.agent | Step 350000 | Mean episode reward: -249.772754 | ent_coef: 0.0100
+2026-04-26 14:36:49 | INFO    | rl_trading.agent | Step 375000 | Mean episode reward: -243.636355 | ent_coef: 0.0100
+2026-04-26 14:38:03 | INFO    | rl_trading.agent | Step 400000 | Mean episode reward: -232.044329 | ent_coef: 0.0100
+2026-04-26 14:39:19 | INFO    | rl_trading.agent | Step 425000 | Mean episode reward: -225.945431 | ent_coef: 0.0100
+2026-04-26 14:40:33 | INFO    | rl_trading.agent | Step 450000 | Mean episode reward: -221.184185 | ent_coef: 0.0100
+2026-04-26 14:41:47 | INFO    | rl_trading.agent | Step 475000 | Mean episode reward: -216.400337 | ent_coef: 0.0100
+2026-04-26 14:43:06 | INFO    | rl_trading.agent | Step 500000 | Mean episode reward: -212.203802 | ent_coef: 0.0100
+2026-04-26 14:43:54 | INFO    | rl_trading.wfo | Fold 13 OOS -- final balance: 1028.39  (2.84%)  trades: 77  positions: sell=62.3% flat=0.0% buy=37.7%  turnover=0.0024
+2026-04-26 14:43:54 | INFO    | rl_trading.wfo | Fold 14/22  train [2016-05-08 -> 2017-05-08]  test [2017-05-08 -> 2017-06-08]
+2026-04-26 14:43:54 | INFO    | rl_trading.agent | Built RecurrentPPO -- LSTM(128x1), LR 1.0e-04 -> 0, ent 0.010 -> 0.010
+2026-04-26 14:45:28 | INFO    | rl_trading.agent | Step 25000 | Mean episode reward: -430.809574 | ent_coef: 0.0100
+2026-04-26 14:46:58 | INFO    | rl_trading.agent | Step 50000 | Mean episode reward: -407.888625 | ent_coef: 0.0100
+2026-04-26 14:48:16 | INFO    | rl_trading.agent | Step 75000 | Mean episode reward: -387.067766 | ent_coef: 0.0100
+2026-04-26 14:49:29 | INFO    | rl_trading.agent | Step 100000 | Mean episode reward: -373.968372 | ent_coef: 0.0100
+2026-04-26 14:50:42 | INFO    | rl_trading.agent | Step 125000 | Mean episode reward: -359.470904 | ent_coef: 0.0100
+2026-04-26 14:51:56 | INFO    | rl_trading.agent | Step 150000 | Mean episode reward: -344.460479 | ent_coef: 0.0100
+2026-04-26 14:53:09 | INFO    | rl_trading.agent | Step 175000 | Mean episode reward: -311.522143 | ent_coef: 0.0100
+2026-04-26 14:54:24 | INFO    | rl_trading.agent | Step 200000 | Mean episode reward: -295.674571 | ent_coef: 0.0100
+2026-04-26 14:55:38 | INFO    | rl_trading.agent | Step 225000 | Mean episode reward: -284.344169 | ent_coef: 0.0100
+2026-04-26 14:56:57 | INFO    | rl_trading.agent | Step 250000 | Mean episode reward: -274.895070 | ent_coef: 0.0100
+2026-04-26 14:58:10 | INFO    | rl_trading.agent | Step 275000 | Mean episode reward: -264.042366 | ent_coef: 0.0100
+2026-04-26 14:59:25 | INFO    | rl_trading.agent | Step 300000 | Mean episode reward: -242.174259 | ent_coef: 0.0100
+2026-04-26 15:00:38 | INFO    | rl_trading.agent | Step 325000 | Mean episode reward: -232.238067 | ent_coef: 0.0100
+2026-04-26 15:01:52 | INFO    | rl_trading.agent | Step 350000 | Mean episode reward: -219.471492 | ent_coef: 0.0100
+2026-04-26 15:03:05 | INFO    | rl_trading.agent | Step 375000 | Mean episode reward: -211.673162 | ent_coef: 0.0100
+2026-04-26 15:04:20 | INFO    | rl_trading.agent | Step 400000 | Mean episode reward: -196.624348 | ent_coef: 0.0100
+2026-04-26 15:05:34 | INFO    | rl_trading.agent | Step 425000 | Mean episode reward: -191.912370 | ent_coef: 0.0100
+2026-04-26 15:06:48 | INFO    | rl_trading.agent | Step 450000 | Mean episode reward: -187.633498 | ent_coef: 0.0100
+2026-04-26 15:08:01 | INFO    | rl_trading.agent | Step 475000 | Mean episode reward: -182.845028 | ent_coef: 0.0100
+2026-04-26 15:09:22 | INFO    | rl_trading.agent | Step 500000 | Mean episode reward: -174.325206 | ent_coef: 0.0100
+2026-04-26 15:10:08 | INFO    | rl_trading.wfo | Fold 14 OOS -- final balance: 984.81  (-1.52%)  trades: 42  positions: sell=61.5% flat=0.2% buy=38.3%  turnover=0.0013
+2026-04-26 15:10:08 | INFO    | rl_trading.wfo | Fold 15/22  train [2017-05-08 -> 2018-05-08]  test [2018-05-08 -> 2018-06-08]
+2026-04-26 15:10:08 | INFO    | rl_trading.agent | Built RecurrentPPO -- LSTM(128x1), LR 1.0e-04 -> 0, ent 0.010 -> 0.010
+2026-04-26 15:11:35 | INFO    | rl_trading.agent | Step 25000 | Mean episode reward: -443.454401 | ent_coef: 0.0100
+2026-04-26 15:12:59 | INFO    | rl_trading.agent | Step 50000 | Mean episode reward: -425.851563 | ent_coef: 0.0100
+2026-04-26 15:14:17 | INFO    | rl_trading.agent | Step 75000 | Mean episode reward: -410.022343 | ent_coef: 0.0100
+2026-04-26 15:15:30 | INFO    | rl_trading.agent | Step 100000 | Mean episode reward: -380.987828 | ent_coef: 0.0100
+2026-04-26 15:16:46 | INFO    | rl_trading.agent | Step 125000 | Mean episode reward: -361.418337 | ent_coef: 0.0100
+2026-04-26 15:18:00 | INFO    | rl_trading.agent | Step 150000 | Mean episode reward: -341.659709 | ent_coef: 0.0100
+2026-04-26 15:19:13 | INFO    | rl_trading.agent | Step 175000 | Mean episode reward: -316.599596 | ent_coef: 0.0100
+2026-04-26 15:20:27 | INFO    | rl_trading.agent | Step 200000 | Mean episode reward: -294.389935 | ent_coef: 0.0100
+2026-04-26 15:21:42 | INFO    | rl_trading.agent | Step 225000 | Mean episode reward: -236.088563 | ent_coef: 0.0100
+2026-04-26 15:23:01 | INFO    | rl_trading.agent | Step 250000 | Mean episode reward: -212.763830 | ent_coef: 0.0100
+2026-04-26 15:24:14 | INFO    | rl_trading.agent | Step 275000 | Mean episode reward: -203.565200 | ent_coef: 0.0100
+2026-04-26 15:25:28 | INFO    | rl_trading.agent | Step 300000 | Mean episode reward: -194.883917 | ent_coef: 0.0100
+2026-04-26 15:26:43 | INFO    | rl_trading.agent | Step 325000 | Mean episode reward: -179.582921 | ent_coef: 0.0100
+2026-04-26 15:27:57 | INFO    | rl_trading.agent | Step 350000 | Mean episode reward: -172.278776 | ent_coef: 0.0100
+2026-04-26 15:29:10 | INFO    | rl_trading.agent | Step 375000 | Mean episode reward: -164.127747 | ent_coef: 0.0100
+2026-04-26 15:30:24 | INFO    | rl_trading.agent | Step 400000 | Mean episode reward: -156.833832 | ent_coef: 0.0100
+2026-04-26 15:31:37 | INFO    | rl_trading.agent | Step 425000 | Mean episode reward: -144.791537 | ent_coef: 0.0100
+2026-04-26 15:32:53 | INFO    | rl_trading.agent | Step 450000 | Mean episode reward: -136.430781 | ent_coef: 0.0100
+2026-04-26 15:34:06 | INFO    | rl_trading.agent | Step 475000 | Mean episode reward: -130.629185 | ent_coef: 0.0100
+2026-04-26 15:35:25 | INFO    | rl_trading.agent | Step 500000 | Mean episode reward: -124.576599 | ent_coef: 0.0100
+2026-04-26 15:36:13 | INFO    | rl_trading.wfo | Fold 15 OOS -- final balance: 990.87  (-0.91%)  trades: 117  positions: sell=33.9% flat=0.0% buy=66.0%  turnover=0.0035
+2026-04-26 15:36:13 | INFO    | rl_trading.wfo | Fold 16/22  train [2018-05-08 -> 2019-05-08]  test [2019-05-08 -> 2019-06-08]
+2026-04-26 15:36:13 | INFO    | rl_trading.agent | Built RecurrentPPO -- LSTM(128x1), LR 1.0e-04 -> 0, ent 0.010 -> 0.010
+2026-04-26 15:37:42 | INFO    | rl_trading.agent | Step 25000 | Mean episode reward: -446.704694 | ent_coef: 0.0100
+2026-04-26 15:39:07 | INFO    | rl_trading.agent | Step 50000 | Mean episode reward: -423.336985 | ent_coef: 0.0100
+2026-04-26 15:40:25 | INFO    | rl_trading.agent | Step 75000 | Mean episode reward: -392.362041 | ent_coef: 0.0100
+2026-04-26 15:41:42 | INFO    | rl_trading.agent | Step 100000 | Mean episode reward: -378.338416 | ent_coef: 0.0100
+2026-04-26 15:42:56 | INFO    | rl_trading.agent | Step 125000 | Mean episode reward: -361.780521 | ent_coef: 0.0100
+2026-04-26 15:44:10 | INFO    | rl_trading.agent | Step 150000 | Mean episode reward: -347.101662 | ent_coef: 0.0100
+2026-04-26 15:45:24 | INFO    | rl_trading.agent | Step 175000 | Mean episode reward: -332.136529 | ent_coef: 0.0100
+2026-04-26 15:46:41 | INFO    | rl_trading.agent | Step 200000 | Mean episode reward: -308.414725 | ent_coef: 0.0100
+2026-04-26 15:47:55 | INFO    | rl_trading.agent | Step 225000 | Mean episode reward: -296.564458 | ent_coef: 0.0100
+2026-04-26 15:49:13 | INFO    | rl_trading.agent | Step 250000 | Mean episode reward: -284.040194 | ent_coef: 0.0100
+2026-04-26 15:50:27 | INFO    | rl_trading.agent | Step 275000 | Mean episode reward: -276.053322 | ent_coef: 0.0100
+2026-04-26 15:51:42 | INFO    | rl_trading.agent | Step 300000 | Mean episode reward: -258.228577 | ent_coef: 0.0100
+2026-04-26 15:52:56 | INFO    | rl_trading.agent | Step 325000 | Mean episode reward: -249.798466 | ent_coef: 0.0100
+2026-04-26 15:54:09 | INFO    | rl_trading.agent | Step 350000 | Mean episode reward: -242.202296 | ent_coef: 0.0100
+2026-04-26 15:55:24 | INFO    | rl_trading.agent | Step 375000 | Mean episode reward: -234.547640 | ent_coef: 0.0100
+2026-04-26 15:56:39 | INFO    | rl_trading.agent | Step 400000 | Mean episode reward: -222.715037 | ent_coef: 0.0100
+2026-04-26 15:57:53 | INFO    | rl_trading.agent | Step 425000 | Mean episode reward: -216.117321 | ent_coef: 0.0100
+2026-04-26 15:59:07 | INFO    | rl_trading.agent | Step 450000 | Mean episode reward: -209.845506 | ent_coef: 0.0100
+2026-04-26 16:00:20 | INFO    | rl_trading.agent | Step 475000 | Mean episode reward: -204.675754 | ent_coef: 0.0100
+2026-04-26 16:01:41 | INFO    | rl_trading.agent | Step 500000 | Mean episode reward: -194.731510 | ent_coef: 0.0100
+2026-04-26 16:02:26 | INFO    | rl_trading.wfo | Fold 16 OOS -- final balance: 1002.12  (0.21%)  trades: 41  positions: sell=66.4% flat=0.4% buy=33.2%  turnover=0.0013
+2026-04-26 16:02:26 | INFO    | rl_trading.wfo | Fold 17/22  train [2019-05-08 -> 2020-05-08]  test [2020-05-08 -> 2020-06-08]
+2026-04-26 16:02:26 | INFO    | rl_trading.agent | Built RecurrentPPO -- LSTM(128x1), LR 1.0e-04 -> 0, ent 0.010 -> 0.010
+2026-04-26 16:03:59 | INFO    | rl_trading.agent | Step 25000 | Mean episode reward: -483.200047 | ent_coef: 0.0100
+2026-04-26 16:05:24 | INFO    | rl_trading.agent | Step 50000 | Mean episode reward: -443.173520 | ent_coef: 0.0100
+2026-04-26 16:06:39 | INFO    | rl_trading.agent | Step 75000 | Mean episode reward: -419.954491 | ent_coef: 0.0100
+2026-04-26 16:07:53 | INFO    | rl_trading.agent | Step 100000 | Mean episode reward: -401.478143 | ent_coef: 0.0100
+2026-04-26 16:09:08 | INFO    | rl_trading.agent | Step 125000 | Mean episode reward: -364.064216 | ent_coef: 0.0100
+2026-04-26 16:10:21 | INFO    | rl_trading.agent | Step 150000 | Mean episode reward: -345.685188 | ent_coef: 0.0100
+2026-04-26 16:11:35 | INFO    | rl_trading.agent | Step 175000 | Mean episode reward: -329.351697 | ent_coef: 0.0100
+2026-04-26 16:12:48 | INFO    | rl_trading.agent | Step 200000 | Mean episode reward: -315.834586 | ent_coef: 0.0100
+2026-04-26 16:14:02 | INFO    | rl_trading.agent | Step 225000 | Mean episode reward: -290.829782 | ent_coef: 0.0100
+2026-04-26 16:15:23 | INFO    | rl_trading.agent | Step 250000 | Mean episode reward: -280.962389 | ent_coef: 0.0100
+2026-04-26 16:16:36 | INFO    | rl_trading.agent | Step 275000 | Mean episode reward: -269.826243 | ent_coef: 0.0100
+2026-04-26 16:17:50 | INFO    | rl_trading.agent | Step 300000 | Mean episode reward: -260.494403 | ent_coef: 0.0100
+2026-04-26 16:19:03 | INFO    | rl_trading.agent | Step 325000 | Mean episode reward: -240.752821 | ent_coef: 0.0100
+2026-04-26 16:20:19 | INFO    | rl_trading.agent | Step 350000 | Mean episode reward: -232.158919 | ent_coef: 0.0100
+2026-04-26 16:21:33 | INFO    | rl_trading.agent | Step 375000 | Mean episode reward: -225.420537 | ent_coef: 0.0100
+2026-04-26 16:22:47 | INFO    | rl_trading.agent | Step 400000 | Mean episode reward: -217.517052 | ent_coef: 0.0100
+2026-04-26 16:24:01 | INFO    | rl_trading.agent | Step 425000 | Mean episode reward: -211.832504 | ent_coef: 0.0100
+2026-04-26 16:25:16 | INFO    | rl_trading.agent | Step 450000 | Mean episode reward: -198.784682 | ent_coef: 0.0100
+2026-04-26 16:26:30 | INFO    | rl_trading.agent | Step 475000 | Mean episode reward: -193.369111 | ent_coef: 0.0100
+2026-04-26 16:27:48 | INFO    | rl_trading.agent | Step 500000 | Mean episode reward: -187.970619 | ent_coef: 0.0100
+2026-04-26 16:28:31 | INFO    | rl_trading.wfo | Fold 17 OOS -- final balance: 1018.84  (1.88%)  trades: 143  positions: sell=58.1% flat=0.0% buy=41.9%  turnover=0.0047
+2026-04-26 16:28:31 | INFO    | rl_trading.wfo | Fold 18/22  train [2020-05-08 -> 2021-05-08]  test [2021-05-08 -> 2021-06-08]
+2026-04-26 16:28:32 | INFO    | rl_trading.agent | Built RecurrentPPO -- LSTM(128x1), LR 1.0e-04 -> 0, ent 0.010 -> 0.010
+2026-04-26 16:29:59 | INFO    | rl_trading.agent | Step 25000 | Mean episode reward: -436.073440 | ent_coef: 0.0100
+2026-04-26 16:31:25 | INFO    | rl_trading.agent | Step 50000 | Mean episode reward: -416.166958 | ent_coef: 0.0100
+2026-04-26 16:32:40 | INFO    | rl_trading.agent | Step 75000 | Mean episode reward: -391.124882 | ent_coef: 0.0100
+2026-04-26 16:33:54 | INFO    | rl_trading.agent | Step 100000 | Mean episode reward: -380.224147 | ent_coef: 0.0100
+2026-04-26 16:35:07 | INFO    | rl_trading.agent | Step 125000 | Mean episode reward: -342.399652 | ent_coef: 0.0100
+2026-04-26 16:36:23 | INFO    | rl_trading.agent | Step 150000 | Mean episode reward: -326.130043 | ent_coef: 0.0100
+2026-04-26 16:37:36 | INFO    | rl_trading.agent | Step 175000 | Mean episode reward: -310.457648 | ent_coef: 0.0100
+2026-04-26 16:38:50 | INFO    | rl_trading.agent | Step 200000 | Mean episode reward: -292.664019 | ent_coef: 0.0100
+2026-04-26 16:40:05 | INFO    | rl_trading.agent | Step 225000 | Mean episode reward: -273.967447 | ent_coef: 0.0100
+2026-04-26 16:41:26 | INFO    | rl_trading.agent | Step 250000 | Mean episode reward: -248.698786 | ent_coef: 0.0100
+2026-04-26 16:42:40 | INFO    | rl_trading.agent | Step 275000 | Mean episode reward: -240.326370 | ent_coef: 0.0100
+2026-04-26 16:43:54 | INFO    | rl_trading.agent | Step 300000 | Mean episode reward: -231.649130 | ent_coef: 0.0100
+2026-04-26 16:45:09 | INFO    | rl_trading.agent | Step 325000 | Mean episode reward: -220.983035 | ent_coef: 0.0100
+2026-04-26 16:46:25 | INFO    | rl_trading.agent | Step 350000 | Mean episode reward: -198.050840 | ent_coef: 0.0100
+2026-04-26 16:47:39 | INFO    | rl_trading.agent | Step 375000 | Mean episode reward: -190.732160 | ent_coef: 0.0100
+2026-04-26 16:48:52 | INFO    | rl_trading.agent | Step 400000 | Mean episode reward: -183.518612 | ent_coef: 0.0100
+2026-04-26 16:50:06 | INFO    | rl_trading.agent | Step 425000 | Mean episode reward: -177.606057 | ent_coef: 0.0100
+2026-04-26 16:51:19 | INFO    | rl_trading.agent | Step 450000 | Mean episode reward: -163.745621 | ent_coef: 0.0100
+2026-04-26 16:52:35 | INFO    | rl_trading.agent | Step 475000 | Mean episode reward: -157.422914 | ent_coef: 0.0100
+2026-04-26 16:53:53 | INFO    | rl_trading.agent | Step 500000 | Mean episode reward: -153.285351 | ent_coef: 0.0100
+2026-04-26 16:54:36 | INFO    | rl_trading.wfo | Fold 18 OOS -- final balance: 1018.13  (1.81%)  trades: 65  positions: sell=40.2% flat=0.0% buy=59.8%  turnover=0.0022
+2026-04-26 16:54:36 | INFO    | rl_trading.wfo | Fold 19/22  train [2021-05-08 -> 2022-05-08]  test [2022-05-08 -> 2022-06-08]
+2026-04-26 16:54:36 | INFO    | rl_trading.agent | Built RecurrentPPO -- LSTM(128x1), LR 1.0e-04 -> 0, ent 0.010 -> 0.010
+2026-04-26 16:56:04 | INFO    | rl_trading.agent | Step 25000 | Mean episode reward: -483.967727 | ent_coef: 0.0100
+2026-04-26 16:57:30 | INFO    | rl_trading.agent | Step 50000 | Mean episode reward: -456.434580 | ent_coef: 0.0100
+2026-04-26 16:58:46 | INFO    | rl_trading.agent | Step 75000 | Mean episode reward: -431.699813 | ent_coef: 0.0100
+2026-04-26 17:00:01 | INFO    | rl_trading.agent | Step 100000 | Mean episode reward: -414.033528 | ent_coef: 0.0100
+2026-04-26 17:01:15 | INFO    | rl_trading.agent | Step 125000 | Mean episode reward: -392.784011 | ent_coef: 0.0100
+2026-04-26 17:02:28 | INFO    | rl_trading.agent | Step 150000 | Mean episode reward: -373.236418 | ent_coef: 0.0100
+2026-04-26 17:03:42 | INFO    | rl_trading.agent | Step 175000 | Mean episode reward: -354.280418 | ent_coef: 0.0100
+2026-04-26 17:04:57 | INFO    | rl_trading.agent | Step 200000 | Mean episode reward: -325.459919 | ent_coef: 0.0100
+2026-04-26 17:06:11 | INFO    | rl_trading.agent | Step 225000 | Mean episode reward: -311.716432 | ent_coef: 0.0100
+2026-04-26 17:07:29 | INFO    | rl_trading.agent | Step 250000 | Mean episode reward: -299.717216 | ent_coef: 0.0100
+2026-04-26 17:08:43 | INFO    | rl_trading.agent | Step 275000 | Mean episode reward: -288.760940 | ent_coef: 0.0100
+2026-04-26 17:09:59 | INFO    | rl_trading.agent | Step 300000 | Mean episode reward: -269.756514 | ent_coef: 0.0100
+2026-04-26 17:11:12 | INFO    | rl_trading.agent | Step 325000 | Mean episode reward: -258.133651 | ent_coef: 0.0100
+2026-04-26 17:12:26 | INFO    | rl_trading.agent | Step 350000 | Mean episode reward: -248.586151 | ent_coef: 0.0100
+2026-04-26 17:13:39 | INFO    | rl_trading.agent | Step 375000 | Mean episode reward: -240.358141 | ent_coef: 0.0100
+2026-04-26 17:14:55 | INFO    | rl_trading.agent | Step 400000 | Mean episode reward: -225.034113 | ent_coef: 0.0100
+2026-04-26 17:16:08 | INFO    | rl_trading.agent | Step 425000 | Mean episode reward: -217.226906 | ent_coef: 0.0100
+2026-04-26 17:17:25 | INFO    | rl_trading.agent | Step 450000 | Mean episode reward: -211.225736 | ent_coef: 0.0100
+2026-04-26 17:18:43 | INFO    | rl_trading.agent | Step 475000 | Mean episode reward: -204.982276 | ent_coef: 0.0100
+2026-04-26 17:20:04 | INFO    | rl_trading.agent | Step 500000 | Mean episode reward: -193.857156 | ent_coef: 0.0100
+2026-04-26 17:20:49 | INFO    | rl_trading.wfo | Fold 19 OOS -- final balance: 975.37  (-2.46%)  trades: 125  positions: sell=50.0% flat=0.0% buy=50.0%  turnover=0.0039
+2026-04-26 17:20:49 | INFO    | rl_trading.wfo | Fold 20/22  train [2022-05-08 -> 2023-05-08]  test [2023-05-08 -> 2023-06-08]
+2026-04-26 17:20:49 | INFO    | rl_trading.agent | Built RecurrentPPO -- LSTM(128x1), LR 1.0e-04 -> 0, ent 0.010 -> 0.010
+2026-04-26 17:22:23 | INFO    | rl_trading.agent | Step 25000 | Mean episode reward: -468.582218 | ent_coef: 0.0100
+2026-04-26 17:23:55 | INFO    | rl_trading.agent | Step 50000 | Mean episode reward: -434.749855 | ent_coef: 0.0100
+2026-04-26 17:25:15 | INFO    | rl_trading.agent | Step 75000 | Mean episode reward: -400.181269 | ent_coef: 0.0100
+2026-04-26 17:26:29 | INFO    | rl_trading.agent | Step 100000 | Mean episode reward: -384.212537 | ent_coef: 0.0100
+2026-04-26 17:27:43 | INFO    | rl_trading.agent | Step 125000 | Mean episode reward: -362.958686 | ent_coef: 0.0100
+2026-04-26 17:28:56 | INFO    | rl_trading.agent | Step 150000 | Mean episode reward: -346.289186 | ent_coef: 0.0100
+2026-04-26 17:30:09 | INFO    | rl_trading.agent | Step 175000 | Mean episode reward: -311.429559 | ent_coef: 0.0100
+2026-04-26 17:31:25 | INFO    | rl_trading.agent | Step 200000 | Mean episode reward: -298.443624 | ent_coef: 0.0100
+2026-04-26 17:32:38 | INFO    | rl_trading.agent | Step 225000 | Mean episode reward: -285.054444 | ent_coef: 0.0100
+2026-04-26 17:33:57 | INFO    | rl_trading.agent | Step 250000 | Mean episode reward: -271.879140 | ent_coef: 0.0100
+2026-04-26 17:35:12 | INFO    | rl_trading.agent | Step 275000 | Mean episode reward: -250.651004 | ent_coef: 0.0100
+2026-04-26 17:36:26 | INFO    | rl_trading.agent | Step 300000 | Mean episode reward: -241.155909 | ent_coef: 0.0100
+2026-04-26 17:37:40 | INFO    | rl_trading.agent | Step 325000 | Mean episode reward: -232.047007 | ent_coef: 0.0100
+2026-04-26 17:38:54 | INFO    | rl_trading.agent | Step 350000 | Mean episode reward: -221.993512 | ent_coef: 0.0100
+2026-04-26 17:40:08 | INFO    | rl_trading.agent | Step 375000 | Mean episode reward: -206.939362 | ent_coef: 0.0100
+2026-04-26 17:41:24 | INFO    | rl_trading.agent | Step 400000 | Mean episode reward: -201.166693 | ent_coef: 0.0100
+2026-04-26 17:42:38 | INFO    | rl_trading.agent | Step 425000 | Mean episode reward: -195.277870 | ent_coef: 0.0100
+2026-04-26 17:43:52 | INFO    | rl_trading.agent | Step 450000 | Mean episode reward: -189.237804 | ent_coef: 0.0100
+2026-04-26 17:45:06 | INFO    | rl_trading.agent | Step 475000 | Mean episode reward: -177.546986 | ent_coef: 0.0100
+2026-04-26 17:46:28 | INFO    | rl_trading.agent | Step 500000 | Mean episode reward: -172.503637 | ent_coef: 0.0100
+2026-04-26 17:47:15 | INFO    | rl_trading.wfo | Fold 20 OOS -- final balance: 1010.01  (1.00%)  trades: 34  positions: sell=30.9% flat=0.0% buy=69.1%  turnover=0.0010
+2026-04-26 17:47:15 | INFO    | rl_trading.wfo | Fold 21/22  train [2023-05-08 -> 2024-05-08]  test [2024-05-08 -> 2024-06-08]
+2026-04-26 17:47:16 | INFO    | rl_trading.agent | Built RecurrentPPO -- LSTM(128x1), LR 1.0e-04 -> 0, ent 0.010 -> 0.010
+2026-04-26 17:48:42 | INFO    | rl_trading.agent | Step 25000 | Mean episode reward: -457.179959 | ent_coef: 0.0100
+2026-04-26 17:50:07 | INFO    | rl_trading.agent | Step 50000 | Mean episode reward: -441.374455 | ent_coef: 0.0100
+2026-04-26 17:51:25 | INFO    | rl_trading.agent | Step 75000 | Mean episode reward: -417.299247 | ent_coef: 0.0100
+2026-04-26 17:52:38 | INFO    | rl_trading.agent | Step 100000 | Mean episode reward: -399.552366 | ent_coef: 0.0100
+2026-04-26 17:53:52 | INFO    | rl_trading.agent | Step 125000 | Mean episode reward: -380.765898 | ent_coef: 0.0100
+2026-04-26 17:55:05 | INFO    | rl_trading.agent | Step 150000 | Mean episode reward: -352.996995 | ent_coef: 0.0100
+2026-04-26 17:56:18 | INFO    | rl_trading.agent | Step 175000 | Mean episode reward: -319.430926 | ent_coef: 0.0100
+2026-04-26 17:57:33 | INFO    | rl_trading.agent | Step 200000 | Mean episode reward: -303.738575 | ent_coef: 0.0100
+2026-04-26 17:58:47 | INFO    | rl_trading.agent | Step 225000 | Mean episode reward: -288.652155 | ent_coef: 0.0100
+2026-04-26 18:00:05 | INFO    | rl_trading.agent | Step 250000 | Mean episode reward: -277.816535 | ent_coef: 0.0100
+2026-04-26 18:01:21 | INFO    | rl_trading.agent | Step 275000 | Mean episode reward: -251.042665 | ent_coef: 0.0100
+2026-04-26 18:02:35 | INFO    | rl_trading.agent | Step 300000 | Mean episode reward: -245.083221 | ent_coef: 0.0100
+2026-04-26 18:03:48 | INFO    | rl_trading.agent | Step 325000 | Mean episode reward: -234.537172 | ent_coef: 0.0100
+2026-04-26 18:05:01 | INFO    | rl_trading.agent | Step 350000 | Mean episode reward: -222.833595 | ent_coef: 0.0100
+2026-04-26 18:06:15 | INFO    | rl_trading.agent | Step 375000 | Mean episode reward: -186.886960 | ent_coef: 0.0100
+2026-04-26 18:07:30 | INFO    | rl_trading.agent | Step 400000 | Mean episode reward: -179.736601 | ent_coef: 0.0100
+2026-04-26 18:08:44 | INFO    | rl_trading.agent | Step 425000 | Mean episode reward: -173.273733 | ent_coef: 0.0100
+2026-04-26 18:09:58 | INFO    | rl_trading.agent | Step 450000 | Mean episode reward: -163.543952 | ent_coef: 0.0100
+2026-04-26 18:11:11 | INFO    | rl_trading.agent | Step 475000 | Mean episode reward: -143.411194 | ent_coef: 0.0100
+2026-04-26 18:12:32 | INFO    | rl_trading.agent | Step 500000 | Mean episode reward: -131.490938 | ent_coef: 0.0100
+2026-04-26 18:13:17 | INFO    | rl_trading.wfo | Fold 21 OOS -- final balance: 999.90  (-0.01%)  trades: 1  positions: sell=0.0% flat=0.0% buy=100.0%  turnover=0.0000
+2026-04-26 18:13:17 | INFO    | rl_trading.wfo | Fold 22/22  train [2024-05-08 -> 2025-05-08]  test [2025-05-08 -> 2025-06-08]
+2026-04-26 18:13:17 | INFO    | rl_trading.agent | Built RecurrentPPO -- LSTM(128x1), LR 1.0e-04 -> 0, ent 0.010 -> 0.010
+2026-04-26 18:14:43 | INFO    | rl_trading.agent | Step 25000 | Mean episode reward: -459.946316 | ent_coef: 0.0100
+2026-04-26 18:16:07 | INFO    | rl_trading.agent | Step 50000 | Mean episode reward: -438.623408 | ent_coef: 0.0100
+2026-04-26 18:17:23 | INFO    | rl_trading.agent | Step 75000 | Mean episode reward: -420.067286 | ent_coef: 0.0100
+2026-04-26 18:18:27 | INFO    | rl_trading.agent | Step 100000 | Mean episode reward: -404.754252 | ent_coef: 0.0100
+2026-04-26 18:19:32 | INFO    | rl_trading.agent | Step 125000 | Mean episode reward: -361.533169 | ent_coef: 0.0100
+2026-04-26 18:20:36 | INFO    | rl_trading.agent | Step 150000 | Mean episode reward: -342.905573 | ent_coef: 0.0100
+2026-04-26 18:21:41 | INFO    | rl_trading.agent | Step 175000 | Mean episode reward: -325.762058 | ent_coef: 0.0100
+2026-04-26 18:22:45 | INFO    | rl_trading.agent | Step 200000 | Mean episode reward: -310.578074 | ent_coef: 0.0100
+2026-04-26 18:23:49 | INFO    | rl_trading.agent | Step 225000 | Mean episode reward: -284.092659 | ent_coef: 0.0100
+2026-04-26 18:24:58 | INFO    | rl_trading.agent | Step 250000 | Mean episode reward: -273.676122 | ent_coef: 0.0100
+2026-04-26 18:26:03 | INFO    | rl_trading.agent | Step 275000 | Mean episode reward: -263.014388 | ent_coef: 0.0100
+2026-04-26 18:27:07 | INFO    | rl_trading.agent | Step 300000 | Mean episode reward: -252.578301 | ent_coef: 0.0100
+2026-04-26 18:28:13 | INFO    | rl_trading.agent | Step 325000 | Mean episode reward: -234.354792 | ent_coef: 0.0100
+2026-04-26 18:29:17 | INFO    | rl_trading.agent | Step 350000 | Mean episode reward: -226.595904 | ent_coef: 0.0100
+2026-04-26 18:30:21 | INFO    | rl_trading.agent | Step 375000 | Mean episode reward: -219.317817 | ent_coef: 0.0100
+2026-04-26 18:31:25 | INFO    | rl_trading.agent | Step 400000 | Mean episode reward: -213.480158 | ent_coef: 0.0100
+2026-04-26 18:32:29 | INFO    | rl_trading.agent | Step 425000 | Mean episode reward: -201.613919 | ent_coef: 0.0100
+2026-04-26 18:33:35 | INFO    | rl_trading.agent | Step 450000 | Mean episode reward: -195.336564 | ent_coef: 0.0100
+2026-04-26 18:34:39 | INFO    | rl_trading.agent | Step 475000 | Mean episode reward: -189.124232 | ent_coef: 0.0100
+2026-04-26 18:35:47 | INFO    | rl_trading.agent | Step 500000 | Mean episode reward: -184.953906 | ent_coef: 0.0100
+2026-04-26 18:36:29 | INFO    | rl_trading.wfo | Fold 22 OOS -- final balance: 967.67  (-3.23%)  trades: 75  positions: sell=68.1% flat=0.1% buy=31.8%  turnover=0.0024
 
-Completed 21 folds
+Completed 22 folds
 
   Pair  Total Return (%)  Ann. Sharpe Ratio  Max Drawdown (%)  Calmar Ratio  Positive Folds (%)  Median Fold Return (%)  Worst Fold Return (%)  OOS Bars  Folds  Trades  Sell %  Flat %  Buy %
-EURUSD             -84.8             -0.701              85.8       -0.0972                23.8                    -7.9                 -27.96   7846858     21   21330    48.7     1.4   49.9
-c:\Users\Administrateur\Documents\code\Trading-Reinforcement-Learning\rl_trading\metrics.py:224: UserWarning: Creating legend with loc="best" can be slow with large amounts of data.
-  fig.tight_layout()
-c:\Users\Administrateur\Documents\code\Trading-Reinforcement-Learning\rl_trading\metrics.py:227: UserWarning: Creating legend with loc="best" can be slow with large amounts of data.
-  fig.savefig(filepath, dpi=150)
-2026-04-25 21:30:49 | INFO    | rl_trading.metrics | Saved equity curve -> results\EURUSD_equity_curve.png
+EURUSD              8.83             0.4947              8.21        0.5473                54.5                    0.41                  -8.21    698721     22    1865    47.1     1.4   51.5
+2026-04-26 18:36:32 | INFO    | rl_trading.metrics | Saved equity curve -> results\EURUSD_equity_curve.png
 
 Equity curve saved
 Summary CSV saved

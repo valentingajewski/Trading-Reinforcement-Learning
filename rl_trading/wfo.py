@@ -171,7 +171,7 @@ def run_wfo(
     pair_name: str,
     df: pd.DataFrame,
     train_months: int = 12,
-    test_months: int = 12,
+    test_months: int = 1,
     max_folds: Optional[int] = None,
     initial_balance: float = 1_000.0,
     lot_size: float = 1_000.0,

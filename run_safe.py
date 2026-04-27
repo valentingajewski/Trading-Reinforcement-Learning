@@ -61,7 +61,7 @@ try:
         pair_name=pair,
         df=df,
         train_months=12,
-        test_months=12,
+        test_months=1,
         max_folds=24,
         initial_balance=1_000.0,
         lot_size=1_000.0,
