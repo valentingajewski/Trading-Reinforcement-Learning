@@ -133,8 +133,8 @@ def build_features(df: pd.DataFrame) -> pd.DataFrame:
     # 1. Log-returns
     feats["log_return"] = compute_log_returns(df["close"])
 
-    # 2. RSI
-    feats["rsi"] = compute_rsi(df["close"])
+    # 2. RSI, centered to keep this bounded oscillator in a stable range
+    feats["rsi"] = (compute_rsi(df["close"]) - 50.0) / 50.0
 
     # 3. MACD
     macd_df = compute_macd(df["close"])

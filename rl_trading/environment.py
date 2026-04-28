@@ -5,7 +5,7 @@ Implements:
 - Discrete action space: 0 = Sell, 1 = Hold/Flat, 2 = Buy
 - Differential Sharpe Ratio reward (Moody et al., 1998)
 - Transaction cost penalty (1 pip per trade)
-- Portfolio state: position, unrealized PnL, balance
+- Private state: position, realised/unrealised PnL context, balance, drawdown
 - Lot sizing: defaults to 1,000 units (0.01 standard lot) for a $1,000 starter account
 """
 
@@ -66,6 +66,8 @@ class ForexTradingEnv(gym.Env):
         position_cost: float = 0.0,
         min_hold_steps: int = 15,
         drawdown_penalty: float = 1.0,
+        turnover_penalty: float = 0.0,
+        reward_clip: Optional[float] = 1.0,
     ):
         super().__init__()
 
@@ -84,11 +86,14 @@ class ForexTradingEnv(gym.Env):
         self.position_cost = position_cost
         self.min_hold_steps = min_hold_steps
         self.drawdown_penalty = drawdown_penalty
+        self.turnover_penalty = turnover_penalty
+        self.reward_clip = reward_clip
 
         self.n_steps = len(features)
         self.n_features = features.shape[1]
 
-        # 5 portfolio vars: position, unrealized PnL, balance, steps_since_trade, drawdown
+        # 5 private-state vars: position, unrealized PnL, balance delta,
+        # steps since last trade, and drawdown.
         obs_dim = self.n_features + 5
         self.observation_space = spaces.Box(
             low=-np.inf, high=np.inf, shape=(obs_dim,), dtype=np.float32
@@ -159,6 +164,8 @@ class ForexTradingEnv(gym.Env):
         cost = 0.0
         if trade_occurred:
             cost = self.pip_cost * self.lot_size + self.trade_penalty
+            if self.turnover_penalty > 0:
+                cost += self.turnover_penalty * abs(target_position - prev_position)
             # Whipsaw penalty: extra cost for rapid position switches
             if self.whipsaw_penalty > 0 and self._steps_since_trade < self.whipsaw_window:
                 cost += self.whipsaw_penalty
@@ -197,6 +204,8 @@ class ForexTradingEnv(gym.Env):
         # Penalize only worsening drawdown, not static drawdown level each step.
         drawdown_increase = max(0.0, drawdown - prev_drawdown)
         reward = pnl_reward + dsr - self.drawdown_penalty * drawdown_increase
+        if self.reward_clip is not None and self.reward_clip > 0:
+            reward = float(np.clip(reward, -self.reward_clip, self.reward_clip))
 
         # --- Advance ---
         self._current_step += 1

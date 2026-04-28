@@ -73,16 +73,20 @@ def parse_args():
         help="Training timesteps per WFO fold (default: 300000)",
     )
     p.add_argument(
+        "--n-steps", type=int, default=4_096,
+        help="Rollout horizon per PPO update (default: 4096)",
+    )
+    p.add_argument(
         "--lr", type=float, default=1e-4,
         help="Initial learning rate (default: 1e-4)",
     )
     p.add_argument(
-        "--ent-coef", type=float, default=0.05,
-        help="Starting entropy coefficient (default: 0.05)",
+        "--ent-coef", type=float, default=0.01,
+        help="Starting entropy coefficient (default: 0.01)",
     )
     p.add_argument(
-        "--ent-coef-final", type=float, default=0.02,
-        help="Final entropy coefficient after linear decay (default: 0.02)",
+        "--ent-coef-final", type=float, default=0.005,
+        help="Final entropy coefficient after linear decay (default: 0.005)",
     )
     p.add_argument(
         "--trade-penalty", type=float, default=0.75,
@@ -101,16 +105,32 @@ def parse_args():
         help="Per-step cost while non-flat in training (default: 0.002)",
     )
     p.add_argument(
-        "--min-hold-steps", type=int, default=15,
-        help="Minimum steps to hold a position before switching (default: 15)",
+        "--min-hold-steps", type=int, default=5,
+        help="Minimum steps to hold a position before switching (default: 5)",
     )
     p.add_argument(
-        "--drawdown-penalty", type=float, default=1.0,
-        help="Reward penalty multiplier for worsening drawdown (default: 1.0)",
+        "--drawdown-penalty", type=float, default=0.5,
+        help="Reward penalty multiplier for worsening drawdown (default: 0.5)",
     )
     p.add_argument(
-        "--lstm-size", type=int, default=256,
-        help="LSTM hidden size (default: 256)",
+        "--turnover-penalty", type=float, default=0.25,
+        help="Extra training penalty per unit of position turnover (default: 0.25)",
+    )
+    p.add_argument(
+        "--reward-scaling", type=float, default=100.0,
+        help="Scale factor for the PnL reward term (default: 100.0)",
+    )
+    p.add_argument(
+        "--reward-clip", type=float, default=1.0,
+        help="Absolute clip applied to per-step training reward (default: 1.0)",
+    )
+    p.add_argument(
+        "--lstm-size", type=int, default=128,
+        help="LSTM hidden size (default: 128)",
+    )
+    p.add_argument(
+        "--lstm-layers", type=int, default=1,
+        help="Number of stacked LSTM layers (default: 1)",
     )
     p.add_argument(
         "--balance", type=float, default=1_000.0,
@@ -141,6 +161,10 @@ def parse_args():
         "--output-dir", type=str, default="results",
         help="Directory for output plots and reports",
     )
+    p.add_argument(
+        "--tensorboard-log", type=str, default="results/tensorboard",
+        help="Directory for TensorBoard logs (default: results/tensorboard)",
+    )
     return p.parse_args()
 
 
@@ -152,6 +176,8 @@ def main():
     args = parse_args()
     output_dir = Path(args.output_dir)
     output_dir.mkdir(parents=True, exist_ok=True)
+    tensorboard_log = Path(args.tensorboard_log)
+    tensorboard_log.mkdir(parents=True, exist_ok=True)
 
     # --- Load data ---
     if args.pair:
@@ -186,16 +212,22 @@ def main():
             pip_cost=args.pip_cost,
             total_timesteps=args.timesteps,
             initial_lr=args.lr,
+            n_steps=args.n_steps,
             ent_coef=args.ent_coef,
             ent_coef_final=args.ent_coef_final,
             lstm_hidden_size=args.lstm_size,
+            n_lstm_layers=args.lstm_layers,
             trade_penalty=args.trade_penalty,
             whipsaw_window=args.whipsaw_window,
             whipsaw_penalty=args.whipsaw_penalty,
             position_cost=args.position_cost,
             min_hold_steps=args.min_hold_steps,
             drawdown_penalty=args.drawdown_penalty,
+            turnover_penalty=args.turnover_penalty,
+            reward_scaling=args.reward_scaling,
+            reward_clip=args.reward_clip,
             chain_balance=args.chain_balance,
+            tensorboard_log=str(tensorboard_log),
             device=args.device,
             seed=args.seed,
         )

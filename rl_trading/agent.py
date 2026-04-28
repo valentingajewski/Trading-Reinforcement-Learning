@@ -56,6 +56,7 @@ class LoggingCallback(BaseCallback):
         decayed_ent = self._decayed_ent_coef()
         if decayed_ent is not None:
             self.model.ent_coef = float(decayed_ent)
+            self.logger.record("train/ent_coef", float(decayed_ent))
 
         if self.n_calls % self.log_interval == 0:
             if len(self.model.ep_info_buffer) > 0:
@@ -83,17 +84,18 @@ class LoggingCallback(BaseCallback):
 def build_agent(
     env,
     initial_lr: float = 3e-4,
-    n_steps: int = 8192,
-    batch_size: int = 256,
+    n_steps: int = 4096,
+    batch_size: int = 128,
     n_epochs: int = 10,
     gamma: float = 0.99,
     gae_lambda: float = 0.95,
-    clip_range: float = 0.1,
-    ent_coef: float = 0.05,
-    ent_coef_final: float = 0.02,
-    lstm_hidden_size: int = 256,
+    clip_range: float = 0.2,
+    ent_coef: float = 0.01,
+    ent_coef_final: float = 0.005,
+    lstm_hidden_size: int = 128,
     n_lstm_layers: int = 1,
     policy_kwargs: Optional[dict] = None,
+    tensorboard_log: Optional[str] = None,
     device: str = "auto",
     seed: int = 42,
 ) -> RecurrentPPO:
@@ -137,6 +139,7 @@ def build_agent(
         max_grad_norm=0.5,
         policy_kwargs=policy_kwargs,
         verbose=0,
+        tensorboard_log=tensorboard_log,
         device=device,
         seed=seed,
     )
