@@ -66,7 +66,7 @@ try:
         initial_balance=1_000.0,
         lot_size=1_000.0,
         pip_cost=0.0001,
-        total_timesteps=750_000,
+        total_timesteps=500_000,
         initial_lr=1e-4,
         ent_coef=0.01,
         ent_coef_final=0.01,
