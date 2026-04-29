@@ -10,15 +10,16 @@ This file lists the parameters you can tune in the current RL trading pipeline a
 | `--test-months` | `1` | Longer OOS period per fold, fewer fold transitions, smoother per-fold stats | Shorter OOS period, more folds, more variance in fold outcomes |
 | `--max-folds` | `None` (all) | More robust backtest coverage, much longer runtime | Faster experiments, less statistical confidence |
 | `--timesteps` | `300000` | Better convergence potential, longer runtime, possible overfit on fold | Faster runs, possible undertraining |
-| `--n-steps` | `4096` | Longer rollout chunks, better long-context credit assignment, slower policy refresh | Faster refresh, noisier updates |
-| `--lr` | `1e-4` | Faster learning, but more unstable updates and oscillation risk | Slower but steadier learning, may underfit if too small |
-| `--ent-coef` | `0.01` | More exploration, usually more action switching and trade frequency | More exploitation, usually fewer switches, can get stuck |
-| `--ent-coef-final` | `0.005` | Preserves more late-stage exploration | Faster convergence toward deterministic policy |
-| `--trade-penalty` | `0.75` | Stronger discouragement of trading, lower churn, can undertrade | More willingness to trade, can increase churn |
+| `--n-steps` | `8192` | Longer rollout chunks, better long-context credit assignment, slower policy refresh | Faster refresh, noisier updates |
+| `--lr` | `5e-5` | Faster learning, but more unstable updates and oscillation risk | Slower but steadier learning, may underfit if too small |
+| `--final-lr` | `match --lr` | Higher final LR preserves larger updates later in training | Lower final LR makes late training more conservative; `0` decays to zero |
+| `--ent-coef` | `0.015` | More exploration, usually more action switching and trade frequency | More exploitation, usually fewer switches, can get stuck |
+| `--ent-coef-final` | `0.015` | Preserves more late-stage exploration | Faster convergence toward deterministic policy |
+| `--trade-penalty` | `0.50` | Stronger discouragement of trading, lower churn, can undertrade | More willingness to trade, can increase churn |
 | `--whipsaw-window` | `30` | More reversals counted as "too fast", fewer quick flips | Less strict reversal window, more rapid switching allowed |
 | `--whipsaw-penalty` | `1.25` | Heavier punishment for flip-flop behavior, lower turnover | Weaker anti-whipsaw control, turnover can rise |
 | `--position-cost` | `0.002` | More incentive to go flat when edge is weak, fewer long holds | Less cost to stay exposed, more continuous market exposure |
-| `--min-hold-steps` | `5` | Forces longer holds, reduces micro-churn but slows reaction | Allows faster position changes, can overtrade |
+| `--min-hold-steps` | `10` | Forces longer holds, reduces micro-churn but slows reaction | Allows faster position changes, can overtrade |
 | `--drawdown-penalty` | `0.5` | More risk-aversion when drawdown worsens, can reduce tail losses but mute upside | More return-seeking behavior, but larger tail-risk possible |
 | `--turnover-penalty` | `0.25` | Adds explicit churn penalty scaled by position change size | Lets the agent reverse more freely |
 | `--reward-scaling` | `100.0` | Stronger direct PnL signal in reward | Relative weight shifts toward DSR and penalties |
@@ -42,14 +43,16 @@ These are tunable by editing `build_agent(...)` inputs or defaults.
 
 | Parameter | Current default | Increase / set higher | Decrease / set lower |
 |---|---:|---|---|
-| `n_steps` | `4096` | Longer rollout chunks, lower gradient noise, slower policy refresh | Faster policy refresh, noisier updates |
+| `n_steps` | `8192` | Longer rollout chunks, lower gradient noise, slower policy refresh | Faster policy refresh, noisier updates |
 | `batch_size` | `128` | Smoother gradient estimate, more memory use | Noisier gradients, sometimes better regularization |
 | `n_epochs` | `10` | More optimization per rollout, better sample usage, more overfit risk | Less optimization per rollout, faster but may underfit |
 | `gamma` | `0.99` | More long-term reward focus | More short-term reward focus |
 | `gae_lambda` | `0.95` | Lower bias / higher variance advantages | Higher bias / lower variance advantages |
 | `clip_range` | `0.2` | Looser policy update constraint, potentially unstable jumps | Tighter update constraint, more conservative learning |
-| `ent_coef` | `0.01` | More exploration and action diversity | More deterministic exploitation |
-| `ent_coef_final` | `0.005` | Maintains more late-stage stochasticity | Quicker convergence to lower exploration |
+| `initial_lr` | `5e-5` | Faster optimization progress, but larger update instability risk | Slower but steadier optimization |
+| `final_lr` | `match initial_lr` | Keeps updates larger later in training | More decay means more conservative late training |
+| `ent_coef` | `0.015` | More exploration and action diversity | More deterministic exploitation |
+| `ent_coef_final` | `0.015` | Maintains more late-stage stochasticity | Quicker convergence to lower exploration |
 | `lstm_hidden_size` | `128` | More sequence modeling capacity, more compute and overfit risk | Lower capacity, faster but may miss temporal structure |
 | `n_lstm_layers` | `1` | Deeper recurrent model, more capacity and training difficulty | Simpler recurrent stack |
 | `max_grad_norm` | `0.5` | Weaker clipping, possible exploding updates | Stronger clipping, safer but can slow learning |
@@ -62,11 +65,11 @@ These are tunable by editing `build_agent(...)` inputs or defaults.
 | `reward_scaling` | `100.0` (set in WFO training env) | Stronger PnL term influence in reward | DSR and penalties dominate relatively more |
 | `eta` (DSR EMA rate) | `0.001` | DSR reacts faster to recent returns, noisier risk signal | Smoother/slower DSR signal |
 | `episode_length` | `20160` (set in WFO training env) | Longer episodes, better long-context learning, slower resets | More frequent resets, faster feedback cycles |
-| `trade_penalty` | `0.75` | Fewer trades, lower churn, potential undertrading | More trades, higher churn risk |
+| `trade_penalty` | `0.50` | Fewer trades, lower churn, potential undertrading | More trades, higher churn risk |
 | `whipsaw_window` | `30` | More strict anti-flip region | Less strict anti-flip region |
 | `whipsaw_penalty` | `1.25` | Stronger punishment for rapid reversals | Weaker punishment for rapid reversals |
 | `position_cost` | `0.002` | More pressure to stay flat unless conviction is high | More willingness to stay in market |
-| `min_hold_steps` | `5` | Forces commitment to positions, lower churn | Enables rapid switching |
+| `min_hold_steps` | `10` | Forces commitment to positions, lower churn | Enables rapid switching |
 | `drawdown_penalty` | `0.5` | More penalty when drawdown worsens, better tail-risk control | Less tail-risk control, potentially higher upside and deeper losses |
 | `turnover_penalty` | `0.25` | Penalizes gross position changes, especially rapid full reversals | Reduces explicit churn control |
 | `reward_clip` | `1.0` | Keeps per-step reward inside PPO-friendly bounds | Allows bigger reward outliers |
@@ -120,9 +123,9 @@ Current wrapper run uses:
 
 - `train_months=12`, `test_months=1`, `max_folds=24`
 - `total_timesteps=500000`
-- `initial_lr=1e-4`, `n_steps=2048`, `ent_coef=0.01 -> 0.005`
+- `initial_lr=5e-5`, `final_lr=5e-5`, `n_steps=8192`, `ent_coef=0.015 -> 0.015`
 - `lstm_hidden_size=64`, `n_lstm_layers=2`
-- `trade_penalty=0.75`, `whipsaw_window=30`, `whipsaw_penalty=1.25`
-- `position_cost=0.002`, `min_hold_steps=5`, `drawdown_penalty=0.5`, `turnover_penalty=0.25`
+- `trade_penalty=0.50`, `whipsaw_window=30`, `whipsaw_penalty=1.25`
+- `position_cost=0.002`, `min_hold_steps=10`, `drawdown_penalty=0.5`, `turnover_penalty=0.25`
 - `reward_scaling=100.0`, `reward_clip=1.0`
 - `chain_balance=False`, `device="cuda"`, `seed=42`

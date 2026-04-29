@@ -73,24 +73,28 @@ def parse_args():
         help="Training timesteps per WFO fold (default: 300000)",
     )
     p.add_argument(
-        "--n-steps", type=int, default=4_096,
-        help="Rollout horizon per PPO update (default: 4096)",
+        "--n-steps", type=int, default=8_192,
+        help="Rollout horizon per PPO update (default: 8192)",
     )
     p.add_argument(
-        "--lr", type=float, default=1e-4,
-        help="Initial learning rate (default: 1e-4)",
+        "--lr", type=float, default=5e-5,
+        help="Initial learning rate (default: 5e-5)",
     )
     p.add_argument(
-        "--ent-coef", type=float, default=0.01,
-        help="Starting entropy coefficient (default: 0.01)",
+        "--final-lr", type=float, default=None,
+        help="Optional final learning rate. Omit to keep LR constant; set to 0 for decay to zero.",
     )
     p.add_argument(
-        "--ent-coef-final", type=float, default=0.005,
-        help="Final entropy coefficient after linear decay (default: 0.005)",
+        "--ent-coef", type=float, default=0.015,
+        help="Starting entropy coefficient (default: 0.015)",
     )
     p.add_argument(
-        "--trade-penalty", type=float, default=0.75,
-        help="Per-trade penalty during training (default: 0.75)",
+        "--ent-coef-final", type=float, default=0.015,
+        help="Final entropy coefficient after linear decay (default: 0.015)",
+    )
+    p.add_argument(
+        "--trade-penalty", type=float, default=0.50,
+        help="Per-trade penalty during training (default: 0.50)",
     )
     p.add_argument(
         "--whipsaw-window", type=int, default=30,
@@ -105,8 +109,8 @@ def parse_args():
         help="Per-step cost while non-flat in training (default: 0.002)",
     )
     p.add_argument(
-        "--min-hold-steps", type=int, default=5,
-        help="Minimum steps to hold a position before switching (default: 5)",
+        "--min-hold-steps", type=int, default=10,
+        help="Minimum steps to hold a position before switching (default: 10)",
     )
     p.add_argument(
         "--drawdown-penalty", type=float, default=0.5,
@@ -212,6 +216,7 @@ def main():
             pip_cost=args.pip_cost,
             total_timesteps=args.timesteps,
             initial_lr=args.lr,
+            final_lr=args.final_lr,
             n_steps=args.n_steps,
             ent_coef=args.ent_coef,
             ent_coef_final=args.ent_coef_final,

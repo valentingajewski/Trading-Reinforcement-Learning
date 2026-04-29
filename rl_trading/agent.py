@@ -83,15 +83,16 @@ class LoggingCallback(BaseCallback):
 
 def build_agent(
     env,
-    initial_lr: float = 3e-4,
-    n_steps: int = 4096,
+    initial_lr: float = 5e-5,
+    final_lr: Optional[float] = None,
+    n_steps: int = 8192,
     batch_size: int = 128,
     n_epochs: int = 10,
     gamma: float = 0.99,
     gae_lambda: float = 0.95,
     clip_range: float = 0.2,
-    ent_coef: float = 0.01,
-    ent_coef_final: float = 0.005,
+    ent_coef: float = 0.015,
+    ent_coef_final: float = 0.015,
     lstm_hidden_size: int = 128,
     n_lstm_layers: int = 1,
     policy_kwargs: Optional[dict] = None,
@@ -107,7 +108,9 @@ def build_agent(
     env : gymnasium.Env
         The trading environment (must already be wrapped if needed).
     initial_lr : float
-        Peak learning rate (decays linearly to 0).
+        Initial learning rate.
+    final_lr : float or None
+        Final learning rate after decay. When omitted, the schedule stays constant.
     lstm_hidden_size : int
         Number of units in each LSTM layer.
     n_lstm_layers : int
@@ -125,10 +128,12 @@ def build_agent(
     # Shared feature extractor fed into separate actor / critic heads
     policy_kwargs.setdefault("shared_lstm", False)
 
+    lr_end = initial_lr if final_lr is None else final_lr
+
     model = RecurrentPPO(
         policy="MlpLstmPolicy",
         env=env,
-        learning_rate=linear_schedule(initial_lr),
+        learning_rate=linear_schedule(initial_lr, lr_end),
         n_steps=n_steps,
         batch_size=batch_size,
         n_epochs=n_epochs,
@@ -144,7 +149,7 @@ def build_agent(
         seed=seed,
     )
     logger.info(
-        "Built RecurrentPPO -- LSTM(%dx%d), LR %.1e -> 0, ent %.3f -> %.3f",
-        lstm_hidden_size, n_lstm_layers, initial_lr, ent_coef, ent_coef_final,
+        "Built RecurrentPPO -- LSTM(%dx%d), LR %.1e -> %.1e, ent %.3f -> %.3f",
+        lstm_hidden_size, n_lstm_layers, initial_lr, lr_end, ent_coef, ent_coef_final,
     )
     return model
