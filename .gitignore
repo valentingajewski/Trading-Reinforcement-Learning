@@ -3,3 +3,4 @@ forex_data_by_pair/
 .conda/
 .vscode/
 forex_data_pairs.text
+__pycache__/
