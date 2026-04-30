@@ -77,24 +77,24 @@ def parse_args():
         help="Rollout horizon per PPO update (default: 8192)",
     )
     p.add_argument(
-        "--lr", type=float, default=5e-5,
-        help="Initial learning rate (default: 5e-5)",
+        "--lr", type=float, default=1e-4,
+        help="Initial learning rate (default: 1e-4)",
     )
     p.add_argument(
         "--final-lr", type=float, default=None,
         help="Optional final learning rate. Omit to keep LR constant; set to 0 for decay to zero.",
     )
     p.add_argument(
-        "--ent-coef", type=float, default=0.015,
-        help="Starting entropy coefficient (default: 0.015)",
+        "--ent-coef", type=float, default=0.02,
+        help="Starting entropy coefficient (default: 0.02)",
     )
     p.add_argument(
-        "--ent-coef-final", type=float, default=0.015,
-        help="Final entropy coefficient after linear decay (default: 0.015)",
+        "--ent-coef-final", type=float, default=0.005,
+        help="Final entropy coefficient after linear decay (default: 0.005)",
     )
     p.add_argument(
-        "--trade-penalty", type=float, default=0.50,
-        help="Per-trade penalty during training (default: 0.50)",
+        "--trade-penalty", type=float, default=0.45,
+        help="Per-trade penalty during training (default: 0.45)",
     )
     p.add_argument(
         "--whipsaw-window", type=int, default=30,
@@ -109,8 +109,8 @@ def parse_args():
         help="Per-step cost while non-flat in training (default: 0.002)",
     )
     p.add_argument(
-        "--min-hold-steps", type=int, default=10,
-        help="Minimum steps to hold a position before switching (default: 10)",
+        "--min-hold-steps", type=int, default=15,
+        help="Minimum steps to hold a position before switching (default: 15)",
     )
     p.add_argument(
         "--drawdown-penalty", type=float, default=0.5,

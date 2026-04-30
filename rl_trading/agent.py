@@ -83,7 +83,7 @@ class LoggingCallback(BaseCallback):
 
 def build_agent(
     env,
-    initial_lr: float = 5e-5,
+    initial_lr: float = 1e-4,
     final_lr: Optional[float] = None,
     n_steps: int = 8192,
     batch_size: int = 128,
@@ -91,8 +91,8 @@ def build_agent(
     gamma: float = 0.99,
     gae_lambda: float = 0.95,
     clip_range: float = 0.2,
-    ent_coef: float = 0.015,
-    ent_coef_final: float = 0.015,
+    ent_coef: float = 0.02,
+    ent_coef_final: float = 0.005,
     lstm_hidden_size: int = 128,
     n_lstm_layers: int = 1,
     policy_kwargs: Optional[dict] = None,
