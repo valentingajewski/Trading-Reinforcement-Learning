@@ -89,8 +89,8 @@ def parse_args():
         help="Starting entropy coefficient (default: 0.02)",
     )
     p.add_argument(
-        "--ent-coef-final", type=float, default=0.005,
-        help="Final entropy coefficient after linear decay (default: 0.005)",
+        "--ent-coef-final", type=float, default=0.01,
+        help="Final entropy coefficient after linear decay (default: 0.01)",
     )
     p.add_argument(
         "--trade-penalty", type=float, default=0.45,
@@ -113,8 +113,8 @@ def parse_args():
         help="Minimum steps to hold a position before switching (default: 15)",
     )
     p.add_argument(
-        "--drawdown-penalty", type=float, default=0.5,
-        help="Reward penalty multiplier for worsening drawdown (default: 0.5)",
+        "--drawdown-penalty", type=float, default=1.0,
+        help="Reward penalty multiplier for worsening drawdown (default: 1.0)",
     )
     p.add_argument(
         "--turnover-penalty", type=float, default=0.25,
@@ -129,8 +129,8 @@ def parse_args():
         help="Absolute clip applied to per-step training reward (default: 1.0)",
     )
     p.add_argument(
-        "--lstm-size", type=int, default=128,
-        help="LSTM hidden size (default: 128)",
+        "--lstm-size", type=int, default=64,
+        help="LSTM hidden size (default: 64)",
     )
     p.add_argument(
         "--lstm-layers", type=int, default=1,

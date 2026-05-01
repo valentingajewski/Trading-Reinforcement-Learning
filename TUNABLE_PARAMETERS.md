@@ -14,17 +14,17 @@ This file lists the parameters you can tune in the current RL trading pipeline a
 | `--lr` | `1e-4` | Faster learning, but more unstable updates and oscillation risk | Slower but steadier learning, may underfit if too small |
 | `--final-lr` | `match --lr` | Higher final LR preserves larger updates later in training | Lower final LR makes late training more conservative; `0` decays to zero |
 | `--ent-coef` | `0.02` | More exploration, usually more action switching and trade frequency | More exploitation, usually fewer switches, can get stuck |
-| `--ent-coef-final` | `0.005` | Preserves more late-stage exploration | Faster convergence toward deterministic policy |
+| `--ent-coef-final` | `0.01` | Preserves more late-stage exploration | Faster convergence toward deterministic policy |
 | `--trade-penalty` | `0.45` | Stronger discouragement of trading, lower churn, can undertrade | More willingness to trade, can increase churn |
 | `--whipsaw-window` | `30` | More reversals counted as "too fast", fewer quick flips | Less strict reversal window, more rapid switching allowed |
 | `--whipsaw-penalty` | `1.25` | Heavier punishment for flip-flop behavior, lower turnover | Weaker anti-whipsaw control, turnover can rise |
 | `--position-cost` | `0.002` | More incentive to go flat when edge is weak, fewer long holds | Less cost to stay exposed, more continuous market exposure |
 | `--min-hold-steps` | `15` | Forces longer holds, reduces micro-churn but slows reaction | Allows faster position changes, can overtrade |
-| `--drawdown-penalty` | `0.5` | More risk-aversion when drawdown worsens, can reduce tail losses but mute upside | More return-seeking behavior, but larger tail-risk possible |
+| `--drawdown-penalty` | `1.0` | More risk-aversion when drawdown worsens, can reduce tail losses but mute upside | More return-seeking behavior, but larger tail-risk possible |
 | `--turnover-penalty` | `0.25` | Adds explicit churn penalty scaled by position change size | Lets the agent reverse more freely |
 | `--reward-scaling` | `100.0` | Stronger direct PnL signal in reward | Relative weight shifts toward DSR and penalties |
 | `--reward-clip` | `1.0` | Tighter PPO-stable reward bounds | Allows larger per-step reward spikes |
-| `--lstm-size` | `128` | Higher model capacity for complex patterns, more compute and overfit risk | Simpler model, faster training, may miss complex temporal structure |
+| `--lstm-size` | `64` | Higher model capacity for complex patterns, more compute and overfit risk | Simpler model, faster training, may miss complex temporal structure |
 | `--lstm-layers` | `1` | Deeper recurrent stack, more capacity and training cost | Shallower recurrent stack, simpler optimization |
 | `--balance` | `1000.0` | Larger nominal account; in this setup many costs are account-normalized so behavior impact is limited | Smaller nominal account; similar behavior if other scales remain proportional |
 | `--lot-size` | `1000.0` | Larger PnL and cost swings per move, higher risk per decision | Smaller per-trade impact, lower volatility |
@@ -52,8 +52,8 @@ These are tunable by editing `build_agent(...)` inputs or defaults.
 | `initial_lr` | `1e-4` | Faster optimization progress, but larger update instability risk | Slower but steadier optimization |
 | `final_lr` | `match initial_lr` | Keeps updates larger later in training | More decay means more conservative late training |
 | `ent_coef` | `0.02` | More exploration and action diversity | More deterministic exploitation |
-| `ent_coef_final` | `0.005` | Maintains more late-stage stochasticity | Quicker convergence to lower exploration |
-| `lstm_hidden_size` | `128` | More sequence modeling capacity, more compute and overfit risk | Lower capacity, faster but may miss temporal structure |
+| `ent_coef_final` | `0.01` | Maintains more late-stage stochasticity | Quicker convergence to lower exploration |
+| `lstm_hidden_size` | `64` | More sequence modeling capacity, more compute and overfit risk | Lower capacity, faster but may miss temporal structure |
 | `n_lstm_layers` | `1` | Deeper recurrent model, more capacity and training difficulty | Simpler recurrent stack |
 | `max_grad_norm` | `0.5` | Weaker clipping, possible exploding updates | Stronger clipping, safer but can slow learning |
 | `shared_lstm` (policy kwargs) | `False` | `True`: actor/critic share representation, fewer params | `False`: separate actor/critic representations, more flexible |
@@ -70,7 +70,7 @@ These are tunable by editing `build_agent(...)` inputs or defaults.
 | `whipsaw_penalty` | `1.25` | Stronger punishment for rapid reversals | Weaker punishment for rapid reversals |
 | `position_cost` | `0.002` | More pressure to stay flat unless conviction is high | More willingness to stay in market |
 | `min_hold_steps` | `15` | Forces commitment to positions, lower churn | Enables rapid switching |
-| `drawdown_penalty` | `0.5` | More penalty when drawdown worsens, better tail-risk control | Less tail-risk control, potentially higher upside and deeper losses |
+| `drawdown_penalty` | `1.0` | More penalty when drawdown worsens, better tail-risk control | Less tail-risk control, potentially higher upside and deeper losses |
 | `turnover_penalty` | `0.25` | Penalizes gross position changes, especially rapid full reversals | Reduces explicit churn control |
 | `reward_clip` | `1.0` | Keeps per-step reward inside PPO-friendly bounds | Allows bigger reward outliers |
 | `pip_cost` | `0.0001` | Simulates worse spread/fees, fewer trades | Simulates cheaper execution, more trades |
@@ -123,9 +123,9 @@ Current wrapper run uses:
 
 - `train_months=12`, `test_months=1`, `max_folds=24`
 - `total_timesteps=500000`
-- `initial_lr=1e-4`, `final_lr=1e-4`, `n_steps=8192`, `ent_coef=0.02 -> 0.005`
-- `lstm_hidden_size=128`, `n_lstm_layers=2`
+- `initial_lr=1e-4`, `final_lr=1e-4`, `n_steps=8192`, `ent_coef=0.02 -> 0.01`
+- `lstm_hidden_size=64`, `n_lstm_layers=2`
 - `trade_penalty=0.45`, `whipsaw_window=30`, `whipsaw_penalty=1.25`
-- `position_cost=0.002`, `min_hold_steps=15`, `drawdown_penalty=0.5`, `turnover_penalty=0.25`
+- `position_cost=0.002`, `min_hold_steps=15`, `drawdown_penalty=1.0`, `turnover_penalty=0.25`
 - `reward_scaling=100.0`, `reward_clip=1.0`
 - `chain_balance=False`, `device="cuda"`, `seed=42`
