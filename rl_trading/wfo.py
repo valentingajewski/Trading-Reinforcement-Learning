@@ -196,7 +196,6 @@ def run_wfo(
     reward_scaling: float = 100.0,
     reward_clip: Optional[float] = 1.0,
     chain_balance: bool = False,
-    tensorboard_log: Optional[str] = None,
     device: str = "auto",
     seed: int = 42,
 ) -> WFOReport:
@@ -298,7 +297,6 @@ def run_wfo(
             ent_coef_final=ent_coef_final,
             lstm_hidden_size=lstm_hidden_size,
             n_lstm_layers=n_lstm_layers,
-            tensorboard_log=tensorboard_log,
             device=device,
             seed=seed,
         )

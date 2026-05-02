@@ -86,7 +86,6 @@ try:
         reward_scaling=100.0,
         reward_clip=1.0,
         chain_balance=False,
-        tensorboard_log="results/tensorboard",
         device="cuda",
         seed=42,
     )

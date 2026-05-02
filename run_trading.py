@@ -232,7 +232,6 @@ def main():
             reward_scaling=args.reward_scaling,
             reward_clip=args.reward_clip,
             chain_balance=args.chain_balance,
-            tensorboard_log=str(tensorboard_log),
             device=args.device,
             seed=args.seed,
         )
