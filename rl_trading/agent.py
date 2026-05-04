@@ -85,7 +85,7 @@ def build_agent(
     env,
     initial_lr: float = 5e-5,
     final_lr: Optional[float] = None,
-    n_steps: int = 8192,
+    n_steps: int = 4096,
     batch_size: int = 128,
     n_epochs: int = 10,
     gamma: float = 0.99,

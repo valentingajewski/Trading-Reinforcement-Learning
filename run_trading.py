@@ -73,8 +73,8 @@ def parse_args():
         help="Training timesteps per WFO fold (default: 300000)",
     )
     p.add_argument(
-        "--n-steps", type=int, default=8_192,
-        help="Rollout horizon per PPO update (default: 8192)",
+        "--n-steps", type=int, default=4_096,
+        help="Rollout horizon per PPO update (default: 4096)",
     )
     p.add_argument(
         "--lr", type=float, default=5e-5,
@@ -93,8 +93,8 @@ def parse_args():
         help="Final entropy coefficient after linear decay (default: 0.005)",
     )
     p.add_argument(
-        "--trade-penalty", type=float, default=0.45,
-        help="Per-trade penalty during training (default: 0.45)",
+        "--trade-penalty", type=float, default=1.0,
+        help="Per-trade penalty during training (default: 1.0)",
     )
     p.add_argument(
         "--whipsaw-window", type=int, default=30,
@@ -113,8 +113,8 @@ def parse_args():
         help="Minimum steps to hold a position before switching (default: 20)",
     )
     p.add_argument(
-        "--drawdown-penalty", type=float, default=0.75,
-        help="Reward penalty multiplier for worsening drawdown (default: 0.75)",
+        "--drawdown-penalty", type=float, default=1.0,
+        help="Reward penalty multiplier for worsening drawdown (default: 1.0)",
     )
     p.add_argument(
         "--turnover-penalty", type=float, default=0.25,
