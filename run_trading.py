@@ -85,16 +85,16 @@ def parse_args():
         help="Optional final learning rate. Omit to keep LR constant; set to 0 for decay to zero.",
     )
     p.add_argument(
-        "--ent-coef", type=float, default=0.015,
-        help="Starting entropy coefficient (default: 0.015)",
+        "--ent-coef", type=float, default=0.01,
+        help="Starting entropy coefficient (default: 0.01)",
     )
     p.add_argument(
-        "--ent-coef-final", type=float, default=0.005,
-        help="Final entropy coefficient after linear decay (default: 0.005)",
+        "--ent-coef-final", type=float, default=0.001,
+        help="Final entropy coefficient after linear decay (default: 0.001)",
     )
     p.add_argument(
-        "--trade-penalty", type=float, default=1.0,
-        help="Per-trade penalty during training (default: 1.0)",
+        "--trade-penalty", type=float, default=1.25,
+        help="Per-trade penalty during training (default: 1.25)",
     )
     p.add_argument(
         "--whipsaw-window", type=int, default=30,
@@ -109,8 +109,8 @@ def parse_args():
         help="Per-step cost while non-flat in training (default: 0.002)",
     )
     p.add_argument(
-        "--min-hold-steps", type=int, default=20,
-        help="Minimum steps to hold a position before switching (default: 20)",
+        "--min-hold-steps", type=int, default=30,
+        help="Minimum steps to hold a position before switching (default: 30)",
     )
     p.add_argument(
         "--drawdown-penalty", type=float, default=1.0,
