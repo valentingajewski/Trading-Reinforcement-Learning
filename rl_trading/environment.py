@@ -54,6 +54,7 @@ class ForexTradingEnv(gym.Env):
         self,
         features: np.ndarray,
         prices: np.ndarray,
+        long_entry_allowed: Optional[np.ndarray] = None,
         initial_balance: float = 1_000.0,
         lot_size: float = DEFAULT_LOT_SIZE,
         pip_cost: float = 0.0001,
@@ -68,12 +69,19 @@ class ForexTradingEnv(gym.Env):
         drawdown_penalty: float = 1.0,
         turnover_penalty: float = 0.0,
         reward_clip: Optional[float] = 1.0,
+        max_drawdown_guard: Optional[float] = None,
     ):
         super().__init__()
 
         assert len(features) == len(prices), "features / prices length mismatch"
+        if long_entry_allowed is not None:
+            long_entry_allowed = np.asarray(long_entry_allowed, dtype=bool)
+            assert len(long_entry_allowed) == len(prices), (
+                "long_entry_allowed / prices length mismatch"
+            )
         self.features = features.astype(np.float32)
         self.prices = prices.astype(np.float64)
+        self._long_entry_allowed = long_entry_allowed
         self.initial_balance = initial_balance
         self.lot_size = lot_size
         self.trade_penalty = trade_penalty
@@ -88,6 +96,7 @@ class ForexTradingEnv(gym.Env):
         self.drawdown_penalty = drawdown_penalty
         self.turnover_penalty = turnover_penalty
         self.reward_clip = reward_clip
+        self.max_drawdown_guard = max_drawdown_guard
 
         self.n_steps = len(features)
         self.n_features = features.shape[1]
@@ -118,6 +127,7 @@ class ForexTradingEnv(gym.Env):
 
         # Whipsaw tracking (penalises rapid position flipping)
         self._steps_since_trade: int = 999
+        self._drawdown_guard_triggered: bool = False
 
     # ------------------------------------------------------------------
     # Gym API
@@ -134,6 +144,7 @@ class ForexTradingEnv(gym.Env):
         self._A = 0.0
         self._B = 0.0
         self._steps_since_trade = 999
+        self._drawdown_guard_triggered = False
         self.trade_count = 0
         self.position_history = []
         return self._get_obs(), {}
@@ -144,11 +155,23 @@ class ForexTradingEnv(gym.Env):
         prev_position = self._position
         prev_drawdown = (self._peak_balance - self._balance) / max(self._peak_balance, 1e-12)
 
+        long_entry_blocked = (
+            self._long_entry_allowed is not None
+            and not bool(self._long_entry_allowed[self._current_step])
+        )
+        if self._drawdown_guard_triggered:
+            desired_position = 0
+        elif long_entry_blocked and desired_position == 1:
+            desired_position = 0
+
         target_position = desired_position
+        force_exit_from_long_gate = long_entry_blocked and prev_position == 1
         if (
             desired_position != prev_position
             and self.min_hold_steps > 0
             and self._steps_since_trade < self.min_hold_steps
+            and not self._drawdown_guard_triggered
+            and not force_exit_from_long_gate
         ):
             # Enforce a small minimum hold time to suppress minute-to-minute churn.
             target_position = prev_position
@@ -203,6 +226,18 @@ class ForexTradingEnv(gym.Env):
         drawdown = (self._peak_balance - self._balance) / max(self._peak_balance, 1e-12)
         # Penalize only worsening drawdown, not static drawdown level each step.
         drawdown_increase = max(0.0, drawdown - prev_drawdown)
+        if (
+            self.max_drawdown_guard is not None
+            and not self._drawdown_guard_triggered
+            and drawdown >= self.max_drawdown_guard
+        ):
+            self._drawdown_guard_triggered = True
+            logger.info(
+                "Drawdown guard triggered at step %d: %.2f%% >= %.2f%%",
+                self._current_step,
+                drawdown * 100.0,
+                self.max_drawdown_guard * 100.0,
+            )
         reward = pnl_reward + dsr - self.drawdown_penalty * drawdown_increase
         if self.reward_clip is not None and self.reward_clip > 0:
             reward = float(np.clip(reward, -self.reward_clip, self.reward_clip))

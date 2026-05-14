@@ -15,7 +15,7 @@ from sklearn.preprocessing import RobustScaler
 
 from rl_trading.agent import LoggingCallback, build_agent
 from rl_trading.environment import ForexTradingEnv
-from rl_trading.features import build_features
+from rl_trading.features import build_features, compute_15m_ema_long_gate
 
 logger = logging.getLogger(__name__)
 
@@ -104,6 +104,8 @@ def _evaluate_fold(
     lot_size: float,
     pip_cost: float,
     min_hold_steps: int,
+    long_entry_allowed: Optional[np.ndarray] = None,
+    max_drawdown_guard: Optional[float] = None,
 ) -> tuple[np.ndarray, np.ndarray, np.ndarray, dict]:
     """
     Run a trained model on OOS data and collect actions, per-step returns,
@@ -112,10 +114,12 @@ def _evaluate_fold(
     env = ForexTradingEnv(
         features=features_scaled,
         prices=prices,
+        long_entry_allowed=long_entry_allowed,
         initial_balance=initial_balance,
         lot_size=lot_size,
         pip_cost=pip_cost,
         min_hold_steps=min_hold_steps,
+        max_drawdown_guard=max_drawdown_guard,
     )
     obs, _ = env.reset()
     lstm_states = None
@@ -195,6 +199,8 @@ def run_wfo(
     turnover_penalty: float = 0.25,
     reward_scaling: float = 100.0,
     reward_clip: Optional[float] = 1.0,
+    require_15m_ema_long_gate: bool = False,
+    oos_kill_switch_drawdown: Optional[float] = None,
     chain_balance: bool = False,
     device: str = "auto",
     seed: int = 42,
@@ -228,6 +234,7 @@ def run_wfo(
     first_valid = valid_mask.idxmax()
     all_features = all_features.loc[first_valid:]
     df = df.loc[first_valid:]
+    long_entry_gate = compute_15m_ema_long_gate(df) if require_15m_ema_long_gate else None
 
     report = WFOReport(pair=pair_name)
 
@@ -265,11 +272,14 @@ def run_wfo(
         scaler = RobustScaler()
         train_scaled = scaler.fit_transform(train_feat.values)
         test_scaled = scaler.transform(test_feat.values)
+        train_long_gate = None if long_entry_gate is None else long_entry_gate.loc[train_feat.index].values
+        test_long_gate = None if long_entry_gate is None else long_entry_gate.loc[test_feat.index].values
 
         # --- Training env ---
         train_env = ForexTradingEnv(
             features=train_scaled,
             prices=train_prices.values,
+            long_entry_allowed=train_long_gate,
             initial_balance=initial_balance,
             lot_size=lot_size,
             pip_cost=pip_cost,
@@ -326,6 +336,8 @@ def run_wfo(
             lot_size=lot_size,
             pip_cost=pip_cost,
             min_hold_steps=min_hold_steps,
+            long_entry_allowed=test_long_gate,
+            max_drawdown_guard=oos_kill_switch_drawdown,
         )
 
         if chain_balance:

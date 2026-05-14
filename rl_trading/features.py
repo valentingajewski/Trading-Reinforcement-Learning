@@ -107,6 +107,21 @@ def compute_multitimeframe_features(df: pd.DataFrame) -> pd.DataFrame:
     return features
 
 
+def compute_15m_ema_long_gate(df: pd.DataFrame) -> pd.Series:
+    """
+    Causal long-entry gate based on completed 15-minute bars.
+
+    Long positions are permitted only when the shifted 15-minute EMA-20 is
+    above the shifted 15-minute EMA-200, which avoids leaking the current
+    in-progress bar into the decision.
+    """
+    df_15m = _resample_ohlcv(df, "15min")
+    ema20_15m = _ema(df_15m["close"], 20).shift(1)
+    ema200_15m = _ema(df_15m["close"], 200).shift(1)
+    long_gate = (ema20_15m > ema200_15m).reindex(df.index, method="ffill")
+    return long_gate.fillna(False).astype(bool)
+
+
 # ---------------------------------------------------------------------------
 # Master feature builder
 # ---------------------------------------------------------------------------
